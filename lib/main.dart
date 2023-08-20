@@ -16,6 +16,7 @@
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/core/context.dart';
 import 'package:flutter_penguin/doc_app.dart';
 import 'package:flutter_penguin/util/logger.dart';
@@ -35,10 +36,10 @@ void main() {
   if (PlatformUtil.isPC()) {
     doWhenWindowReady(() {
       final win = appWindow;
-      win.minSize = const Size(1300, 800);
-      win.size = const Size(1500, 1000);
+      win.minSize = const Size(1100, 800);
+      win.size = const Size(XConstant.defaultWidget, XConstant.defaultHeight);
       win.alignment = Alignment.center;
-      win.title = 'StoreX';
+      win.title = 'LinuxDoc';
       win.show();
     });
   }

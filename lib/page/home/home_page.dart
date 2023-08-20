@@ -17,6 +17,7 @@
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
 import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
@@ -44,7 +45,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
-    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_terminal.svg', name: '首页'),
+    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_all_items.svg', name: '文档'),
     SideItem(type: SortType.setting, icon: 'assets/svg/ic_settings.svg', name: '设置'),
     SideItem(type: SortType.help, icon: 'assets/svg/ic_help.svg', name: '帮助'),
   ];
@@ -173,7 +174,6 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
           ),
           XBox.horizontal8,
           Expanded(
-            flex: 9,
             child: PageView(
               scrollDirection: Axis.vertical,
               physics: const NeverScrollableScrollPhysics(),
@@ -202,7 +202,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   bool onIntercept(SideItem item) {
     if (item.type == SortType.help) {
       // 帮助
-      LaunchUtil.launch('https://github.com/sky-wei/flutter_penguin');
+      LaunchUtil.launch(XConstant.source);
       return true;
     }
     return false;

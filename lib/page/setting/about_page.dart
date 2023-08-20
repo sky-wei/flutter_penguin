@@ -15,9 +15,17 @@
  * limitations under the License.
  */
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
+import 'package:flutter_penguin/theme/theme.dart';
+import 'package:flutter_penguin/util/launch_util.dart';
+import 'package:flutter_penguin/util/size_box_util.dart';
+import 'package:flutter_penguin/widget/color_box_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AboutPage extends StatefulWidget {
 
@@ -34,6 +42,21 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
 
+  late TapGestureRecognizer _tapGestureRecognizer;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapGestureRecognizer = TapGestureRecognizer()
+      ..onTap = _handlePress;
+  }
+
+  @override
+  void dispose() {
+    _tapGestureRecognizer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SubScaffold(
@@ -44,6 +67,74 @@ class _AboutPageState extends State<AboutPage> {
   }
 
   Widget _buildBodyWidget() {
-    return const Center();
+    return Padding(
+      padding: REdgeInsets.all(15),
+      child: ColorBoxWidget(
+        child: Center(
+          child: _buildAboutWidget(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAboutWidget() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          XBox.vertical30,
+          SvgPicture.asset(
+            'assets/svg/ic_head_logo.svg',
+            width: 50.r,
+            color: Theme.of(context).themeColor,
+          ),
+          XBox.vertical20,
+          Text(
+            S.of(context).appName,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          XBox.vertical5,
+          Text(
+            S.of(context).versionX(XConstant.versionName),
+            style: const TextStyle(
+              fontSize: 12,
+            ),
+          ),
+          XBox.vertical40,
+          SelectableText(S.of(context).mailX(XConstant.mail)),
+          XBox.vertical10,
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: S.of(context).sourceX('')),
+                TextSpan(
+                  text: XConstant.source,
+                  style: TextStyle(
+                    color: Theme.of(context).themeColor
+                  ),
+                  recognizer: _tapGestureRecognizer
+                )
+              ]
+            )
+          ),
+          XBox.vertical60,
+          Material(
+            color: Theme.of(context).xColor.background,
+            borderRadius: BorderRadius.circular(6),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: SelectableText(S.of(context).license),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 处理点击事件
+  void _handlePress() {
+    LaunchUtil.launch(XConstant.source);
   }
 }

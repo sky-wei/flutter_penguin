@@ -289,6 +289,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Version: {value}`
+  String versionX(Object value) {
+    return Intl.message(
+      'Version: $value',
+      name: 'versionX',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Mail: {value}`
+  String mailX(Object value) {
+    return Intl.message(
+      'Mail: $value',
+      name: 'mailX',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Source: {value}`
+  String sourceX(Object value) {
+    return Intl.message(
+      'Source: $value',
+      name: 'sourceX',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Copyright 2023 The sky Authors\n\nLicensed under the Apache License, Version 2.0 (the "License");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.`
+  String get license {
+    return Intl.message(
+      'Copyright 2023 The sky Authors\n\nLicensed under the Apache License, Version 2.0 (the "License");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.',
+      name: 'license',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

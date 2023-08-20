@@ -32,8 +32,16 @@ class XConstant {
 
   static const String versionName = '0.0.1';
 
+  static const String mail = 'jingcai.wei@163.com';
+
+  static const String source = 'https://github.com/sky-wei/flutter_penguin';
+
   /// 默认平板模式(关闭)
   static const bool defaultTabletMode = false;
+
+  static const double defaultWidget = 1400;
+
+  static const double defaultHeight = 950;
 }
 
 class XLinuxDoc {

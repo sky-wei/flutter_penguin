@@ -20,9 +20,15 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(value) => "${value}不能为空！";
+  static String m0(value) => "Mail: ${value}";
 
-  static String m1(value) => "${value}Seconds";
+  static String m1(value) => "Source: ${value}";
+
+  static String m2(value) => "Version: ${value}";
+
+  static String m3(value) => "${value}不能为空！";
+
+  static String m4(value) => "${value}Seconds";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -36,8 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "hint": MessageLookupByLibrary.simpleMessage("Hint"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
+        "license": MessageLookupByLibrary.simpleMessage(
+            "Copyright 2023 The sky Authors\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License."),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "mailX": m0,
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "on": MessageLookupByLibrary.simpleMessage("ON"),
@@ -45,10 +54,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "reboot": MessageLookupByLibrary.simpleMessage("Reboot"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "simplifiedChinese": MessageLookupByLibrary.simpleMessage("简体中文"),
+        "sourceX": m1,
         "storage": MessageLookupByLibrary.simpleMessage("Storage"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
-        "xNotEmpty": m0,
-        "xSeconds": m1
+        "versionX": m2,
+        "xNotEmpty": m3,
+        "xSeconds": m4
       };
 }

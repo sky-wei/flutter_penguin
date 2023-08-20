@@ -133,16 +133,16 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ],
         ),
-      if (!basic)
-        SubGroupItem(
-          menuItems: [
-            SubMenuItem.more(
-              id: 4,
-              iconName: 'ic_update.svg',
-              title: S.of(context).update,
-            ),
-          ],
-        ),
+      // if (!basic)
+      //   SubGroupItem(
+      //     menuItems: [
+      //       SubMenuItem.more(
+      //         id: 4,
+      //         iconName: 'ic_update.svg',
+      //         title: S.of(context).update,
+      //       ),
+      //     ],
+      //   ),
       if (!basic)
         SubGroupItem(
           menuItems: [

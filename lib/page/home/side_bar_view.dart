@@ -70,13 +70,13 @@ class _SideBarViewState extends State<SideBarView> {
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             children: [
-              for (var index = 0; index < _sideItems.length - 1; index++)
+              for (var index = 0; index < _sideItems.length - 2; index++)
                 _buildSideWidget(index, _sideItems[index]),
             ],
           ),
         ),
         XBox.vertical20,
-        for (var index = _sideItems.length - 1; index < _sideItems.length; index++)
+        for (var index = _sideItems.length - 2; index < _sideItems.length; index++)
           _buildSideWidget(index, _sideItems[index]),
       ],
     );

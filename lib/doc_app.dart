@@ -22,6 +22,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'constant.dart';
 import 'core/context.dart';
 import 'core/settings.dart';
 import 'generated/l10n.dart';
@@ -82,7 +83,7 @@ class _DocAppState extends State<DocApp> {
         ),
       ],
       child: MaterialApp(
-        title: 'ToolBox',
+        title: 'LinuxDoc',
         theme: XTheme.lightTheme(context),
         darkTheme: XTheme.darkTheme(context),
         themeMode: _getThemeMode(),
@@ -118,9 +119,9 @@ class _DocAppState extends State<DocApp> {
   Size _getDesignSize() {
     final size = appSetting.getDisplaySize();
     return PlatformUtil.isPC()
-        ? Size(1500 * size, 1000 * size)
+        ? Size(XConstant.defaultWidget * size, XConstant.defaultHeight * size)
         : appSetting.isTabletMode()
-        ? Size(1500 * size, 1000 * size)
+        ? Size(XConstant.defaultWidget * size, XConstant.defaultHeight * size)
         : Size(432 * size, 768 * size);
   }
 

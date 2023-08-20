@@ -64,7 +64,7 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
         ),
         XBox.horizontal8,
         ExpandBoxWidget(
-          flex: 7,
+          flex: 8,
           child: DocDetailsPage(
             inline: widget.inline,
             listController: _listController,

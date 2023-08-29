@@ -15,7 +15,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/data/item/linux_doc_item.dart';
 import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
 import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
@@ -23,9 +22,9 @@ import 'package:flutter_penguin/util/app_extension.dart';
 import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/list_controller.dart';
 import 'package:flutter_penguin/util/message_util.dart';
-import 'package:flutter_penguin/widget/color_box_widget.dart';
 import 'package:flutter_penguin/widget/inner_loading_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +33,13 @@ class DocDetailsPage extends StatefulWidget {
 
   final bool inline;
   final ListController? listController;
+  final int index;
 
   const DocDetailsPage({
     Key? key,
     this.inline = false,
-    this.listController
+    this.listController,
+    this.index = -1
   }) : super(key: key);
 
   @override
@@ -53,8 +54,9 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   bool get inline => widget.inline;
   ListController? get listController => widget.listController;
-  int get _currentIndex => widget.listController?.value ?? -1;
+  int get _currentIndex => widget.listController?.value ?? widget.index;
   LinuxDocItem? get docDetails => _listDocModel.linuxDocItem;
+  bool _loading = false;
 
   @override
   void initState() {
@@ -62,10 +64,13 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
     _listDocModel = context.read<LinuxDocModel>();
     _listDocModel.detailsNotifier.addListener(_infoChange);
     listController?.addListener(_chooseChange);
+
+    if (_currentIndex != -1) _chooseChange();
   }
 
   @override
   void dispose() {
+    _listDocModel.clearLinuxDocItem();
     _listDocModel.detailsNotifier.removeListener(_infoChange);
     listController?.removeListener(_chooseChange);
     super.dispose();
@@ -88,7 +93,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
         _buildBody2Widget(),
         InnerLoadingWidget(
           key: _loadingKey,
-          loading: false,
+          loading: !inline,
         ),
       ],
     );
@@ -99,10 +104,10 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return docDetails != null ? MarkdownWidget(
       data: docDetails!.data,
-        config: isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig,
-    ) : const EmptyDocWidget(
+      config: isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig,
+    ) : !_loading ? const EmptyDocWidget(
       message: '没有命令说明～',
-    );
+    ) : const Center();
   }
 
   /// 选择修改
@@ -117,7 +122,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
     _showLoading();
     _listDocModel.requestDetail(
-      item
+      item, 500
     ).then((value) {
       _cancelLoading();
     }).onError((error, stackTrace) {
@@ -137,11 +142,13 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   /// 显示加载
   void _showLoading() {
+    _loading = true;
     _loadingKey.currentState?.setLoading(true);
   }
 
   /// 取消加载
   void _cancelLoading() {
+    _loading = false;
     _loadingKey.currentState?.setLoading(false);
   }
 

@@ -15,11 +15,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/list_controller.dart';
+import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/color_box_widget.dart';
 import 'package:flutter_penguin/widget/expand_box_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
 
@@ -29,10 +27,12 @@ import 'doc_list_page.dart';
 class LinuxDocPage extends StatefulWidget {
 
   final bool inline;
+  final Widget? drawer;
 
   const LinuxDocPage({
     Key? key,
-    this.inline = false
+    this.inline = false,
+    this.drawer,
   }) : super(key: key);
 
   @override
@@ -44,15 +44,38 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
   final ListController _listController = ListController(initIndex: -1);
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _listController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    final bodyWidget = PlatformUtil.isTabletMode()
+        ? _buildDesktopBody() : _buildMobileBody();
+
     return SubScaffold(
       inline: widget.inline,
-      body: _buildBodyWidget(),
+      body: bodyWidget,
     );
   }
 
   /// 创建内容控件
-  Widget _buildBodyWidget() {
+  Widget _buildMobileBody() {
+    return DocListPage(
+      inline: widget.inline,
+      drawer: widget.drawer,
+    );
+  }
+
+  /// 创建内容控件
+  Widget _buildDesktopBody() {
     return Row(
       children: [
         ExpandBoxWidget(

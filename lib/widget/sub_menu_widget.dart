@@ -91,7 +91,7 @@ class SubMenuWidget extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/svg/$iconName',
                     width: 22.r,
-                    color: choose ? XColor.white : iconColor ?? Theme.of(context).iconColor,
+                    color: choose ? XColor.white : iconColor ?? Theme.of(context).iconTheme.color,
                   ),
                 if (iconName != null)
                   XBox.horizontal15,

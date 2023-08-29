@@ -21,10 +21,13 @@ import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
 import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_view.dart';
+import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
+import 'package:flutter_penguin/page/setting/setting_page.dart';
 import 'package:flutter_penguin/page/setting/setting_view_page.dart';
 import 'package:flutter_penguin/theme/theme.dart';
+import 'package:flutter_penguin/util/app_navigator.dart';
 import 'package:flutter_penguin/util/launch_util.dart';
+import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_penguin/widget/head_logo_widget.dart';
@@ -45,7 +48,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
-    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_all_items.svg', name: '文档'),
+    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_terminal.svg', name: '命令'),
     SideItem(type: SortType.setting, icon: 'assets/svg/ic_settings.svg', name: '设置'),
     SideItem(type: SortType.help, icon: 'assets/svg/ic_help.svg', name: '帮助'),
   ];
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildMobileBody() {
-    return const Center();
+    return MobileHomePage(sideItems: _sideItems);
   }
 
   Widget _buildDesktopBody() {
@@ -81,7 +84,7 @@ class DesktopHomePage extends StatefulWidget {
 class _DesktopHomePageState extends State<DesktopHomePage> {
 
   final List<Widget> _children = const [
-    LinuxDocView(inline: true),
+    LinuxDocPage(inline: true),
     SettingViewPage(),
     EmptyPage(),
     EmptyPage(),
@@ -166,7 +169,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
         children: [
           SizedBox(
             width: 80.r,
-            child: SideBarView(
+            child: DesktopSideBarView(
               controller: _pageController,
               sideItems: widget.sideItems,
               intercept: (item) => onIntercept(item),
@@ -219,3 +222,65 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
     });
   }
 }
+
+
+class MobileHomePage extends StatefulWidget {
+
+  final List<SideItem> sideItems;
+
+  const MobileHomePage({
+    Key? key,
+    required this.sideItems,
+  }) : super(key: key);
+
+  @override
+  State<MobileHomePage> createState() => _MobileHomePageState();
+}
+
+class _MobileHomePageState extends State<MobileHomePage> {
+
+  DateTime? _lastPressTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: LinuxDocPage(
+        inline: true,
+        drawer: MobileSideBarView(
+          sideItems: widget.sideItems,
+          intercept: (item) => onIntercept(item),
+        ),
+      ),
+    );
+  }
+
+  /// 事件处理
+  /// 事件拦截
+  bool onIntercept(SideItem item) {
+     if (item.type == SortType.setting) {
+       // 设置
+       AppNavigator.push(context, const SettingPage());
+       return true;
+     } else if (item.type == SortType.help) {
+      // 帮助
+      LaunchUtil.launch(XConstant.source);
+      return true;
+    }
+    return false;
+  }
+
+  /// 返回事件处理
+  Future<bool> _onWillPop() {
+
+    if (_lastPressTime == null ||
+        DateTime.now().difference(_lastPressTime!) > const Duration(seconds: 3)
+    ) {
+      _lastPressTime = DateTime.now();
+      MessageUtil.showMessage(context, S.of(context).exitTips);
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
+}
+

@@ -20,16 +20,6 @@ class XRoute {
 
   static const String splash = "/";
 
-  static const String launcher = "/launcher";
-
   static const String home = "/home";
-
-  static const String lock = "/lock";
-
-  static const String login = "/login";
-
-  static const String register = "/register";
-
-  static const String backstage = "/home/backstage";
 }
 

@@ -27,6 +27,7 @@ import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
+import 'package:go_router/go_router.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,7 @@ class _SplashPageState extends State<SplashPage> {
     _appContext = context.read<AppContext>();
     _appModel = context.read<AppModel>();
     _appContext.initialize().then((value) {
-      Navigator.pushReplacementNamed(context, XRoute.home);
+      context.pushReplacement(XRoute.home);
     }).onError((error, stackTrace) {
       _handleInitError(error, stackTrace);
     });

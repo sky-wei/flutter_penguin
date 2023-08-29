@@ -15,9 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/data/item/linux_doc_item.dart';
-import 'package:flutter_penguin/data/item/option_item.dart';
 import 'package:flutter_penguin/page/doc/linux/filter_page.dart';
 import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
 import 'package:flutter_penguin/theme/theme.dart';
@@ -27,29 +25,34 @@ import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/list_controller.dart';
 import 'package:flutter_penguin/util/log_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
+import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/app_icon_button.dart';
+import 'package:flutter_penguin/widget/action_menu_widget.dart';
 import 'package:flutter_penguin/widget/app_text.dart';
 import 'package:flutter_penguin/widget/frame_widget.dart';
 import 'package:flutter_penguin/widget/inner_loading_widget.dart';
 import 'package:flutter_penguin/widget/sub_item_line.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
 import 'package:flutter_penguin/widget/text_field_widget.dart';
+import 'package:flutter_penguin/widget/title_widget.dart';
 import 'package:flutter_penguin/widget/widget_factory.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import 'doc_details_page.dart';
 import 'linux_doc_page.dart';
 
 class DocListPage extends StatefulWidget {
 
   final bool inline;
   final ListController? listController;
+  final Widget? drawer;
 
   const DocListPage({
     Key? key,
     this.inline = false,
     this.listController,
+    this.drawer,
   }) : super(key: key);
 
   @override
@@ -62,9 +65,6 @@ class _DocListPageState extends State<DocListPage> {
   final FocusNode _focusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
 
-  final List<OptionItem<int>> _optionItems = [
-    OptionItem('全部', -1)
-  ];
   late LinuxDocModel _linuxDocModel;
 
   bool get inline => widget.inline;
@@ -96,32 +96,63 @@ class _DocListPageState extends State<DocListPage> {
 
   @override
   Widget build(BuildContext context) {
+    return PlatformUtil.isTabletMode()
+        ? _buildDesktopBody() : _buildMobileBody();
+  }
+
+  Widget _buildDesktopBody() {
     return SubScaffold(
       title: '命令列表',
       inline: widget.inline,
       actions: [_buildFilterWidget()],
-      body: Flex(
-        direction: Axis.vertical,
-        children: [
-          _buildSearchWidget(),
-          XBox.vertical15,
-          // _buildFilterWidget(),
-          // XBox.vertical15,
-          const SubItemLine(),
-          // XBox.vertical5,
-          Expanded(
-            child: Stack(
-              children: [
-                _buildBodyWidget(),
-                InnerLoadingWidget(
-                  key: _loadingKey,
-                  loading: true,
-                ),
-              ],
-            ),
-          ),
-        ],
+      body: _buildFrameWidget(),
+    );
+  }
+
+  Widget _buildMobileBody() {
+    return Scaffold(
+      appBar: AppBar(
+        leading: LayoutBuilder(builder: (context, type) {
+          return ActionMenuWidget(
+            iconName: 'ic_menu.svg',
+            iconColor: Theme.of(context).iconTheme.color,
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          );
+        }),
+        title: const PageTitleWidget(
+          title: '命令列表',
+        ),
+        centerTitle: true,
+        elevation: 0,
+        actions: [_buildFilterWidget()],
       ),
+      drawer: widget.drawer,
+      body: _buildFrameWidget(),
+    );
+  }
+
+  Widget _buildFrameWidget() {
+    return Flex(
+      direction: Axis.vertical,
+      children: [
+        _buildSearchWidget(),
+        XBox.vertical15,
+        // _buildFilterWidget(),
+        // XBox.vertical15,
+        const SubItemLine(),
+        // XBox.vertical5,
+        Expanded(
+          child: Stack(
+            children: [
+              _buildBodyWidget(),
+              InnerLoadingWidget(
+                key: _loadingKey,
+                loading: true,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -145,65 +176,15 @@ class _DocListPageState extends State<DocListPage> {
 
   /// 创建过虑的控件
   Widget _buildFilterWidget() {
-    // return LayoutBuilder(builder: (context, type) {
-    //   return ;
-    // });
-
     return Padding(
-      padding: REdgeInsets.fromLTRB(0, 0, 25, 0),
-      child: AppIconButton(
+      padding: REdgeInsets.fromLTRB(0, 0, 22, 0),
+      child: ActionMenuWidget(
         iconSize: 18.r,
-        splashRadius: 26.r,
-        icon: SvgPicture.asset(
-          'assets/svg/ic_filter.svg',
-          color: Theme.of(context).iconTheme.color,
-          width: 18.r,
-        ),
+        iconName: 'ic_filter.svg',
         tooltip: '筛选',
         onPressed: () => _showFilterPage(context),
       ),
     );
-
-    // return Padding(
-    //   padding: REdgeInsets.symmetric(horizontal: 15),
-    //   child: Row(
-    //     children: [
-    //       AppText(
-    //         '总数: ${_linuxDocModel.linuxDocItems.length}',
-    //         fontSize: 15.sp,
-    //         color: Theme.of(context).hintColor,
-    //       ),
-    //       const Spacer(),
-    //       // SimpleDropdownButton<int>(
-    //       //   buttonWidth: 130.w,
-    //       //   buttonHeight: 36.h,
-    //       //   // buttonDecoration: BoxDecoration(
-    //       //   //   color: Theme.of(context).highlightColor,
-    //       //   //   borderRadius: BorderRadius.circular(6),
-    //       //   //   // border: Border.symmetric(),
-    //       //   // ),
-    //       //   buttonPadding: REdgeInsets.only(left: 10, right: 5),
-    //       //   dropdownItems: _optionItems,
-    //       //   value: _getCurOption(),
-    //       //   onChanged: (value) => _setOption(value!),
-    //       // ),
-    //       AppIconButton(
-    //         iconSize: 16.r,
-    //         splashRadius: 24.r,
-    //         icon: SvgPicture.asset(
-    //           'assets/svg/ic_filter.svg',
-    //           color: Theme.of(context).iconTheme.color,
-    //           width: 18.r,
-    //         ),
-    //         tooltip: '过滤',
-    //         onPressed: () {
-    //
-    //         },
-    //       ),
-    //       XBox.horizontal5,
-    //     ],
-    //   ),
-    // );
   }
 
   /// 创建内容体
@@ -275,7 +256,18 @@ class _DocListPageState extends State<DocListPage> {
 
   /// 选择列表
   void _chooseListItem(int index) {
-    setState(() => widget.listController?.setValue(index, linuxDocItems[index]));
+
+    final listController = widget.listController;
+
+    if (listController != null) {
+      setState(() => listController.setValue(index, linuxDocItems[index]));
+      return;
+    }
+
+    AppNavigator.start(
+      context: context,
+      child: DocDetailsPage(index: index)
+    );
   }
 
   /// 搜索
@@ -285,7 +277,7 @@ class _DocListPageState extends State<DocListPage> {
   }
 
   /// 刷新命令列表
-  refreshDocList({
+  void refreshDocList({
     String? keyword,
     int? category,
     int? delayedTime,
@@ -307,17 +299,10 @@ class _DocListPageState extends State<DocListPage> {
   Future<void> _showFilterPage(BuildContext context) async {
 
     final value = await AppNavigator.start<FilterItem>(
-      context: context,
-      // constraints: BoxConstraints(maxWidth: 490.w),
-      child: FilterPage(filter: FilterItem(_linuxDocModel.queryDoc.category))
+        context: context,
+        // constraints: BoxConstraints(maxWidth: 490.w),
+        child: FilterPage(filter: FilterItem(_linuxDocModel.queryDoc.category))
     );
-
-    // showBottomSheet(
-    //   context: context,
-    //   builder: (context) {
-    //     return FilterPage(filter: FilterItem(_linuxDocModel.queryDoc.category));
-    //   },
-    // );
 
     if (value != null) {
       _linuxDocModel.refreshDocList(

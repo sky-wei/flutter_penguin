@@ -28,9 +28,9 @@ void main() {
     final baseContext = BaseContext();
     await baseContext.initialize();
     runApp(
-        RestartWidget(
-            child: DocApp(baseContext: baseContext)
-        )
+      RestartWidget(
+        child: DocApp(baseContext: baseContext)
+      )
     );
   });
   if (PlatformUtil.isPC()) {

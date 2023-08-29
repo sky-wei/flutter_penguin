@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkMode": MessageLookupByLibrary.simpleMessage("暗色模式"),
         "display": MessageLookupByLibrary.simpleMessage("显示"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "exitTips": MessageLookupByLibrary.simpleMessage("再按一次返回桌面！"),
         "followSystem": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "hint": MessageLookupByLibrary.simpleMessage("提示"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),

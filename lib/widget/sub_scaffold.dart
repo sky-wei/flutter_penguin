@@ -16,6 +16,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/theme/color.dart';
 
@@ -56,7 +57,7 @@ class SubScaffold extends StatelessWidget {
 
     final backgroundColor = inline
         ? XColor.transparent
-        : this.backgroundColor ?? Theme.of(context).backgroundColor;
+        : this.backgroundColor ?? Theme.of(context).xColor.background;
 
     return Scaffold(
       appBar: title != null || leading != null ? AppBar(

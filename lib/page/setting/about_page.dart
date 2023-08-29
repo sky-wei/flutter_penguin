@@ -21,6 +21,8 @@ import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/launch_util.dart';
+import 'package:flutter_penguin/util/log_util.dart';
+import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_penguin/widget/color_box_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
@@ -67,14 +69,26 @@ class _AboutPageState extends State<AboutPage> {
   }
 
   Widget _buildBodyWidget() {
+
+    final child = PlatformUtil.isTabletMode()
+        ? _buildDesktopBody() : _buildMobileBody();
+
     return Padding(
       padding: REdgeInsets.all(15),
-      child: ColorBoxWidget(
-        child: Center(
-          child: _buildAboutWidget(),
-        ),
+      child: child,
+    );
+  }
+
+  Widget _buildDesktopBody() {
+    return ColorBoxWidget(
+      child: Center(
+        child: _buildAboutWidget(),
       ),
     );
+  }
+
+  Widget _buildMobileBody() {
+    return _buildAboutWidget();
   }
 
   Widget _buildAboutWidget() {
@@ -90,16 +104,16 @@ class _AboutPageState extends State<AboutPage> {
           XBox.vertical20,
           Text(
             S.of(context).appName,
-            style: const TextStyle(
-              fontSize: 18,
+            style: TextStyle(
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold
             ),
           ),
           XBox.vertical5,
           Text(
             S.of(context).versionX(XConstant.versionName),
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: 12.sp,
             ),
           ),
           XBox.vertical40,
@@ -121,7 +135,9 @@ class _AboutPageState extends State<AboutPage> {
           ),
           XBox.vertical60,
           Material(
-            color: Theme.of(context).xColor.background,
+            color: PlatformUtil.isTabletMode()
+                ? Theme.of(context).xColor.background
+                : Theme.of(context).xColor.surface,
             borderRadius: BorderRadius.circular(6),
             child: Padding(
               padding: const EdgeInsets.all(20),

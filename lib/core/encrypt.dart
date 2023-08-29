@@ -47,7 +47,7 @@ abstract class XEncrypt implements XComponent {
 
 class EncryptStore extends AbstractComponent implements XEncrypt {
 
-  final _ivBytes = [98, 10, 60, 80, 20, 1, 9, 8, 9, 20, 21, 11, 10, 26, 6, 97];
+  final _ivBytes = [89, 10, 68, 89, 20, 1, 9, 8, 9, 28, 21, 91, 10, 26, 16, 90];
 
   /// Base64加密
   @override

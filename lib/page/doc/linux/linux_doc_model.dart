@@ -57,6 +57,10 @@ class LinuxDocModel extends AbstractModel {
 
   LinuxDocModel(super.context);
 
+  void clearLinuxDocItem() {
+    _linuxDocItem = null;
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -89,9 +93,13 @@ class LinuxDocModel extends AbstractModel {
   }
 
   /// 请求详情信息
-  Future<void> requestDetail(LinuxDocItem item) async {
+  Future<void> requestDetail(LinuxDocItem item, [int? delayed]) async {
 
     final result = await linuxDocSource.getDetails(item.id);
+
+    if (delayed != null && delayed > 0) {
+      await Future.delayed(Duration(milliseconds: delayed));
+    }
 
     detailsNotifier.notify(() {
       // 详情结果

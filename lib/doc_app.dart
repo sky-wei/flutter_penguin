@@ -19,7 +19,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'constant.dart';
@@ -52,6 +54,20 @@ class DocApp extends StatefulWidget {
 
 class _DocAppState extends State<DocApp> {
 
+  final GoRouter _router = GoRouter(
+    routes: <RouteBase>[
+      GoRoute(
+        path: XRoute.splash,
+        builder: (BuildContext context, GoRouterState state) => const SplashPage()
+      ),
+      GoRoute(
+        path: XRoute.home,
+        builder: (BuildContext context, GoRouterState state) => const HomePage()
+      ),
+    ],
+    observers: [AppNavigatorObserver()]
+  );
+
   BaseContext get baseContext => widget.baseContext;
   XSettings get appSetting => baseContext.appSetting;
 
@@ -81,17 +97,17 @@ class _DocAppState extends State<DocApp> {
         ChangeNotifierProvider(
           create: (context) => AppModel(context.read<AppContext>())
         ),
+        ChangeNotifierProvider(
+          create: (context) => LinuxDocModel(context.read<AppContext>())
+        ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'LinuxDoc',
         theme: XTheme.lightTheme(context),
         darkTheme: XTheme.darkTheme(context),
         themeMode: _getThemeMode(),
         debugShowCheckedModeBanner: false,
-        routes: {
-          XRoute.splash: (context) => const SplashPage(),
-          XRoute.home: (context) => const HomePage(),
-        },
+        routerConfig: _router,
         builder: EasyLoading.init(builder: (context, child) {
           LoadingUtil.initialize(context);
           final fontSize = appSetting.getFontSize();
@@ -101,7 +117,6 @@ class _DocAppState extends State<DocApp> {
             child: MonitorWidget(child: child)
           );
         }),
-        initialRoute: XRoute.splash,
         locale: appSetting.getLocale(),
         localizationsDelegates: const [
           S.delegate,
@@ -110,7 +125,6 @@ class _DocAppState extends State<DocApp> {
           GlobalWidgetsLocalizations.delegate
         ],
         supportedLocales: S.delegate.supportedLocales,
-        navigatorObservers: [AppNavigatorObserver()],
       ),
     );
   }

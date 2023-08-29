@@ -158,10 +158,6 @@ class AppContext extends EasyNotifier implements ComponentManager, XContext {
         name: XRepositoryFactory.componentName,
         builder: (componentManager) => RepositoryFactory(this)
     );
-    // componentManager.registerLazyComponent(
-    //     name: XUserManager.componentName,
-    //     builder: (componentManager) => UserManager(this)
-    // );
   }
 
   @override
@@ -230,11 +226,9 @@ extension XContextExtension on XContext {
 
   XRepositoryFactory get repositoryFactory => XRepositoryFactory.getRepositoryFactory(this);
 
-  XPreferences get defaultPreferences => getPreferencesByName('sparrow_default');
+  XPreferences get defaultPreferences => getPreferencesByName('penguin_default');
 
   // XNetService get netService => XNetService.getNetService(this);
 
   XEncrypt get encrypt => XEncrypt.getEncrypt(this);
-
-  // XUserManager get userManager => XUserManager.getUserManager(this);
 }

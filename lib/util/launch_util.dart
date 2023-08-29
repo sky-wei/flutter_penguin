@@ -24,7 +24,7 @@ class LaunchUtil {
 
   static void launch(String url) {
     _launch(
-        url
+      url
     ).then((value) {
       XLog.d('>>>>>>>>>>>>>>> $value');
     }).onError((error, stackTrace) {
@@ -37,6 +37,7 @@ class LaunchUtil {
     if (await canLaunchUrl(uri)) {
       return await launchUrl(uri);
     }
-    throw 'Could not launch $url';
+    return await launchUrl(uri, mode: LaunchMode.externalApplication);
+    // throw 'Could not launch $url';
   }
 }

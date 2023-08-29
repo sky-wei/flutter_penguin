@@ -15,6 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/data/item/option_item.dart';
 import 'package:flutter_penguin/theme/color.dart';
@@ -81,7 +82,7 @@ class _FilterPageState extends State<FilterPage> {
           // runAlignment: WrapAlignment.center,
           // crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 10.r,
-          runSpacing: 10.r,
+          runSpacing: PlatformUtil.isTabletMode() ? 10.r : 0,
           children: _buildCategoryListWidget(),
         ),
         // XBox.vertical60,

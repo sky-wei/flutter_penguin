@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/util/border_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'color.dart';
 
@@ -187,8 +187,6 @@ extension XThemeData on ThemeData {
   Color get listChooseColor => isLight ? XColor.listChooseColor : const Color(0xFF505050);
 
   Color get mainTextColor => isLight ? XColor.light.mainText : XColor.dark.mainText;
-
-  Color get iconColor => isLight ? const Color(0xFF212121) : XColor.white;
 
   XColor get xColor => isLight ? XColor.light : XColor.dark;
 

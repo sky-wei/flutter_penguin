@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "display": MessageLookupByLibrary.simpleMessage("Display"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "exitTips": MessageLookupByLibrary.simpleMessage(
+            "Press again to return to desktop！"),
         "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
         "hint": MessageLookupByLibrary.simpleMessage("Hint"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),

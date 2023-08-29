@@ -51,7 +51,7 @@ class ActionMenuWidget extends StatelessWidget {
       icon: SvgPicture.asset(
         'assets/svg/$iconName',
         width: iconSize ?? 22.r,
-        color: iconColor ?? Theme.of(context).iconColor,
+        color: iconColor ?? Theme.of(context).iconTheme.color,
       ),
       tooltip: tooltip
     );

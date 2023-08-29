@@ -18,6 +18,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
+import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/theme/color.dart';
 import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/border_util.dart';
@@ -25,13 +26,13 @@ import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SideBarView extends StatefulWidget {
+class DesktopSideBarView extends StatefulWidget {
 
   final PageController controller;
   final List<SideItem> sideItems;
   final InterceptCallback<SideItem>? intercept;
 
-  const SideBarView({
+  const DesktopSideBarView({
     required this.controller,
     required this.sideItems,
     this.intercept,
@@ -39,10 +40,10 @@ class SideBarView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SideBarViewState();
+  State<StatefulWidget> createState() => _DesktopSideBarViewState();
 }
 
-class _SideBarViewState extends State<SideBarView> {
+class _DesktopSideBarViewState extends State<DesktopSideBarView> {
 
   int _currentIndex = 0;
 
@@ -202,6 +203,162 @@ class _SideBarViewState extends State<SideBarView> {
       setState(() {
         _currentIndex = index;
         widget.controller.jumpToPage(index);
+      });
+    }
+  }
+}
+
+
+
+class MobileSideBarView extends StatefulWidget {
+
+  final PageController? controller;
+  final List<SideItem> sideItems;
+  final InterceptCallback<SideItem>? intercept;
+
+  const MobileSideBarView({
+    this.controller,
+    required this.sideItems,
+    this.intercept,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MobileSideBarView> createState() => _MobileSideBarViewState();
+}
+
+class _MobileSideBarViewState extends State<MobileSideBarView> {
+
+  int _currentIndex = 0;
+
+  List<SideItem> get _sideItems => widget.sideItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.controller?.initialPage ?? 0;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildDrawerHeader(),
+                  )
+                ],
+              ),
+              for (var index = 0; index < _sideItems.length - 2; index++)
+                _buildSideWidget(index, _sideItems[index]),
+              const Divider(),
+              for (var index = _sideItems.length - 2; index < _sideItems.length; index++)
+                _buildSideWidget(index, _sideItems[index]),
+            ]
+        ),
+      ),
+    );
+  }
+
+  /// 创建 DrawerHeader
+  DrawerHeader _buildDrawerHeader() {
+    return DrawerHeader(
+      // decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage('assets/image/ic_head_background.jpeg'),
+      //       fit: BoxFit.cover
+      //     )
+      // ),
+      child: Column(
+        children: [
+          XBox.vertical20,
+          SvgPicture.asset(
+            'assets/svg/ic_linux.svg',
+            width: 50.r,
+            color: Theme.of(context).themeColor,
+          ),
+          XBox.vertical20,
+          Text(
+            S.current.appName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 18.sp,
+              color: Theme.of(context).mainTextColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSideWidget(int index, SideItem side) {
+    return _buildListTile(
+        icon: side.icon ?? 'assets/svg/ic_user.svg',
+        title: side.name ?? '',
+        onTap: () {
+          Scaffold.of(context).closeDrawer();
+          _onInterceptAction(
+            side: side,
+            callback: () => _setCurrentIndex(index)
+          );
+        },
+        selected: _currentIndex == index
+    );
+  }
+
+  /// 创建 ListTile
+  ListTile _buildListTile({
+    required String icon,
+    Color? iconColor,
+    required String title,
+    Color? titleColor,
+    GestureTapCallback? onTap,
+    bool selected = false
+  }) {
+    return ListTile(
+      leading: SvgPicture.asset(
+        icon,
+        width: 22.r,
+        color: iconColor ?? (selected ? Theme.of(context).themeColor : Theme.of(context).iconTheme.color),
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16.sp,
+          color: titleColor ?? (selected ? Theme.of(context).themeColor : Theme.of(context).mainTextColor)
+        ),
+      ),
+      onTap: onTap,
+      selected: selected,
+    );
+  }
+
+  void _onInterceptAction({
+    required SideItem side,
+    required VoidCallback callback
+  }) {
+    final intercept = widget.intercept;
+
+    if (intercept == null || !intercept(side)) {
+      callback();
+    }
+  }
+
+  /// 切换界面
+  void _setCurrentIndex(int index) {
+    if (_currentIndex != index) {
+      setState(() {
+        _currentIndex = index;
+        widget.controller?.jumpToPage(index);
       });
     }
   }

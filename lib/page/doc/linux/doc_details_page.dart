@@ -104,6 +104,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return docDetails != null ? MarkdownWidget(
       data: docDetails!.data,
+      physics: const BouncingScrollPhysics(),
       config: isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig,
     ) : !_loading ? const EmptyDocWidget(
       message: '没有命令说明～',

@@ -35,7 +35,7 @@ class LaunchUtil {
   static Future<bool> _launch(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      return await launchUrl(uri);
+      return await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
     return await launchUrl(uri, mode: LaunchMode.externalApplication);
     // throw 'Could not launch $url';

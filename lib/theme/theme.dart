@@ -184,6 +184,8 @@ extension XThemeData on ThemeData {
 
   Color get deleteColor => XColor.deleteColor;
 
+  Color get favoriteColor => XColor.favoriteColor;
+
   Color get listChooseColor => isLight ? XColor.listChooseColor : const Color(0xFF505050);
 
   Color get mainTextColor => isLight ? XColor.light.mainText : XColor.dark.mainText;

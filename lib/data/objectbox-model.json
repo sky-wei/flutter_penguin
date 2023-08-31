@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "2:8292288305236522292",
-      "lastPropertyId": "4:5794431701180616516",
+      "lastPropertyId": "5:4409612404047341116",
       "name": "LinuxDocEntity",
       "properties": [
         {
@@ -28,6 +28,11 @@
           "id": "4:5794431701180616516",
           "name": "data",
           "type": 9
+        },
+        {
+          "id": "5:4409612404047341116",
+          "name": "favorite",
+          "type": 1
         }
       ],
       "relations": []

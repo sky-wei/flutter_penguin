@@ -26,6 +26,11 @@ typedef InterceptCallback<T> = bool Function(T value);
 
 typedef ResultCallback<T> = void Function(T value);
 
+enum ListType {
+  all,
+  favorite
+}
+
 class XConstant {
 
   static const String projectName = 'flutter_penguin';

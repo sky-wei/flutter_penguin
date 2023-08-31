@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 8292288305236522292),
       name: 'LinuxDocEntity',
-      lastPropertyId: const IdUid(4, 5794431701180616516),
+      lastPropertyId: const IdUid(5, 4409612404047341116),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -44,6 +44,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(4, 5794431701180616516),
             name: 'data',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 4409612404047341116),
+            name: 'favorite',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -101,11 +106,12 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (LinuxDocEntity object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final dataOffset = fbb.writeString(object.data);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addInt64(2, object.categoryId);
           fbb.addOffset(3, dataOffset);
+          fbb.addBool(4, object.favorite);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -120,8 +126,10 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           final dataParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
-          final object =
-              LinuxDocEntity(idParam, nameParam, categoryIdParam, dataParam);
+          final favoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
+          final object = LinuxDocEntity(
+              idParam, nameParam, categoryIdParam, dataParam, favoriteParam);
 
           return object;
         })
@@ -147,4 +155,8 @@ class LinuxDocEntity_ {
   /// see [LinuxDocEntity.data]
   static final data =
       QueryStringProperty<LinuxDocEntity>(_entities[0].properties[3]);
+
+  /// see [LinuxDocEntity.favorite]
+  static final favorite =
+      QueryBooleanProperty<LinuxDocEntity>(_entities[0].properties[4]);
 }

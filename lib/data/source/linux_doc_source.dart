@@ -32,12 +32,13 @@ class QueryParam {
 
   String keyword = '';
   int category = -1;
+  bool favorite = false;
   int page = 0;
   int pageSize = 20;
 
   @override
   String toString() {
-    return 'QueryParam{keyword: $keyword, category: $category, page: $page, pageSize: $pageSize}';
+    return 'QueryParam{keyword: $keyword, category: $category, favorite: $favorite, page: $page, pageSize: $pageSize}';
   }
 }
 

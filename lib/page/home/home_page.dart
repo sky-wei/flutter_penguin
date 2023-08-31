@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
     SideItem(type: SortType.terminal, icon: 'assets/svg/ic_terminal.svg', name: '命令'),
+    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_favorites.svg', name: '收藏'),
     SideItem(type: SortType.setting, icon: 'assets/svg/ic_settings.svg', name: '设置'),
     SideItem(type: SortType.help, icon: 'assets/svg/ic_help.svg', name: '帮助'),
   ];
@@ -85,6 +86,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
 
   final List<Widget> _children = const [
     LinuxDocPage(inline: true),
+    LinuxDocPage(inline: true, listType: ListType.favorite),
     SettingViewPage(),
     EmptyPage(),
     EmptyPage(),

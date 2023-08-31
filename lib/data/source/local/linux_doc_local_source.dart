@@ -55,6 +55,10 @@ class LinuxDocLocalSource implements XLinuxDocSource {
       qc = qc.and(LinuxDocEntity_.categoryId.equals(param.category));
     }
 
+    if (param.favorite) {
+      qc = qc.and(LinuxDocEntity_.favorite.equals(param.favorite));
+    }
+
     final query = linuxDoc.query(qc).build();
 
     final result = query.find();

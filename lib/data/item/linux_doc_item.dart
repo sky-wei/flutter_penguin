@@ -32,6 +32,9 @@ class LinuxDocItem {
 	@JSONField(serialize: false, deserialize: false)
 	String category = '';
 
+	@JSONField(serialize: false, deserialize: false)
+	bool favorite = false;
+
 	LinuxDocItem();
 
 	factory LinuxDocItem.fromJson(Map<String, dynamic> json) => $LinuxDocItemFromJson(json);

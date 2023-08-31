@@ -26,7 +26,9 @@ class LinuxDocEntity {
   int categoryId;
   String data;
 
-  LinuxDocEntity(this.id, this.name, this.categoryId, this.data);
+  bool favorite;
+
+  LinuxDocEntity(this.id, this.name, this.categoryId, this.data, this.favorite);
 
   @override
   bool operator ==(Object other) =>
@@ -42,6 +44,6 @@ class LinuxDocEntity {
 
   @override
   String toString() {
-    return 'LinuxDocEntity{id: $id, name: $name, categoryId: $categoryId, data: $data}';
+    return 'LinuxDocEntity{id: $id, name: $name, categoryId: $categoryId, data: $data, favorite: $favorite}';
   }
 }

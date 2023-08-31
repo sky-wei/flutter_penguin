@@ -22,6 +22,7 @@ import 'package:flutter_penguin/data/item/linux_doc_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 import 'package:flutter_penguin/generated/json/base/json_convert_content.dart';
 import 'package:flutter_penguin/model/abstract_model.dart';
+import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
 import 'package:flutter_penguin/util/easy_notifier.dart';
 import 'package:flutter_penguin/util/log_util.dart';
 
@@ -69,10 +70,13 @@ class LinuxDocModel extends AbstractModel {
 
   /// 刷新列表
   Future<void> refreshDocList({
+    required ListType listType,
     String? keyword,
     int? category,
     int? delayedTime,
   }) async {
+
+    queryDoc.listType = listType;
 
     if (keyword != null) {
       queryDoc.keyword = keyword;
@@ -122,6 +126,7 @@ class LinuxDocModel extends AbstractModel {
       QueryParam()
         ..category = queryDoc.category
         ..keyword = queryDoc.keyword
+        ..favorite = queryDoc.favoriteList
     );
 
     if (XLog.isDebug && result.isEmpty) {
@@ -177,8 +182,11 @@ class LinuxDocModel extends AbstractModel {
 
 class QueryDoc {
 
+  ListType listType = ListType.all;
   String keyword = '';
   int category = -1;
   int page = 0;
   int pageSize = 20;
+  
+  bool get favoriteList => listType == ListType.favorite;
 }

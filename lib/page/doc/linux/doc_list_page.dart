@@ -15,6 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/linux_doc_item.dart';
 import 'package:flutter_penguin/page/doc/linux/filter_page.dart';
 import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
@@ -28,6 +29,7 @@ import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_penguin/widget/action_menu_widget.dart';
+import 'package:flutter_penguin/widget/app_icon_button.dart';
 import 'package:flutter_penguin/widget/app_text.dart';
 import 'package:flutter_penguin/widget/frame_widget.dart';
 import 'package:flutter_penguin/widget/inner_loading_widget.dart';
@@ -37,6 +39,7 @@ import 'package:flutter_penguin/widget/text_field_widget.dart';
 import 'package:flutter_penguin/widget/title_widget.dart';
 import 'package:flutter_penguin/widget/widget_factory.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import 'doc_details_page.dart';
@@ -47,12 +50,14 @@ class DocListPage extends StatefulWidget {
   final bool inline;
   final ListController? listController;
   final Widget? drawer;
+  final ListType listType;
 
   const DocListPage({
     Key? key,
     this.inline = false,
     this.listController,
     this.drawer,
+    this.listType = ListType.all
   }) : super(key: key);
 
   @override
@@ -204,53 +209,18 @@ class _DocListPageState extends State<DocListPage> {
       controller: _scrollController,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
-        return _buildItemWidget(
-          index: index,
-          choose: _currentIndex == index,
-          onTap: () => _chooseListItem(index)
+        final item = linuxDocItems[index];
+        return DocItemWidget(
+          item: item,
+          onChoose: (item) => _currentIndex == index,
+          onPressed: (item) => _chooseListItem(index),
+          onFavorite: (item) => _favoriteListItem(index)
         );
       },
       separatorBuilder: (context, index) {
         return WidgetFactory.buildLeft15Line();
       },
       itemCount: linuxDocItems.length
-    );
-  }
-
-  /// 创建列表项控件
-  Widget _buildItemWidget({
-    required int index,
-    required bool choose,
-    GestureTapCallback? onTap,
-  }) {
-    final item = linuxDocItems[index];
-
-    return ChooseFrameWidget(
-      choose: choose,
-      chooseColor: Theme.of(context).highlightColor.withOpacity(0.2),
-      onTap: onTap,
-      child: _buildInfoWidget(item)
-    );
-  }
-
-  /// 创建信息控件
-  Widget _buildInfoWidget(LinuxDocItem item) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppText(
-          item.name,
-          overflow: TextOverflow.ellipsis,
-          color: Theme.of(context).mainTextColor,
-          fontSize: 18.sp,
-        ),
-        XBox.vertical5,
-        AppText(
-          item.category,
-          overflow: TextOverflow.ellipsis,
-          color: Theme.of(context).hintColor,
-        ),
-      ],
     );
   }
 
@@ -270,6 +240,27 @@ class _DocListPageState extends State<DocListPage> {
     );
   }
 
+  void _favoriteListItem(int index) {
+
+    final item = linuxDocItems[index];
+
+    // _linuxDocModel.favorite(item).catchError((error, stackTrace) {
+    //   MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+    // });
+
+    // final listController = widget.listController;
+    //
+    // if (listController != null) {
+    //   setState(() => listController.setValue(index, linuxDocItems[index]));
+    //   return;
+    // }
+    //
+    // AppNavigator.start(
+    //     context: context,
+    //     child: DocDetailsPage(index: index)
+    // );
+  }
+
   /// 搜索
   void _onSearch(String keyword) {
     refreshDocList(keyword: keyword);
@@ -287,6 +278,7 @@ class _DocListPageState extends State<DocListPage> {
       keyword: keyword,
       category: category,
       delayedTime: delayedTime,
+      listType: widget.listType,
     ).then((value) {
       _cancelLoading();
     }).onError((error, stackTrace) {
@@ -306,7 +298,8 @@ class _DocListPageState extends State<DocListPage> {
 
     if (value != null) {
       _linuxDocModel.refreshDocList(
-        category: value.category
+        category: value.category,
+        listType: widget.listType,
       ).onError((error, stackTrace) {
         MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
       });
@@ -353,3 +346,126 @@ class _DocListPageState extends State<DocListPage> {
     _loadingKey.currentState?.setLoading(false);
   }
 }
+
+
+class DocItemWidget extends StatefulWidget {
+
+  final LinuxDocItem item;
+  final ChooseItem<LinuxDocItem> onChoose;
+  final ValueChanged<LinuxDocItem> onPressed;
+  final ValueChanged<LinuxDocItem> onFavorite;
+
+  const DocItemWidget({
+    super.key,
+    required this.item,
+    required this.onChoose,
+    required this.onPressed,
+    required this.onFavorite,
+  });
+
+  @override
+  State<DocItemWidget> createState() => _DocItemWidgetState();
+}
+
+class _DocItemWidgetState extends State<DocItemWidget> {
+
+  bool _favoriteState = false;
+
+  bool get favorite => widget.item.favorite;
+  bool get unFavorite => _favoriteState && !widget.item.favorite;
+
+  @override
+  Widget build(BuildContext context) {
+
+    final choose = widget.onChoose(widget.item);
+
+    return ChooseFrameWidget(
+      choose: choose,
+      chooseColor: Theme.of(context).highlightColor.withOpacity(0.2),
+      onTap: () { widget.onPressed(widget.item); },
+      child: MouseRegion(
+        onEnter: (event) { _setFavorite(true); },
+        onExit: (event) { _setFavorite(false); },
+        child: Stack(
+          children: [
+            _buildInfoWidget(widget.item),
+            if (favorite)
+              _buildFavorite(
+                  icon: 'assets/svg/ic_favorite.svg',
+                  color: Theme.of(context).favoriteColor,
+                  onPressed: _handlerFavorite
+              ),
+            if (unFavorite)
+              _buildFavorite(
+                  icon: 'assets/svg/ic_un_favorite.svg',
+                  color: Theme.of(context).hintColor,
+                  onPressed: _handlerFavorite
+              ),
+          ],
+        ),
+      )
+    );
+  }
+
+  /// 创建信息控件
+  Widget _buildInfoWidget(LinuxDocItem item) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppText(
+          item.name,
+          overflow: TextOverflow.ellipsis,
+          color: Theme.of(context).mainTextColor,
+          fontSize: 18.sp,
+        ),
+        XBox.vertical5,
+        AppText(
+          item.category,
+          overflow: TextOverflow.ellipsis,
+          color: Theme.of(context).hintColor,
+        ),
+      ],
+    );
+  }
+
+  /// 创建收藏控件
+  Widget _buildFavorite({
+    required String icon,
+    required Color color,
+    VoidCallback? onPressed
+  }) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: REdgeInsets.only(top: 3.r, right: 3.r),
+        child: AppIconButton(
+          iconSize: 18.r,
+          splashRadius: 24.r,
+          padding: const EdgeInsets.all(0),
+          constraints: BoxConstraints(
+              maxWidth: 18.r
+          ),
+          onPressed: onPressed,
+          icon: SvgPicture.asset(
+            icon,
+            color: color,
+            width: 18.r,
+          )
+        ),
+      ),
+    );
+  }
+
+  /// 处理收藏事件
+  void _handlerFavorite() {
+    widget.onFavorite(widget.item);
+  }
+
+  /// 设置收藏状态
+  void _setFavorite(bool show) {
+    setState(() {
+      _favoriteState = show;
+    });
+  }
+}
+

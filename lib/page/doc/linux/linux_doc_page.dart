@@ -15,6 +15,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/util/list_controller.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
@@ -28,11 +29,13 @@ class LinuxDocPage extends StatefulWidget {
 
   final bool inline;
   final Widget? drawer;
+  final ListType listType;
 
   const LinuxDocPage({
     Key? key,
     this.inline = false,
     this.drawer,
+    this.listType = ListType.all
   }) : super(key: key);
 
   @override
@@ -71,6 +74,7 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
     return DocListPage(
       inline: widget.inline,
       drawer: widget.drawer,
+      listType: widget.listType,
     );
   }
 
@@ -83,6 +87,7 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
           child: DocListPage(
             inline: widget.inline,
             listController: _listController,
+            listType: widget.listType,
           ),
         ),
         XBox.horizontal8,

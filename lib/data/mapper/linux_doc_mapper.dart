@@ -37,6 +37,7 @@ class LinuxDocMapper {
       ..name = entity.name
       ..categoryId = entity.categoryId
       ..data = entity.data
+      ..favorite = entity.favorite
     ;
   }
 
@@ -49,7 +50,8 @@ class LinuxDocMapper {
       item.id,
       item.name,
       item.categoryId,
-      item.data
+      item.data,
+      item.favorite
     );
   }
 }

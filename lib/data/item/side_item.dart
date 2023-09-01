@@ -50,4 +50,9 @@ class SideItem {
   @override
   int get hashCode =>
       icon.hashCode ^ name.hashCode ^ type.hashCode ^ data.hashCode;
+
+  @override
+  String toString() {
+    return 'SideItem{icon: $icon, name: $name, type: $type, data: $data}';
+  }
 }

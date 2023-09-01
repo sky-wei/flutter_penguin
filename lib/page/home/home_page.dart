@@ -25,16 +25,15 @@ import 'package:flutter_penguin/page/doc/cmd/cmd_doc_view.dart';
 import 'package:flutter_penguin/page/setting/setting_page.dart';
 import 'package:flutter_penguin/page/setting/setting_view_page.dart';
 import 'package:flutter_penguin/theme/theme.dart';
-import 'package:flutter_penguin/util/app_navigator.dart';
 import 'package:flutter_penguin/util/launch_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
 import 'package:flutter_penguin/util/size_box_util.dart';
+import 'package:flutter_penguin/widget/action_menu_widget.dart';
 import 'package:flutter_penguin/widget/head_logo_widget.dart';
 import 'package:flutter_penguin/widget/window_buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'empty_page.dart';
 import 'side_bar_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -88,12 +87,6 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
     CmdDocView(inline: true),
     CmdDocView(inline: true, listType: ListType.favorite),
     SettingViewPage(),
-    EmptyPage(),
-    EmptyPage(),
-    EmptyPage(),
-    EmptyPage(),
-    EmptyPage(),
-    EmptyPage(),
   ];
 
   final PageController _pageController = PageController(initialPage: 0);
@@ -106,6 +99,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   @override
   void dispose() {
     super.dispose();
+    _pageController.dispose();
   }
 
   @override
@@ -239,39 +233,70 @@ class MobileHomePage extends StatefulWidget {
   State<MobileHomePage> createState() => _MobileHomePageState();
 }
 
+
 class _MobileHomePageState extends State<MobileHomePage> {
 
+  final PageController _pageController = PageController(initialPage: 0);
+
   DateTime? _lastPressTime;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: CmdDocView(
-        inline: true,
+      child: Scaffold(
         drawer: MobileSideBarView(
+          controller: _pageController,
           sideItems: widget.sideItems,
           intercept: (item) => onIntercept(item),
         ),
+        body: LayoutBuilder(builder: (context, type) {
+          return _buildBodyWidget(context);
+        }),
       ),
     );
   }
 
-  /// 事件处理
+  Widget _buildBodyWidget(BuildContext context) {
+
+    final leadingWidget = ActionMenuWidget(
+      iconName: 'ic_menu.svg',
+      iconColor: Theme.of(context).iconTheme.color,
+      onPressed: () { Scaffold.of(context).openDrawer(); },
+    );
+
+    return PageView(
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      controller: _pageController,
+      children: [
+        CmdDocView(
+          inline: true,
+          leading: leadingWidget,
+        ),
+        CmdDocView(
+          inline: true, listType: ListType.favorite,
+          leading: leadingWidget,
+        ),
+        SettingPage(leading: leadingWidget),
+      ],
+    );
+  }
+
   /// 事件拦截
   bool onIntercept(SideItem item) {
-    if (item.type == SortType.favorite) {
-      // 收藏
-      AppNavigator.push(
-        context,
-        CmdDocView(inline: true, listType: ListType.favorite)
-      );
-      return true;
-    } else if (item.type == SortType.setting) {
-       // 设置
-       AppNavigator.push(context, const SettingPage());
-       return true;
-     } else if (item.type == SortType.help) {
+    if (item.type == SortType.help) {
       // 帮助
       LaunchUtil.launch(XConstant.source);
       return true;
@@ -281,6 +306,12 @@ class _MobileHomePageState extends State<MobileHomePage> {
 
   /// 返回事件处理
   Future<bool> _onWillPop() {
+
+    if (_pageController.page?.toInt() != 0) {
+      // 退回到第一页
+      _pageController.jumpToPage(0);
+      return Future.value(false);
+    }
 
     if (_lastPressTime == null ||
         DateTime.now().difference(_lastPressTime!) > const Duration(seconds: 3)

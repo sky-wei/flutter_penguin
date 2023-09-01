@@ -26,13 +26,13 @@ import 'cmd_doc_page.dart';
 class CmdDocView extends StatefulWidget {
 
   final bool inline;
-  final Widget? drawer;
+  final Widget? leading;
   final ListType listType;
 
   const CmdDocView({
     Key? key,
     this.inline = false,
-    this.drawer,
+    this.leading,
     this.listType = ListType.all
   }) : super(key: key);
 
@@ -57,7 +57,7 @@ class _CmdDocViewState extends State<CmdDocView> {
       ],
       child: CmdDocPage(
         inline: widget.inline,
-        drawer: widget.drawer,
+        leading: widget.leading,
         listType: widget.listType,
       ),
     );

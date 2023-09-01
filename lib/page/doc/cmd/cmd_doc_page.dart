@@ -22,19 +22,19 @@ import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_penguin/widget/expand_box_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
 
-import 'doc_details_page.dart';
 import 'cmd_list_page.dart';
+import 'doc_details_page.dart';
 
 class CmdDocPage extends StatefulWidget {
 
   final bool inline;
-  final Widget? drawer;
+  final Widget? leading;
   final ListType listType;
 
   const CmdDocPage({
     Key? key,
     this.inline = false,
-    this.drawer,
+    this.leading,
     this.listType = ListType.all
   }) : super(key: key);
 
@@ -73,7 +73,7 @@ class _CmdDocPageState extends State<CmdDocPage> {
   Widget _buildMobileBody() {
     return CmdListPage(
       inline: widget.inline,
-      drawer: widget.drawer,
+      leading: widget.leading,
       listType: widget.listType,
     );
   }

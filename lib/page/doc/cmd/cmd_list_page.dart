@@ -39,6 +39,7 @@ import 'package:flutter_penguin/widget/text_field_widget.dart';
 import 'package:flutter_penguin/widget/title_widget.dart';
 import 'package:flutter_penguin/widget/widget_factory.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -49,14 +50,14 @@ class CmdListPage extends StatefulWidget {
 
   final bool inline;
   final ListController? listController;
-  final Widget? drawer;
+  final Widget? leading;
   final ListType listType;
 
   const CmdListPage({
     Key? key,
     this.inline = false,
     this.listController,
-    this.drawer,
+    this.leading,
     this.listType = ListType.all
   }) : super(key: key);
 
@@ -117,13 +118,7 @@ class _CmdListPageState extends State<CmdListPage> {
   Widget _buildMobileBody() {
     return Scaffold(
       appBar: AppBar(
-        leading: LayoutBuilder(builder: (context, type) {
-          return ActionMenuWidget(
-            iconName: 'ic_menu.svg',
-            iconColor: Theme.of(context).iconTheme.color,
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          );
-        }),
+        leading: widget.leading,
         title: const PageTitleWidget(
           title: '命令列表',
         ),
@@ -131,7 +126,6 @@ class _CmdListPageState extends State<CmdListPage> {
         elevation: 0,
         actions: [_buildFilterWidget()],
       ),
-      drawer: widget.drawer,
       body: _buildFrameWidget(),
     );
   }
@@ -205,7 +199,8 @@ class _CmdListPageState extends State<CmdListPage> {
 
   /// 创建列表控件
   Widget _buildListWidget() {
-    return ListView.separated(
+
+    final listWidget = ListView.separated(
       controller: _scrollController,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
@@ -222,6 +217,13 @@ class _CmdListPageState extends State<CmdListPage> {
       },
       itemCount: cmdDocItems.length
     );
+
+    if (!PlatformUtil.isTabletMode()) {
+      return SlidableAutoCloseBehavior(
+        child: listWidget,
+      );
+    }
+    return listWidget;
   }
 
   /// 选择列表
@@ -369,7 +371,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
 
     final choose = widget.onChoose(widget.item);
 
-    return ChooseFrameWidget(
+    final frameWidget = ChooseFrameWidget(
       choose: choose,
       chooseColor: Theme.of(context).highlightColor.withOpacity(0.2),
       onTap: () { widget.onPressed(widget.item); },
@@ -395,26 +397,49 @@ class _ListItemWidgetState extends State<ListItemWidget> {
         ),
       )
     );
+
+    if (!PlatformUtil.isTabletMode()) {
+      return Slidable(
+        groupTag: '0',
+        endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          children: [
+            _buildFavoriteAction(
+              favorite: favorite,
+              onPressed: (context) {
+                _handlerFavorite();
+              }
+            ),
+          ]
+        ),
+        child: frameWidget,
+      );
+    }
+
+    return frameWidget;
   }
 
   /// 创建信息控件
   Widget _buildInfoWidget(CmdDocItem item) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppText(
-          item.name,
-          overflow: TextOverflow.ellipsis,
-          color: Theme.of(context).mainTextColor,
-          fontSize: 18.sp,
-        ),
-        XBox.vertical5,
-        AppText(
-          item.category,
-          overflow: TextOverflow.ellipsis,
-          color: Theme.of(context).hintColor,
-        ),
-      ],
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppText(
+            item.name,
+            overflow: TextOverflow.ellipsis,
+            color: Theme.of(context).mainTextColor,
+            fontSize: 18.sp,
+          ),
+          XBox.vertical5,
+          AppText(
+            item.category,
+            overflow: TextOverflow.ellipsis,
+            color: Theme.of(context).hintColor,
+          ),
+        ],
+      ),
     );
   }
 
@@ -443,6 +468,21 @@ class _ListItemWidgetState extends State<ListItemWidget> {
           )
         ),
       ),
+    );
+  }
+
+  /// 创建收藏控件
+  SlidableAction _buildFavoriteAction({
+    required bool favorite,
+    required SlidableActionCallback onPressed
+  }) {
+    return SlidableAction(
+      onPressed: onPressed,
+      backgroundColor: Theme.of(context).favoriteColor,
+      foregroundColor: Colors.white,
+      icon: !favorite ? Icons.star_border_outlined : Icons.star,
+      label: !favorite ? '收藏' : '取消',
+      borderRadius: const BorderRadius.all(Radius.circular(6)),
     );
   }
 

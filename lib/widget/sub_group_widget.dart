@@ -27,6 +27,7 @@ import 'sub_scaffold.dart';
 
 class SubGroupWidget extends StatelessWidget {
 
+  final Widget? leading;
   final ListController? controller;
   final ValueChanged<int>? onItemTap;
   final String? title;
@@ -37,6 +38,7 @@ class SubGroupWidget extends StatelessWidget {
 
   const SubGroupWidget({
     Key? key,
+    this.leading,
     this.controller,
     this.onItemTap,
     this.title,
@@ -48,6 +50,7 @@ class SubGroupWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SubScaffold(
       inline: inline,
+      leading: leading,
       title: title,
       body: _buildBody(),
     );

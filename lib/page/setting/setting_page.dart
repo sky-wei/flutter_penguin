@@ -35,11 +35,13 @@ import 'font_size_page.dart';
 
 class SettingPage extends StatefulWidget {
 
+  final Widget? leading;
   final bool basic;
   final ListController? controller;
   
   const SettingPage({
     Key? key,
+    this.leading,
     this.basic = false,
     this.controller
   }) : super(key: key);
@@ -71,6 +73,7 @@ class _SettingPageState extends State<SettingPage> {
     final groupItems = _loadGroupItems();
 
     return SubGroupWidget(
+      leading: widget.leading,
       controller: widget.controller,
       onItemTap: _onValueChange,
       title: S.of(context).setting,

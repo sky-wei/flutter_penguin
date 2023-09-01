@@ -236,7 +236,7 @@ class _MobileSideBarViewState extends State<MobileSideBarView> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.controller?.initialPage ?? 0;
+    _currentIndex = widget.controller?.page?.toInt() ?? 0;
   }
 
   @override

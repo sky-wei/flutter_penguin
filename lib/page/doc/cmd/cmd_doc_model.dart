@@ -18,21 +18,23 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_penguin/constant.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 import 'package:flutter_penguin/generated/json/base/json_convert_content.dart';
 import 'package:flutter_penguin/model/abstract_model.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
+import 'package:flutter_penguin/util/app_extension.dart';
 import 'package:flutter_penguin/util/easy_notifier.dart';
 import 'package:flutter_penguin/util/log_util.dart';
 
-class LinuxDocModel extends AbstractModel {
+class CmdDocModel extends AbstractModel {
 
   final EasyNotifier detailsNotifier = EasyNotifier();
 
-  final String _docName = 'assets/doc/linux/linux_doc.json';
+  final String _docName = 'assets/doc/linux/cmd_doc.json';
   final QueryDoc _queryDoc = _createDefault();
-  final List<LinuxDocItem> _linuxDocItems = [];
+  final List<CmdDocItem> _cmdDocItems = [];
+  final Map<String, FavoriteItem> _favoriteMap = { };
 
   final Map<int, String> categoryIndex = {
     0: "其他",
@@ -48,18 +50,18 @@ class LinuxDocModel extends AbstractModel {
     10: "备份压缩"
   };
 
-  LinuxDocItem? _linuxDocItem;
+  CmdDocItem? _cmdDocItem;
 
   XLinuxDocSource get linuxDocSource => repositoryFactory.createLinuxDocSource();
 
-  List<LinuxDocItem> get linuxDocItems => _linuxDocItems;
+  List<CmdDocItem> get cmdDocItems => _cmdDocItems;
   QueryDoc get queryDoc => _queryDoc;
-  LinuxDocItem? get linuxDocItem => _linuxDocItem;
+  CmdDocItem? get cmdDocItem => _cmdDocItem;
 
-  LinuxDocModel(super.context);
+  CmdDocModel(super.context);
 
-  void clearLinuxDocItem() {
-    _linuxDocItem = null;
+  void clearCmdDocItem() {
+    _cmdDocItem = null;
   }
 
   @override
@@ -76,8 +78,6 @@ class LinuxDocModel extends AbstractModel {
     int? delayedTime,
   }) async {
 
-    queryDoc.listType = listType;
-
     if (keyword != null) {
       queryDoc.keyword = keyword;
     }
@@ -93,13 +93,13 @@ class LinuxDocModel extends AbstractModel {
     }
 
     /// 刷新订单
-    await _refreshDocList();
+    await _refreshDocList(listType);
   }
 
   /// 请求详情信息
-  Future<void> requestDetail(LinuxDocItem item, [int? delayed]) async {
+  Future<void> requestDetail(CmdDocItem item, [int? delayed]) async {
 
-    final result = await linuxDocSource.getDetails(item.id);
+    final result = await linuxDocSource.getCmdDocDetails(item.id);
 
     if (delayed != null && delayed > 0) {
       await Future.delayed(Duration(milliseconds: delayed));
@@ -107,58 +107,112 @@ class LinuxDocModel extends AbstractModel {
 
     detailsNotifier.notify(() {
       // 详情结果
-      _linuxDocItem = result;
+      _cmdDocItem = result;
     });
   }
 
   /// 重新请求命令信息
-  Future<void> _refreshDocList() async {
+  Future<void> _refreshDocList(ListType listType) async {
 
-    if (_isImportLinuxDoc()) {
+    if (_isImportCmdDoc()) {
       // 导入命令
-      if (await _importLinuxDoc(_docName)) {
+      if (await _importCmdDoc(_docName)) {
         // 保存版本信息
-        _saveLinuxDocVersion();
+        _saveCmdDocVersion();
       }
     }
 
-    final result = await linuxDocSource.getDocList(
-      QueryParam()
+    // 加载收藏列表
+    await _loadFavoriteList();
+
+    final result = await linuxDocSource.getCmdDocList(
+      QueryCmdParam()
         ..category = queryDoc.category
         ..keyword = queryDoc.keyword
-        ..favorite = queryDoc.favoriteList
     );
 
     if (XLog.isDebug && result.isEmpty) {
       // 需要重置下(测试下会删除数据库)
-      _saveLinuxDocVersion(-1);
+      _saveCmdDocVersion(-1);
     }
 
     for (var item in result) {
       item.category = categoryIndex[item.categoryId] ?? categoryIndex[0]!;
+      item.favorite = _favoriteMap.containsKey(item.name);
+    }
+
+    final newResult = <CmdDocItem>[];
+
+    if (ListType.favorite == listType) {
+      for (var item in result) {
+        if (item.favorite) {
+          newResult.add(item);
+        }
+      }
+    } else {
+      newResult.addAll(result);
     }
 
     notify(() {
-      _linuxDocItems.clear();
-      _linuxDocItems.addAll(result);
+      _cmdDocItems.clear();
+      _cmdDocItems.addAll(newResult);
+    });
+  }
+
+  /// 添加收藏
+  Future<void> favoriteCmdDoc(
+    ListType listType,
+    CmdDocItem item
+  ) async {
+
+    if (item.favorite) {
+      // 删除收藏
+      item.favorite = false;
+      final favorite = _favoriteMap.remove(item.name);
+      if (favorite != null) {
+        await linuxDocSource.removeFavorite(favorite);  
+      }
+      if (ListType.favorite == listType) {
+        _cmdDocItems.remove(item);
+      }
+    } else {
+      // 添加收藏
+      item.favorite = true;
+      final favorite = await linuxDocSource.addFavorite(
+        FavoriteItem.cmd(item.name)
+      );
+      _favoriteMap.putIfAbsent(favorite.key, () => favorite);
+    }
+    notify();
+  }
+
+  /// 加载收藏列表
+  Future<void> _loadFavoriteList() async {
+
+    final list = await linuxDocSource.getFavoriteList();
+
+    _favoriteMap.clear();
+
+    list.forEachX((e) {
+      _favoriteMap.putIfAbsent(e.key, () => e);
     });
   }
 
   /// 是否需要导入命令
-  bool _isImportLinuxDoc() {
-    return XLinuxDoc.version != defaultPreferences.getInt('linux_doc_version');
+  bool _isImportCmdDoc() {
+    return XCmdDoc.version != defaultPreferences.getInt('cmd_doc_version');
   }
 
   /// 保存导入的版本
-  void _saveLinuxDocVersion([int version = XLinuxDoc.version]) {
-    defaultPreferences.setInt('linux_doc_version', version);
+  void _saveCmdDocVersion([int version = XCmdDoc.version]) {
+    defaultPreferences.setInt('cmd_doc_version', version);
   }
 
   /// 导入文件
-  Future<bool> _importLinuxDoc(String fileName) async {
+  Future<bool> _importCmdDoc(String fileName) async {
 
     final data = await rootBundle.loadString(fileName);
-    final items = JsonConvert.fromJsonAsT<List<LinuxDocItem>>(
+    final items = JsonConvert.fromJsonAsT<List<CmdDocItem>>(
         json.decode(data)
     );
 
@@ -170,7 +224,7 @@ class LinuxDocModel extends AbstractModel {
     XLog.d('导入数据 ${items.length} 条');
 
     // 导入数据
-    return await linuxDocSource.importDoc(items);
+    return await linuxDocSource.importCmdDoc(items);
   }
 
   /// 创建默认查询条件
@@ -182,11 +236,8 @@ class LinuxDocModel extends AbstractModel {
 
 class QueryDoc {
 
-  ListType listType = ListType.all;
   String keyword = '';
   int category = -1;
   int page = 0;
   int pageSize = 20;
-  
-  bool get favoriteList => listType == ListType.favorite;
 }

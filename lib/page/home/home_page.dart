@@ -21,7 +21,7 @@ import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
 import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
+import 'package:flutter_penguin/page/doc/cmd/cmd_doc_page.dart';
 import 'package:flutter_penguin/page/setting/setting_page.dart';
 import 'package:flutter_penguin/page/setting/setting_view_page.dart';
 import 'package:flutter_penguin/theme/theme.dart';
@@ -85,8 +85,8 @@ class DesktopHomePage extends StatefulWidget {
 class _DesktopHomePageState extends State<DesktopHomePage> {
 
   final List<Widget> _children = const [
-    LinuxDocPage(inline: true),
-    LinuxDocPage(inline: true, listType: ListType.favorite),
+    CmdDocPage(inline: true),
+    CmdDocPage(inline: true, listType: ListType.favorite),
     SettingViewPage(),
     EmptyPage(),
     EmptyPage(),
@@ -247,7 +247,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: LinuxDocPage(
+      child: CmdDocPage(
         inline: true,
         drawer: MobileSideBarView(
           sideItems: widget.sideItems,

@@ -15,9 +15,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_page.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/page/doc/cmd/cmd_doc_model.dart';
+import 'package:flutter_penguin/page/doc/cmd/cmd_doc_page.dart';
 import 'package:flutter_penguin/util/app_extension.dart';
 import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/list_controller.dart';
@@ -50,18 +50,18 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   final GlobalKey<InnerLoadingWidgetState> _loadingKey = GlobalKey();
 
-  late LinuxDocModel _listDocModel;
+  late CmdDocModel _listDocModel;
 
   bool get inline => widget.inline;
   ListController? get listController => widget.listController;
   int get _currentIndex => widget.listController?.value ?? widget.index;
-  LinuxDocItem? get docDetails => _listDocModel.linuxDocItem;
+  CmdDocItem? get docDetails => _listDocModel.cmdDocItem;
   bool _loading = false;
 
   @override
   void initState() {
     super.initState();
-    _listDocModel = context.read<LinuxDocModel>();
+    _listDocModel = context.read<CmdDocModel>();
     _listDocModel.detailsNotifier.addListener(_infoChange);
     listController?.addListener(_chooseChange);
 
@@ -70,7 +70,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   @override
   void dispose() {
-    _listDocModel.clearLinuxDocItem();
+    _listDocModel.clearCmdDocItem();
     _listDocModel.detailsNotifier.removeListener(_infoChange);
     listController?.removeListener(_chooseChange);
     super.dispose();
@@ -133,8 +133,8 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
   }
 
   /// 获取当前的命令
-  LinuxDocItem? _getCurrentDoc() {
-    final docItems = _listDocModel.linuxDocItems;
+  CmdDocItem? _getCurrentDoc() {
+    final docItems = _listDocModel.cmdDocItems;
     if (docItems.isSafeRange(_currentIndex)) {
       return docItems[_currentIndex];
     }

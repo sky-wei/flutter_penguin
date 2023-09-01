@@ -16,9 +16,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
-import 'package:flutter_penguin/page/doc/linux/filter_page.dart';
-import 'package:flutter_penguin/page/doc/linux/linux_doc_model.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/page/doc/cmd/cmd_doc_model.dart';
+import 'package:flutter_penguin/page/doc/cmd/filter_page.dart';
 import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/app_extension.dart';
 import 'package:flutter_penguin/util/app_navigator.dart';
@@ -42,17 +42,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import 'cmd_doc_page.dart';
 import 'doc_details_page.dart';
-import 'linux_doc_page.dart';
 
-class DocListPage extends StatefulWidget {
+class CmdListPage extends StatefulWidget {
 
   final bool inline;
   final ListController? listController;
   final Widget? drawer;
   final ListType listType;
 
-  const DocListPage({
+  const CmdListPage({
     Key? key,
     this.inline = false,
     this.listController,
@@ -61,26 +61,26 @@ class DocListPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DocListPage> createState() => _DocListPageState();
+  State<CmdListPage> createState() => _CmdListPageState();
 }
 
-class _DocListPageState extends State<DocListPage> {
+class _CmdListPageState extends State<CmdListPage> {
 
   final GlobalKey<InnerLoadingWidgetState> _loadingKey = GlobalKey();
   final FocusNode _focusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
 
-  late LinuxDocModel _linuxDocModel;
+  late CmdDocModel _cmdDocModel;
 
   bool get inline => widget.inline;
   int get _currentIndex => widget.listController?.value ?? -1;
-  List<LinuxDocItem> get linuxDocItems => _linuxDocModel.linuxDocItems;
+  List<CmdDocItem> get cmdDocItems => _cmdDocModel.cmdDocItems;
 
   @override
   void initState() {
     super.initState();
-    _linuxDocModel = context.read<LinuxDocModel>();
-    _linuxDocModel.addListener(_infoChange);
+    _cmdDocModel = context.read<CmdDocModel>();
+    _cmdDocModel.addListener(_infoChange);
     _scrollController.addListener(_handlerLoadMore);
     refreshDocList(delayedTime: 50);
   }
@@ -88,7 +88,7 @@ class _DocListPageState extends State<DocListPage> {
   @override
   void dispose() {
     _scrollController.dispose();
-    _linuxDocModel.removeListener(_infoChange);
+    _cmdDocModel.removeListener(_infoChange);
     super.dispose();
   }
 
@@ -194,7 +194,7 @@ class _DocListPageState extends State<DocListPage> {
 
   /// 创建内容体
   Widget _buildBodyWidget() {
-    if (_loadingKey.currentState != null && linuxDocItems.isEmpty) {
+    if (_loadingKey.currentState != null && cmdDocItems.isEmpty) {
       return EmptyDocWidget(
         width: 240.w,
         message: '还没有命令～',
@@ -209,8 +209,8 @@ class _DocListPageState extends State<DocListPage> {
       controller: _scrollController,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
-        final item = linuxDocItems[index];
-        return DocItemWidget(
+        final item = cmdDocItems[index];
+        return ListItemWidget(
           item: item,
           onChoose: (item) => _currentIndex == index,
           onPressed: (item) => _chooseListItem(index),
@@ -220,7 +220,7 @@ class _DocListPageState extends State<DocListPage> {
       separatorBuilder: (context, index) {
         return WidgetFactory.buildLeft15Line();
       },
-      itemCount: linuxDocItems.length
+      itemCount: cmdDocItems.length
     );
   }
 
@@ -230,7 +230,7 @@ class _DocListPageState extends State<DocListPage> {
     final listController = widget.listController;
 
     if (listController != null) {
-      setState(() => listController.setValue(index, linuxDocItems[index]));
+      setState(() => listController.setValue(index, cmdDocItems[index]));
       return;
     }
 
@@ -242,23 +242,13 @@ class _DocListPageState extends State<DocListPage> {
 
   void _favoriteListItem(int index) {
 
-    final item = linuxDocItems[index];
+    final item = cmdDocItems[index];
 
-    // _linuxDocModel.favorite(item).catchError((error, stackTrace) {
-    //   MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
-    // });
-
-    // final listController = widget.listController;
-    //
-    // if (listController != null) {
-    //   setState(() => listController.setValue(index, linuxDocItems[index]));
-    //   return;
-    // }
-    //
-    // AppNavigator.start(
-    //     context: context,
-    //     child: DocDetailsPage(index: index)
-    // );
+    _cmdDocModel.favoriteCmdDoc(
+      widget.listType, item
+    ).catchError((error, stackTrace) {
+      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+    });
   }
 
   /// 搜索
@@ -274,7 +264,7 @@ class _DocListPageState extends State<DocListPage> {
     int? delayedTime,
   }) {
     _showLoading();
-    _linuxDocModel.refreshDocList(
+    _cmdDocModel.refreshDocList(
       keyword: keyword,
       category: category,
       delayedTime: delayedTime,
@@ -293,11 +283,11 @@ class _DocListPageState extends State<DocListPage> {
     final value = await AppNavigator.start<FilterItem>(
         context: context,
         // constraints: BoxConstraints(maxWidth: 490.w),
-        child: FilterPage(filter: FilterItem(_linuxDocModel.queryDoc.category))
+        child: FilterPage(filter: FilterItem(_cmdDocModel.queryDoc.category))
     );
 
     if (value != null) {
-      _linuxDocModel.refreshDocList(
+      _cmdDocModel.refreshDocList(
         category: value.category,
         listType: widget.listType,
       ).onError((error, stackTrace) {
@@ -321,14 +311,14 @@ class _DocListPageState extends State<DocListPage> {
       return;
     }
 
-    if (!linuxDocItems.isSafeRange(index)) {
+    if (!cmdDocItems.isSafeRange(index)) {
       // 超出重置选择
       listController.setValue(-1);
       return;
     }
 
     // 获取选择订单
-    final order = linuxDocItems[_currentIndex];
+    final order = cmdDocItems[_currentIndex];
 
     if (listController.data != order) {
       // 索引相同订单信息不同
@@ -348,14 +338,14 @@ class _DocListPageState extends State<DocListPage> {
 }
 
 
-class DocItemWidget extends StatefulWidget {
+class ListItemWidget extends StatefulWidget {
 
-  final LinuxDocItem item;
-  final ChooseItem<LinuxDocItem> onChoose;
-  final ValueChanged<LinuxDocItem> onPressed;
-  final ValueChanged<LinuxDocItem> onFavorite;
+  final CmdDocItem item;
+  final ChooseItem<CmdDocItem> onChoose;
+  final ValueChanged<CmdDocItem> onPressed;
+  final ValueChanged<CmdDocItem> onFavorite;
 
-  const DocItemWidget({
+  const ListItemWidget({
     super.key,
     required this.item,
     required this.onChoose,
@@ -364,10 +354,10 @@ class DocItemWidget extends StatefulWidget {
   });
 
   @override
-  State<DocItemWidget> createState() => _DocItemWidgetState();
+  State<ListItemWidget> createState() => _ListItemWidgetState();
 }
 
-class _DocItemWidgetState extends State<DocItemWidget> {
+class _ListItemWidgetState extends State<ListItemWidget> {
 
   bool _favoriteState = false;
 
@@ -408,7 +398,7 @@ class _DocItemWidgetState extends State<DocItemWidget> {
   }
 
   /// 创建信息控件
-  Widget _buildInfoWidget(LinuxDocItem item) {
+  Widget _buildInfoWidget(CmdDocItem item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -17,33 +17,30 @@
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-class LinuxDocEntity {
+class FavoriteEntity {
 
   @Id(assignable: true)
   int id;
 
-  String name;
-  int categoryId;
-  String data;
+  String key;
+  int type;
 
-  bool favorite;
-
-  LinuxDocEntity(this.id, this.name, this.categoryId, this.data, this.favorite);
+  FavoriteEntity(this.id, this.key, this.type);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LinuxDocEntity &&
+      other is FavoriteEntity &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          name == other.name &&
-          categoryId == other.categoryId;
+          key == other.key &&
+          type == other.type;
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ categoryId.hashCode;
+  int get hashCode => id.hashCode ^ key.hashCode ^ type.hashCode;
 
   @override
   String toString() {
-    return 'LinuxDocEntity{id: $id, name: $name, categoryId: $categoryId, data: $data, favorite: $favorite}';
+    return 'FavoriteEntity{id: $id, key: $key, type: $type}';
   }
 }

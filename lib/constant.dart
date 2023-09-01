@@ -49,7 +49,7 @@ class XConstant {
   static const double defaultHeight = 950;
 }
 
-class XLinuxDoc {
+class XCmdDoc {
 
   static const int version = 1;   // 数据版本
 }

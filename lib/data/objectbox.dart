@@ -16,17 +16,20 @@
 
 import 'package:flutter_penguin/util/log_util.dart';
 
-import 'entity/linux_doc_entity.dart';
+import 'entity/cmd_doc_entity.dart';
+import 'entity/favorite_entity.dart';
 import 'objectbox.g.dart';
 
 class ObjectBox {
 
   late final Store store;
 
-  late final Box<LinuxDocEntity> linuxDoc;
+  late final Box<CmdDocEntity> cmdDoc;
+  late final Box<FavoriteEntity> favorite;
 
   ObjectBox._create(this.store) {
-    linuxDoc = Box<LinuxDocEntity>(store);
+    cmdDoc = Box<CmdDocEntity>(store);
+    favorite = Box<FavoriteEntity>(store);
   }
 
   /// 创建ObjectBox

@@ -14,26 +14,45 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 
 class LinuxDocRemoteSource implements XLinuxDocSource {
 
   @override
-  Future<LinuxDocItem> getDetails(int id) {
+  Future<CmdDocItem> getCmdDocDetails(int id) {
     // TODO: implement getDetails
     throw UnimplementedError();
   }
 
   @override
-  Future<List<LinuxDocItem>> getDocList(QueryParam param) {
+  Future<List<CmdDocItem>> getCmdDocList(QueryCmdParam param) {
     // TODO: implement getDocList
     throw UnimplementedError();
   }
 
   @override
-  Future<bool> importDoc(List<LinuxDocItem> items) {
+  Future<bool> importCmdDoc(List<CmdDocItem> items) {
     // TODO: implement importDoc
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FavoriteItem> addFavorite(FavoriteItem item) {
+    // TODO: implement addFavorite
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<FavoriteItem>> getFavoriteList() {
+    // TODO: implement getFavoriteList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FavoriteItem> removeFavorite(FavoriteItem item) {
+    // TODO: implement removeFavorite
     throw UnimplementedError();
   }
 }

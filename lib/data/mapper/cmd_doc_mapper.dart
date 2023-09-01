@@ -14,44 +14,42 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/data/entity/linux_doc_entity.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
+import 'package:flutter_penguin/data/entity/cmd_doc_entity.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
 
-class LinuxDocMapper {
+class CmdDocMapper {
 
-  LinuxDocMapper._();
+  CmdDocMapper._();
 
-  static List<LinuxDocItem> transformEntities(
-    List<LinuxDocEntity> entities, { bool skipData = false }
+  static List<CmdDocItem> transformEntities(
+    List<CmdDocEntity> entities, { bool skipData = false }
   ) {
     return entities.map((e) => transformEntity(
         e, skipData: skipData
     )).toList();
   }
 
-  static LinuxDocItem transformEntity(
-    LinuxDocEntity entity, { bool skipData = false }
+  static CmdDocItem transformEntity(
+    CmdDocEntity entity, { bool skipData = false }
   ) {
-    return LinuxDocItem()
+    return CmdDocItem()
       ..id = entity.id
       ..name = entity.name
       ..categoryId = entity.categoryId
       ..data = entity.data
-      ..favorite = entity.favorite
     ;
   }
 
-  static List<LinuxDocEntity> transformItems(List<LinuxDocItem> items) {
+  static List<CmdDocEntity> transformItems(List<CmdDocItem> items) {
     return items.map((e) => transformItem(e)).toList();
   }
 
-  static LinuxDocEntity transformItem(LinuxDocItem item) {
-    return LinuxDocEntity(
+  static CmdDocEntity transformItem(CmdDocItem item) {
+    return CmdDocEntity(
       item.id,
       item.name,
       item.categoryId,
       item.data,
-      item.favorite
     );
   }
 }

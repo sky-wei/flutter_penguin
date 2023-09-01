@@ -14,31 +14,41 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/data/item/favorite_item.dart';
 
 abstract class XLinuxDocSource {
 
   /// 导入文档
-  Future<bool> importDoc(List<LinuxDocItem> items);
+  Future<bool> importCmdDoc(List<CmdDocItem> items);
 
   /// 获取文档列表(没有data字段数据)
-  Future<List<LinuxDocItem>> getDocList(QueryParam param);
+  Future<List<CmdDocItem>> getCmdDocList(QueryCmdParam param);
 
   /// 获取文档详情数据
-  Future<LinuxDocItem> getDetails(int id);
+  Future<CmdDocItem> getCmdDocDetails(int id);
+
+  /// 获取收藏列表
+  Future<List<FavoriteItem>> getFavoriteList();
+
+  /// 移除收藏
+  Future<FavoriteItem> addFavorite(FavoriteItem item);
+
+  /// 移除收藏
+  Future<FavoriteItem> removeFavorite(FavoriteItem item);
 }
 
-class QueryParam {
+
+class QueryCmdParam {
 
   String keyword = '';
   int category = -1;
-  bool favorite = false;
   int page = 0;
   int pageSize = 20;
 
   @override
   String toString() {
-    return 'QueryParam{keyword: $keyword, category: $category, favorite: $favorite, page: $page, pageSize: $pageSize}';
+    return 'QueryCmdParam{keyword: $keyword, category: $category, page: $page, pageSize: $pageSize}';
   }
 }
 

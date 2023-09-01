@@ -17,7 +17,8 @@
 import 'dart:io';
 
 import 'package:flutter_penguin/data/data_exception.dart';
-import 'package:flutter_penguin/data/entity/linux_doc_entity.dart';
+import 'package:flutter_penguin/data/entity/cmd_doc_entity.dart';
+import 'package:flutter_penguin/data/entity/favorite_entity.dart';
 import 'package:flutter_penguin/data/objectbox.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -32,7 +33,9 @@ abstract class XDataManager implements XComponent {
     return context.getComponent(componentName);
   }
 
-  Box<LinuxDocEntity> get linuxDoc;
+  Box<CmdDocEntity> get cmdDoc;
+
+  Box<FavoriteEntity> get favorite;
 
   /// 创建指定用户的数据库
   Future<bool> create(int userId);
@@ -47,7 +50,10 @@ class DataManager extends AbstractComponent implements XDataManager {
   ObjectBox? _userObjectBox;
 
   @override
-  Box<LinuxDocEntity> get linuxDoc => _publicObjectBox.linuxDoc;
+  Box<CmdDocEntity> get cmdDoc => _publicObjectBox.cmdDoc;
+
+  @override
+  Box<FavoriteEntity> get favorite => _publicObjectBox.favorite;
 
   DataManager(this._context, this._publicObjectBox);
 

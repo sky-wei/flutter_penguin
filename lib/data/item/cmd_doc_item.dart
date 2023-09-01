@@ -17,10 +17,10 @@
 import 'dart:convert';
 
 import 'package:flutter_penguin/generated/json/base/json_field.dart';
-import 'package:flutter_penguin/generated/json/linux_doc_item.g.dart';
+import 'package:flutter_penguin/generated/json/cmd_doc_item.g.dart';
 
 @JsonSerializable()
-class LinuxDocItem {
+class CmdDocItem {
 
 	@JSONField(serialize: false, deserialize: false)
 	int id = 0;
@@ -35,11 +35,11 @@ class LinuxDocItem {
 	@JSONField(serialize: false, deserialize: false)
 	bool favorite = false;
 
-	LinuxDocItem();
+	CmdDocItem();
 
-	factory LinuxDocItem.fromJson(Map<String, dynamic> json) => $LinuxDocItemFromJson(json);
+	factory CmdDocItem.fromJson(Map<String, dynamic> json) => $CmdDocItemFromJson(json);
 
-	Map<String, dynamic> toJson() => $LinuxDocItemToJson(this);
+	Map<String, dynamic> toJson() => $CmdDocItemToJson(this);
 
 	@override
 	String toString() {

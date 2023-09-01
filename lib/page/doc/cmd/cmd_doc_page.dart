@@ -23,15 +23,15 @@ import 'package:flutter_penguin/widget/expand_box_widget.dart';
 import 'package:flutter_penguin/widget/sub_scaffold.dart';
 
 import 'doc_details_page.dart';
-import 'doc_list_page.dart';
+import 'cmd_list_page.dart';
 
-class LinuxDocPage extends StatefulWidget {
+class CmdDocPage extends StatefulWidget {
 
   final bool inline;
   final Widget? drawer;
   final ListType listType;
 
-  const LinuxDocPage({
+  const CmdDocPage({
     Key? key,
     this.inline = false,
     this.drawer,
@@ -39,10 +39,10 @@ class LinuxDocPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LinuxDocPage> createState() => _LinuxDocPageState();
+  State<CmdDocPage> createState() => _CmdDocPageState();
 }
 
-class _LinuxDocPageState extends State<LinuxDocPage> {
+class _CmdDocPageState extends State<CmdDocPage> {
 
   final ListController _listController = ListController(initIndex: -1);
 
@@ -71,7 +71,7 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
 
   /// 创建内容控件
   Widget _buildMobileBody() {
-    return DocListPage(
+    return CmdListPage(
       inline: widget.inline,
       drawer: widget.drawer,
       listType: widget.listType,
@@ -84,7 +84,7 @@ class _LinuxDocPageState extends State<LinuxDocPage> {
       children: [
         ExpandBoxWidget(
           flex: 3,
-          child: DocListPage(
+          child: CmdListPage(
             inline: widget.inline,
             listController: _listController,
             listType: widget.listType,

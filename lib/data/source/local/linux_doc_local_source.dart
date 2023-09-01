@@ -16,9 +16,12 @@
 
 import 'package:flutter_penguin/core/database.dart';
 import 'package:flutter_penguin/data/data_exception.dart';
-import 'package:flutter_penguin/data/entity/linux_doc_entity.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
-import 'package:flutter_penguin/data/mapper/linux_doc_mapper.dart';
+import 'package:flutter_penguin/data/entity/cmd_doc_entity.dart';
+import 'package:flutter_penguin/data/entity/favorite_entity.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/data/item/favorite_item.dart';
+import 'package:flutter_penguin/data/mapper/cmd_doc_mapper.dart';
+import 'package:flutter_penguin/data/mapper/favorite_mapper.dart';
 import 'package:flutter_penguin/data/objectbox.g.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 
@@ -26,58 +29,78 @@ class LinuxDocLocalSource implements XLinuxDocSource {
 
   final XDataManager dataManage;
 
-  Box<LinuxDocEntity> get linuxDoc => dataManage.linuxDoc;
+  Box<CmdDocEntity> get cmdDoc => dataManage.cmdDoc;
+  Box<FavoriteEntity> get favorite => dataManage.favorite;
 
   LinuxDocLocalSource(this.dataManage);
 
   @override
-  Future<LinuxDocItem> getDetails(int id) async {
+  Future<CmdDocItem> getCmdDocDetails(int id) async {
 
-    final entity = linuxDoc.get(id);
+    final entity = cmdDoc.get(id);
 
     if (entity == null) {
       throw DataException.message();
     }
 
-    return LinuxDocMapper.transformEntity(entity);
+    return CmdDocMapper.transformEntity(entity);
   }
 
   @override
-  Future<List<LinuxDocItem>> getDocList(QueryParam param) async {
+  Future<List<CmdDocItem>> getCmdDocList(QueryCmdParam param) async {
 
-    Condition<LinuxDocEntity> qc = LinuxDocEntity_.name.notNull();
+    Condition<CmdDocEntity> qc = CmdDocEntity_.name.notNull();
 
     if (param.keyword.isNotEmpty) {
-      qc = qc.and(LinuxDocEntity_.name.contains(param.keyword, caseSensitive: false));
+      qc = qc.and(CmdDocEntity_.name.contains(param.keyword, caseSensitive: false));
     }
 
     if (param.category >= 0) {
-      qc = qc.and(LinuxDocEntity_.categoryId.equals(param.category));
+      qc = qc.and(CmdDocEntity_.categoryId.equals(param.category));
     }
 
-    if (param.favorite) {
-      qc = qc.and(LinuxDocEntity_.favorite.equals(param.favorite));
-    }
-
-    final query = linuxDoc.query(qc).build();
+    final query = cmdDoc.query(qc).build();
 
     final result = query.find();
     query.close();
 
-    return LinuxDocMapper.transformEntities(
+    return CmdDocMapper.transformEntities(
       result,
       skipData: true
     );
   }
 
   @override
-  Future<bool> importDoc(List<LinuxDocItem> items) async {
+  Future<bool> importCmdDoc(List<CmdDocItem> items) async {
     
-    linuxDoc.removeAll();
+    cmdDoc.removeAll();
     
-    return linuxDoc.putMany(
-      LinuxDocMapper.transformItems(items)
+    return cmdDoc.putMany(
+      CmdDocMapper.transformItems(items)
     ).isNotEmpty;
+  }
+
+  @override
+  Future<FavoriteItem> addFavorite(FavoriteItem item) async {
+
+    final id = favorite.put(
+      FavoriteMapper.transformItem(item)
+    );
+
+    return item.copy(id: id);
+  }
+
+  @override
+  Future<List<FavoriteItem>> getFavoriteList() async {
+    return FavoriteMapper.transformEntities(favorite.getAll());
+  }
+
+  @override
+  Future<FavoriteItem> removeFavorite(FavoriteItem item) async {
+
+    favorite.remove(item.id);
+
+    return item;
   }
 }
 

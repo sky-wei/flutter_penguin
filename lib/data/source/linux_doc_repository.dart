@@ -15,7 +15,8 @@
  */
 
 import 'package:flutter_penguin/core/settings.dart';
-import 'package:flutter_penguin/data/item/linux_doc_item.dart';
+import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 
 class LinuxDocRepository implements XLinuxDocSource {
@@ -31,21 +32,36 @@ class LinuxDocRepository implements XLinuxDocSource {
   }) : _settings = settings, _localSource = localSource, _remoteSource = remoteSource;
 
   @override
-  Future<LinuxDocItem> getDetails(int id) {
-    return _localSource.getDetails(id);
+  Future<CmdDocItem> getCmdDocDetails(int id) {
+    return _localSource.getCmdDocDetails(id);
     // return _settings.isOfflineMode() ? _localSource.getDetails(id) : _remoteSource.getDetails(id);
   }
 
   @override
-  Future<List<LinuxDocItem>> getDocList(QueryParam param) {
-    return _localSource.getDocList(param);
+  Future<List<CmdDocItem>> getCmdDocList(QueryCmdParam param) {
+    return _localSource.getCmdDocList(param);
     // return _settings.isOfflineMode() ? _localSource.getDocList(param) : _remoteSource.getDocList(param);
   }
 
   @override
-  Future<bool> importDoc(List<LinuxDocItem> items) {
-    return _localSource.importDoc(items);
+  Future<bool> importCmdDoc(List<CmdDocItem> items) {
+    return _localSource.importCmdDoc(items);
     // return _settings.isOfflineMode() ? _localSource.importDoc(items) : _remoteSource.importDoc(items);
+  }
+
+  @override
+  Future<List<FavoriteItem>> getFavoriteList() {
+    return _localSource.getFavoriteList();
+  }
+
+  @override
+  Future<FavoriteItem> addFavorite(FavoriteItem item) {
+    return _localSource.addFavorite(item);
+  }
+
+  @override
+  Future<FavoriteItem> removeFavorite(FavoriteItem item) {
+    return _localSource.removeFavorite(item);
   }
 }
 

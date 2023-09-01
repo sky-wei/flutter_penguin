@@ -111,6 +111,30 @@ class CmdDocModel extends AbstractModel {
     });
   }
 
+  /// 添加收藏
+  Future<void> favoriteCmdDoc(ListType listType, CmdDocItem item) async {
+
+    if (item.favorite) {
+      // 删除收藏
+      item.favorite = false;
+      final favorite = _favoriteMap.remove(item.name);
+      if (favorite != null) {
+        await linuxDocSource.removeFavorite(favorite);
+      }
+      if (ListType.favorite == listType) {
+        _cmdDocItems.remove(item);
+      }
+    } else {
+      // 添加收藏
+      item.favorite = true;
+      final favorite = await linuxDocSource.addFavorite(
+          FavoriteItem.cmd(item.name)
+      );
+      _favoriteMap.putIfAbsent(favorite.key, () => favorite);
+    }
+    notify();
+  }
+
   /// 重新请求命令信息
   Future<void> _refreshDocList(ListType listType) async {
 
@@ -157,33 +181,6 @@ class CmdDocModel extends AbstractModel {
       _cmdDocItems.clear();
       _cmdDocItems.addAll(newResult);
     });
-  }
-
-  /// 添加收藏
-  Future<void> favoriteCmdDoc(
-    ListType listType,
-    CmdDocItem item
-  ) async {
-
-    if (item.favorite) {
-      // 删除收藏
-      item.favorite = false;
-      final favorite = _favoriteMap.remove(item.name);
-      if (favorite != null) {
-        await linuxDocSource.removeFavorite(favorite);  
-      }
-      if (ListType.favorite == listType) {
-        _cmdDocItems.remove(item);
-      }
-    } else {
-      // 添加收藏
-      item.favorite = true;
-      final favorite = await linuxDocSource.addFavorite(
-        FavoriteItem.cmd(item.name)
-      );
-      _favoriteMap.putIfAbsent(favorite.key, () => favorite);
-    }
-    notify();
   }
 
   /// 加载收藏列表

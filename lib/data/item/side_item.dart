@@ -16,6 +16,7 @@
 
 enum SortType {
   terminal,
+  favorite,
   setting,
   help,
   other,

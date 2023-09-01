@@ -21,7 +21,7 @@ import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
 import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_penguin/page/doc/cmd/cmd_doc_page.dart';
+import 'package:flutter_penguin/page/doc/cmd/cmd_doc_view.dart';
 import 'package:flutter_penguin/page/setting/setting_page.dart';
 import 'package:flutter_penguin/page/setting/setting_view_page.dart';
 import 'package:flutter_penguin/theme/theme.dart';
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
     SideItem(type: SortType.terminal, icon: 'assets/svg/ic_terminal.svg', name: '命令'),
-    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_favorites.svg', name: '收藏'),
+    SideItem(type: SortType.favorite, icon: 'assets/svg/ic_favorites.svg', name: '收藏'),
     SideItem(type: SortType.setting, icon: 'assets/svg/ic_settings.svg', name: '设置'),
     SideItem(type: SortType.help, icon: 'assets/svg/ic_help.svg', name: '帮助'),
   ];
@@ -85,8 +85,8 @@ class DesktopHomePage extends StatefulWidget {
 class _DesktopHomePageState extends State<DesktopHomePage> {
 
   final List<Widget> _children = const [
-    CmdDocPage(inline: true),
-    CmdDocPage(inline: true, listType: ListType.favorite),
+    CmdDocView(inline: true),
+    CmdDocView(inline: true, listType: ListType.favorite),
     SettingViewPage(),
     EmptyPage(),
     EmptyPage(),
@@ -247,7 +247,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: CmdDocPage(
+      child: CmdDocView(
         inline: true,
         drawer: MobileSideBarView(
           sideItems: widget.sideItems,
@@ -260,7 +260,14 @@ class _MobileHomePageState extends State<MobileHomePage> {
   /// 事件处理
   /// 事件拦截
   bool onIntercept(SideItem item) {
-     if (item.type == SortType.setting) {
+    if (item.type == SortType.favorite) {
+      // 收藏
+      AppNavigator.push(
+        context,
+        CmdDocView(inline: true, listType: ListType.favorite)
+      );
+      return true;
+    } else if (item.type == SortType.setting) {
        // 设置
        AppNavigator.push(context, const SettingPage());
        return true;

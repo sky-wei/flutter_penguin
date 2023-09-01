@@ -43,7 +43,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import 'cmd_doc_page.dart';
-import 'doc_details_page.dart';
+import 'doc_details_view.dart';
 
 class CmdListPage extends StatefulWidget {
 
@@ -236,7 +236,7 @@ class _CmdListPageState extends State<CmdListPage> {
 
     AppNavigator.start(
       context: context,
-      child: DocDetailsPage(index: index)
+      child: DocDetailsView(docItem: cmdDocItems[index])
     );
   }
 

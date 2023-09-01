@@ -33,13 +33,13 @@ class DocDetailsPage extends StatefulWidget {
 
   final bool inline;
   final ListController? listController;
-  final int index;
+  final CmdDocItem? docItem;
 
   const DocDetailsPage({
     Key? key,
     this.inline = false,
     this.listController,
-    this.index = -1
+    this.docItem
   }) : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   bool get inline => widget.inline;
   ListController? get listController => widget.listController;
-  int get _currentIndex => widget.listController?.value ?? widget.index;
+  int get _currentIndex => widget.listController?.value ?? -1;
   CmdDocItem? get docDetails => _listDocModel.cmdDocItem;
   bool _loading = false;
 
@@ -65,7 +65,9 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
     _listDocModel.detailsNotifier.addListener(_infoChange);
     listController?.addListener(_chooseChange);
 
-    if (_currentIndex != -1) _chooseChange();
+    if (widget.docItem != null) {
+      _requestDocDetail(widget.docItem);
+    }
   }
 
   @override
@@ -113,8 +115,11 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   /// 选择修改
   void _chooseChange() {
+    _requestDocDetail(_getCurrentDoc());
+  }
 
-    final item = _getCurrentDoc();
+  /// 请求详情信息
+  void _requestDocDetail(CmdDocItem? item) {
 
     if (item == null) {
       // 异常情况不需要处理

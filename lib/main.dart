@@ -27,6 +27,7 @@ void main() {
   initLogger(() async {
     final baseContext = BaseContext();
     await baseContext.initialize();
+    PlatformUtil.setUIOverlayStyle(baseContext);
     runApp(
       RestartWidget(
         child: DocApp(baseContext: baseContext)

@@ -16,7 +16,6 @@
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/core/context.dart';
 import 'package:flutter_penguin/core/settings.dart';
 import 'package:flutter_penguin/dialog/message_dialog.dart';
@@ -27,6 +26,9 @@ import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_penguin/util/platform_util.dart';
+import 'package:flutter_penguin/util/size_box_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:provider/provider.dart';
@@ -87,11 +89,22 @@ class _SplashPageState extends State<SplashPage> {
 
   Widget _buildBodyContent(BuildContext context) {
     return Center(
-      child: Text(
-        S.of(context).loading,
-        style: TextStyle(
-          fontSize: 18.sp
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(
+            'assets/svg/ic_head_logo.svg',
+            width: 50.r,
+            color: Theme.of(context).themeColor,
+          ),
+          XBox.vertical20,
+          Text(
+            S.of(context).loading,
+            style: TextStyle(
+              fontSize: 18.sp
+            ),
+          )
+        ],
       ),
     );
   }

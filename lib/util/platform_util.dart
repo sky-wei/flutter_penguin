@@ -20,6 +20,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_penguin/constant.dart';
+import 'package:flutter_penguin/core/context.dart';
 import 'package:flutter_penguin/core/settings.dart';
 import 'package:flutter_penguin/theme/theme.dart';
 
@@ -87,13 +88,13 @@ class PlatformUtil {
     }
   }
 
-  static void setUIOverlayStyle(XSettings appSetting) {
+  static void setUIOverlayStyle(XContext context) {
 
     if (!PlatformUtil.isMobile()) {
       return;
     }
 
-    final darkMode = appSetting.getDarkMode(XTheme.system);
+    final darkMode = context.appSetting.getDarkMode(XTheme.system);
     final navigationBarColor = XTheme.dark == darkMode
         ? const Color(0xFF363636) : Colors.transparent;
 

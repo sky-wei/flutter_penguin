@@ -51,5 +51,5 @@ class XConstant {
 
 class XCmdDoc {
 
-  static const int version = 1;   // 数据版本
+  static const int version = 2;   // 数据版本
 }

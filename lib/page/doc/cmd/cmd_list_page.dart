@@ -398,7 +398,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
       )
     );
 
-    if (!PlatformUtil.isTabletMode()) {
+    if (PlatformUtil.isMobile()) {
       return Slidable(
         groupTag: '0',
         endActionPane: ActionPane(
@@ -482,7 +482,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
       foregroundColor: Colors.white,
       icon: !favorite ? Icons.star_border_outlined : Icons.star,
       label: !favorite ? '收藏' : '取消',
-      borderRadius: const BorderRadius.all(Radius.circular(6)),
+      // borderRadius: const BorderRadius.all(Radius.circular(6)),
     );
   }
 

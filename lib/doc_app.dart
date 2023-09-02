@@ -86,8 +86,7 @@ class _DocAppState extends State<DocApp> {
   }
 
   Widget _buildBodyWidget(BuildContext context) {
-    PlatformUtil.initialize(appSetting);
-    PlatformUtil.setUIOverlayStyle(appSetting);
+    PlatformUtil.initialize(baseContext.appSetting);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

@@ -16,34 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
-import 'package:flutter_penguin/core/preferences.dart';
-
-abstract class XSettings {
-
-  int getDarkMode(int defaultValue);
-
-  Future<bool> setDarkMode(int mode);
-
-  Locale? getLocale();
-
-  Future<bool> setLocale(Locale? locale);
-
-  bool isTabletMode();
-
-  Future<bool> setTabletMode(bool enable);
-
-  double getDisplaySize();
-
-  Future<bool> setDisplaySize(double size);
-
-  double getFontSize();
-
-  Future<bool> setFontSize(double size);
-
-  bool isOfflineMode();
-
-  Future<bool> setOfflineMode(bool enable);
-}
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 
 
 class AppSettings implements XSettings {

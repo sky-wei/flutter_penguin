@@ -323,6 +323,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.0"
+  flutter_sky_library:
+    dependency: "direct main"
+    description:
+      path: "/media/data/Work/StudioProject/flutter_sky_library"
+      relative: false
+    source: path
+    version: "0.0.1"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -955,13 +962,13 @@ packages:
     source: hosted
     version: "0.4.0+2"
   watcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: watcher
-      sha256: "6a7f46926b01ce81bfc339da6a7f20afbe7733eff9846f6d6a5466aa4c6667c0"
+      sha256: "3d2ad6751b3c16cf07c7fca317a1413b3f26530319181b37e3b9039b84fc01d8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   web:
     dependency: transitive
     description:
@@ -1011,5 +1018,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.1.0-185.0.dev <4.0.0"
+  dart: ">=3.1.0 <4.0.0"
   flutter: ">=3.10.0"

@@ -21,8 +21,8 @@ import 'package:flutter_penguin/core/encrypt.dart';
 import 'package:flutter_penguin/core/preferences.dart';
 import 'package:flutter_penguin/core/settings.dart';
 import 'package:flutter_penguin/data/source/repository.dart';
-import 'package:flutter_penguin/util/easy_notifier.dart';
 import 'package:flutter_penguin/util/message_util.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 
 class AbstractModel extends EasyNotifier {
 

@@ -20,7 +20,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_penguin/widget/restart_widget.dart';
+import 'package:flutter_sky_library/widget/restart_widget.dart';
 
 import 'abstract_model.dart';
 

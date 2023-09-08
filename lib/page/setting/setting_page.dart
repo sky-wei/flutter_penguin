@@ -16,7 +16,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_penguin/data/item/sub_menu_item.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/page/setting/about_page.dart';
 import 'package:flutter_penguin/page/setting/language_page.dart';
@@ -26,9 +25,10 @@ import 'package:flutter_penguin/page/setting/tablet_page.dart';
 import 'package:flutter_penguin/page/setting/theme_page.dart';
 import 'package:flutter_penguin/page/setting/update_page.dart';
 import 'package:flutter_penguin/util/app_navigator.dart';
-import 'package:flutter_penguin/util/list_controller.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/widget/sub_group_widget.dart';
+import 'package:flutter_sky_library/data/item/sub_menu_item.dart';
+import 'package:flutter_sky_library/util/list_controller.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/widget/sub_group_widget.dart';
 
 import 'display_page.dart';
 import 'font_size_page.dart';

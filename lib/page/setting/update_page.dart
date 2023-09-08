@@ -19,11 +19,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_penguin/theme/theme.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/color_box_widget.dart';
-import 'package:flutter_penguin/widget/sub_scaffold.dart';
+import 'package:flutter_sky_library/theme/theme.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/util/size_box_util.dart';
+import 'package:flutter_sky_library/widget/color_box_widget.dart';
+import 'package:flutter_sky_library/widget/sub_scaffold.dart';
 import 'package:flutter_svg/svg.dart';
 
 class UpdatePage extends StatefulWidget {

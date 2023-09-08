@@ -17,10 +17,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_penguin/route/mobile_page_route.dart';
-import 'package:flutter_penguin/theme/theme.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/widget/right_sheet.dart';
+import 'package:flutter_sky_library/route/mobile_page_route.dart';
+import 'package:flutter_sky_library/theme/theme.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/widget/right_sheet.dart';
 
 class AppNavigator {
 

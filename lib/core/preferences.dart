@@ -15,41 +15,8 @@
  * limitations under the License.
  */
 
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-abstract class XPreferences {
-
-  Set<String> getKeys();
-
-  Object? get(String key);
-
-  bool getBool(String key, [bool defaultValue]);
-
-  int getInt(String key, [int defaultValue]);
-
-  double getDouble(String key, [double defaultValue]);
-
-  String getString(String key, [String defaultValue]);
-
-  bool containsKey(String key);
-
-  List<String> getStringList(String key, [List<String> defaultValue]);
-
-  Future<bool> setBool(String key, bool value);
-
-  Future<bool> setInt(String key, int value);
-
-  Future<bool> setDouble(String key, double value);
-
-  Future<bool> setString(String key, String value);
-
-  Future<bool> setStringList(String key, List<String> value);
-
-  Future<bool> remove(String key);
-
-  Future<bool> clear();
-}
-
 
 class AppPreferences implements XPreferences {
 

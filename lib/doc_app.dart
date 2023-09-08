@@ -20,22 +20,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'constant.dart';
 import 'core/context.dart';
-import 'core/settings.dart';
 import 'generated/l10n.dart';
 import 'model/app_model.dart';
 import 'page/home/home_page.dart';
 import 'page/splash/splash_page.dart';
 import 'route.dart';
-import 'theme/theme.dart';
-import 'util/app_navigator_observer.dart';
 import 'util/easy_loading_util.dart';
-import 'util/platform_util.dart';
-import 'widget/monitor_widget.dart';
 
 
 class DocApp extends StatefulWidget {

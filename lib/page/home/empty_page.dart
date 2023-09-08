@@ -16,9 +16,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_penguin/widget/app_text.dart';
-import 'package:flutter_penguin/widget/color_box_widget.dart';
-import 'package:flutter_penguin/widget/expand_box_widget.dart';
+import 'package:flutter_sky_library/widget/app_text.dart';
+import 'package:flutter_sky_library/widget/color_box_widget.dart';
+import 'package:flutter_sky_library/widget/expand_box_widget.dart';
 
 class EmptyPage extends StatefulWidget {
 

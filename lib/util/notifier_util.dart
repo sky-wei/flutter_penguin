@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import 'easy_notifier.dart';
+ import 'package:flutter_sky_library/util/easy_notifier.dart';
 
- class NotifierUtil {
+class NotifierUtil {
 
    /// 登录失效,需要重新登录
    static EasyNotifier loginInvalid = EasyNotifier();

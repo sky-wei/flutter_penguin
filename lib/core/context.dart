@@ -22,31 +22,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/core/preferences.dart';
 import 'package:flutter_penguin/core/settings.dart';
-import 'package:flutter_penguin/data/item/version.dart';
 import 'package:flutter_penguin/data/objectbox.dart';
 import 'package:flutter_penguin/data/source/repository.dart';
-import 'package:flutter_penguin/util/easy_notifier.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'component.dart';
 import 'database.dart';
 import 'encrypt.dart';
 
-abstract class XContext {
-
-  XVersion get appVersion;
-
-  Directory get appDirectory;
-
-  XSettings get appSetting;
-
-  XComponentManager get componentManager;
-
-  T getComponent<T extends XComponent>(String name);
-
-  XPreferences getPreferencesByName(String name);
-}
 
 class BaseContext extends XContext {
 

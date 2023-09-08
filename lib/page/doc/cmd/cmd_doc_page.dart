@@ -16,11 +16,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
-import 'package:flutter_penguin/util/list_controller.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/expand_box_widget.dart';
-import 'package:flutter_penguin/widget/sub_scaffold.dart';
+import 'package:flutter_sky_library/util/list_controller.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/util/size_box_util.dart';
+import 'package:flutter_sky_library/widget/expand_box_widget.dart';
+import 'package:flutter_sky_library/widget/sub_scaffold.dart';
 
 import 'cmd_list_page.dart';
 import 'doc_details_page.dart';

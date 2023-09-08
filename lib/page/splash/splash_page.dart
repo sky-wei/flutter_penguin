@@ -17,17 +17,13 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/core/context.dart';
-import 'package:flutter_penguin/core/settings.dart';
-import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/model/app_model.dart';
 import 'package:flutter_penguin/route.dart';
-import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:objectbox/objectbox.dart';
@@ -124,7 +120,9 @@ class _SplashPageState extends State<SplashPage> {
     final result = await showMessageDialog(
       context: context,
       title: S.of(context).hint,
-      message: '您的数据库出现异常,是否删除本地数据库文件？ 删除完成后应用将自动退出！'
+      message: '您的数据库出现异常,是否删除本地数据库文件？ 删除完成后应用将自动退出！',
+      positive: S.of(context).ok,
+      negative: S.of(context).cancel,
     );
 
     if (result != 1) return;

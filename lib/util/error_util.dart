@@ -17,8 +17,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_penguin/data/data_exception.dart';
 import 'package:flutter_penguin/data/net_exception.dart';
-
-import 'log_util.dart';
+import 'package:flutter_sky_library/util/log_util.dart';
 
 class ErrorUtil {
 

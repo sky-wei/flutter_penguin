@@ -17,10 +17,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/page/setting/font_size_page.dart';
-import 'package:flutter_penguin/util/list_controller.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/expand_box_widget.dart';
-import 'package:flutter_penguin/widget/sub_page_widget.dart';
+import 'package:flutter_sky_library/util/list_controller.dart';
+import 'package:flutter_sky_library/util/size_box_util.dart';
+import 'package:flutter_sky_library/widget/expand_box_widget.dart';
+import 'package:flutter_sky_library/widget/sub_page_widget.dart';
 
 import 'about_page.dart';
 import 'display_page.dart';

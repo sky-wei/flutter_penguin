@@ -46,13 +46,16 @@ dependencies:
   shared_preferences: ^2.2.0
   encrypt: ^5.0.1
   crypto: ^3.0.2
-  path_provider: ^2.0.11
-  provider: ^6.0.3
+  path_provider: ^2.1.0
+  provider: ^6.0.5
   flutter_slidable: ^3.0.0
   flutter_screenutil: ^5.9.0
   flutter_easyloading: ^3.0.5
   url_launcher: ^6.1.14
   markdown_widget: ^2.2.0
+  watcher: ^1.1.0
+  flutter_sky_library:
+    path: /media/data/Work/StudioProject/flutter_sky_library
 
 dev_dependencies:
   flutter_test:

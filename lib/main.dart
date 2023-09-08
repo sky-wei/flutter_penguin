@@ -19,9 +19,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/core/context.dart';
 import 'package:flutter_penguin/doc_app.dart';
-import 'package:flutter_penguin/util/logger.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/widget/restart_widget.dart';
+import 'package:flutter_sky_library/util/logger.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/widget/restart_widget.dart';
 
 void main() {
   initLogger(() async {

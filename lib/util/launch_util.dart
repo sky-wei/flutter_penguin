@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
+import 'package:flutter_sky_library/util/log_util.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'log_util.dart';
 
 class LaunchUtil {
 

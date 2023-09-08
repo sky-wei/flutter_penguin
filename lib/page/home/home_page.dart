@@ -19,20 +19,20 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/side_item.dart';
-import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/page/doc/cmd/cmd_doc_view.dart';
 import 'package:flutter_penguin/page/setting/setting_page.dart';
 import 'package:flutter_penguin/page/setting/setting_view_page.dart';
-import 'package:flutter_penguin/theme/theme.dart';
 import 'package:flutter_penguin/util/launch_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
-import 'package:flutter_penguin/util/platform_util.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/action_menu_widget.dart';
-import 'package:flutter_penguin/widget/head_logo_widget.dart';
-import 'package:flutter_penguin/widget/window_buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sky_library/dialog/message_dialog.dart';
+import 'package:flutter_sky_library/theme/theme.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_sky_library/util/size_box_util.dart';
+import 'package:flutter_sky_library/widget/action_menu_widget.dart';
+import 'package:flutter_sky_library/widget/head_logo_widget.dart';
+import 'package:flutter_sky_library/widget/window_buttons.dart';
 
 import 'side_bar_view.dart';
 
@@ -210,9 +210,11 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   /// 退出应用
   void _exitApp() {
     showMessageDialog(
-        context: context,
-        title: '提示',
-        message: '您确定要关闭当前应用？'
+      context: context,
+      title: '提示',
+      message: '您确定要关闭当前应用？',
+      positive: S.of(context).ok,
+      negative: S.of(context).cancel,
     ).then((value) {
       if (value == 1) appWindow.close();
     });

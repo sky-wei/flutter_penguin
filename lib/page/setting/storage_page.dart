@@ -15,14 +15,13 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_penguin/data/item/sub_menu_item.dart';
-import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/util/message_util.dart';
-import 'package:flutter_penguin/util/size_box_util.dart';
-import 'package:flutter_penguin/widget/list_menu_widget.dart';
-import 'package:flutter_penguin/widget/sub_scaffold.dart';
-import 'package:flutter_penguin/widget/sub_scroll_widget.dart';
+import 'package:flutter_sky_library/data/item/sub_menu_item.dart';
+import 'package:flutter_sky_library/dialog/message_dialog.dart';
+import 'package:flutter_sky_library/widget/list_menu_widget.dart';
+import 'package:flutter_sky_library/widget/sub_scaffold.dart';
+import 'package:flutter_sky_library/widget/sub_scroll_widget.dart';
 
 
 class StoragePage extends StatefulWidget {
@@ -94,9 +93,11 @@ class _StoragePageState extends State<StoragePage> {
   Future<void> _cleanDatabaseData() async {
 
     final result = await showMessageDialog(
-        context: context,
-        title: S.of(context).hint,
-        message: '您确定清除本地数据库数据！'
+      context: context,
+      title: S.of(context).hint,
+      message: '您确定清除本地数据库数据！',
+      positive: S.of(context).ok,
+      negative: S.of(context).cancel,
     );
 
     // if (result == 1) {

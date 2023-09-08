@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/core/component.dart';
 import 'package:flutter_penguin/core/context.dart';
 import 'package:flutter_penguin/data/source/linux_doc_repository.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 import 'package:flutter_penguin/data/source/local/linux_doc_local_source.dart';
 import 'package:flutter_penguin/data/source/remote/linux_doc_remote_source.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 
 abstract class XRepositoryFactory implements XComponent {
 

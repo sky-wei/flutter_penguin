@@ -23,9 +23,7 @@ import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 import 'package:flutter_penguin/generated/json/base/json_convert_content.dart';
 import 'package:flutter_penguin/model/abstract_model.dart';
-import 'package:flutter_penguin/util/app_extension.dart';
-import 'package:flutter_penguin/util/easy_notifier.dart';
-import 'package:flutter_penguin/util/log_util.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 
 class CmdDocModel extends AbstractModel {
 

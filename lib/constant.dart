@@ -14,18 +14,6 @@
  * limitations under the License.
  */
 
-typedef ChooseItem<T> = bool Function(T value);
-
-typedef IsLoginCallback = bool Function();
-
-typedef PasswordCallback = Future<String?> Function();
-
-typedef CompleteCallback = void Function();
-
-typedef InterceptCallback<T> = bool Function(T value);
-
-typedef ResultCallback<T> = void Function(T value);
-
 enum ListType {
   all,
   favorite

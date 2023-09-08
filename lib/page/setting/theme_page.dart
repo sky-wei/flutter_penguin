@@ -16,16 +16,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_penguin/core/settings.dart';
-import 'package:flutter_penguin/data/item/option_item.dart';
-import 'package:flutter_penguin/data/item/sub_menu_item.dart';
-import 'package:flutter_penguin/dialog/message_dialog.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/model/app_model.dart';
-import 'package:flutter_penguin/theme/theme.dart';
-import 'package:flutter_penguin/widget/list_menu_widget.dart';
-import 'package:flutter_penguin/widget/sub_scaffold.dart';
-import 'package:flutter_penguin/widget/sub_scroll_widget.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:provider/provider.dart';
 
 class ThemePage extends StatefulWidget {

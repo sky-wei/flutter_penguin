@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/core/settings.dart';
 import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
 import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 
 class LinuxDocRepository implements XLinuxDocSource {
 

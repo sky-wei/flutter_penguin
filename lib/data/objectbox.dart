@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import 'package:flutter_penguin/util/log_util.dart';
+import 'package:flutter_sky_library/util/log_util.dart';
 
 import 'entity/cmd_doc_entity.dart';
 import 'entity/favorite_entity.dart';

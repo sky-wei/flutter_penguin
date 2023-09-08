@@ -17,7 +17,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_penguin/widget/sub_scaffold.dart';
+import 'package:flutter_sky_library/widget/sub_scaffold.dart';
 
 class PermissionsPage extends StatefulWidget {
 

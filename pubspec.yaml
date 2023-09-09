@@ -55,7 +55,10 @@ dependencies:
   markdown_widget: ^2.2.0
   watcher: ^1.1.0
   flutter_sky_library:
-    path: /media/data/Work/StudioProject/flutter_sky_library
+    git:
+      url: git@github.com:sky-wei/flutter_sky_library.git
+      ref: main
+#    path: /media/data/Work/StudioProject/flutter_sky_library
 
 dev_dependencies:
   flutter_test:

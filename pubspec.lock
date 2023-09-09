@@ -326,9 +326,11 @@ packages:
   flutter_sky_library:
     dependency: "direct main"
     description:
-      path: "/media/data/Work/StudioProject/flutter_sky_library"
-      relative: false
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: eeb2818ffd03957f042c6d0356d8a1a00189c9f2
+      url: "git@github.com:sky-wei/flutter_sky_library.git"
+    source: git
     version: "0.0.1"
   flutter_slidable:
     dependency: "direct main"

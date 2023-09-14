@@ -328,7 +328,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: eeb2818ffd03957f042c6d0356d8a1a00189c9f2
+      resolved-ref: "7cccfa7da5e03694a70ea989d14db170f9f6b560"
       url: "git@github.com:sky-wei/flutter_sky_library.git"
     source: git
     version: "0.0.1"

@@ -368,13 +368,13 @@ class _ListItemWidgetState extends State<ListItemWidget> {
             _buildInfoWidget(widget.item),
             if (favorite)
               _buildFavorite(
-                  icon: 'assets/svg/ic_favorite.svg',
+                  icon: 'ic_favorite.svg'.toAssetsSvg(),
                   color: Theme.of(context).favoriteColor,
                   onPressed: _handlerFavorite
               ),
             if (unFavorite)
               _buildFavorite(
-                  icon: 'assets/svg/ic_un_favorite.svg',
+                  icon: 'ic_un_favorite.svg'.toAssetsSvg(),
                   color: Theme.of(context).hintColor,
                   onPressed: _handlerFavorite
               ),

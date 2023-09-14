@@ -27,6 +27,7 @@ import 'package:flutter_penguin/util/launch_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sky_library/dialog/message_dialog.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:flutter_sky_library/theme/theme.dart';
 import 'package:flutter_sky_library/util/platform_util.dart';
 import 'package:flutter_sky_library/util/size_box_util.dart';
@@ -47,10 +48,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
-    SideItem(type: SortType.terminal, icon: 'assets/svg/ic_terminal.svg', name: '命令'),
-    SideItem(type: SortType.favorite, icon: 'assets/svg/ic_favorites.svg', name: '收藏'),
-    SideItem(type: SortType.setting, icon: 'assets/svg/ic_settings.svg', name: '设置'),
-    SideItem(type: SortType.help, icon: 'assets/svg/ic_help.svg', name: '帮助'),
+    SideItem(type: SortType.terminal, icon: 'ic_terminal.svg'.toAssetsSvg(), name: '命令'),
+    SideItem(type: SortType.favorite, icon: 'ic_favorites.svg'.toAssetsSvg(), name: '收藏'),
+    SideItem(type: SortType.setting, icon: 'ic_settings.svg'.toAssetsSvg(), name: '设置'),
+    SideItem(type: SortType.help, icon: 'ic_help.svg'.toAssetsSvg(), name: '帮助'),
   ];
 
   @override
@@ -142,7 +143,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
             mainAxisAlignment: mainAxisAlignment,
             children: [
               HeadLogoWidget(
-                logo: PlatformUtil.isMacOS() ? null : 'assets/svg/ic_head_logo.svg',
+                logo: PlatformUtil.isMacOS() ? null : 'ic_head_logo.svg'.toAssetsSvg(),
                 title: S.of(context).appName,
                 logoColor: Theme.of(context).themeColor,
                 titleColor: Theme.of(context).mainTextColor,

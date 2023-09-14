@@ -89,7 +89,7 @@ class _SplashPageState extends State<SplashPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            'assets/svg/ic_head_logo.svg',
+            'ic_head_logo.svg'.toAssetsSvg(),
             width: 50.r,
             color: Theme.of(context).themeColor,
           ),

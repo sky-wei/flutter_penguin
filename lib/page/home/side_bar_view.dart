@@ -116,7 +116,7 @@ class _DesktopSideBarViewState extends State<DesktopSideBarView> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(
-          side.icon ?? 'assets/svg/ic_user.svg',
+          side.icon ?? 'ic_user.svg'.toAssetsSvg(),
           width: 24.r,
           color: choose ? Theme.of(context).themeColor : Theme.of(context).mainTextColor,
         ),
@@ -277,7 +277,7 @@ class _MobileSideBarViewState extends State<MobileSideBarView> {
         children: [
           XBox.vertical20,
           SvgPicture.asset(
-            'assets/svg/ic_linux.svg',
+            'ic_linux.svg'.toAssetsSvg(),
             width: 50.r,
             color: Theme.of(context).themeColor,
           ),
@@ -298,7 +298,7 @@ class _MobileSideBarViewState extends State<MobileSideBarView> {
 
   Widget _buildSideWidget(int index, SideItem side) {
     return _buildListTile(
-        icon: side.icon ?? 'assets/svg/ic_user.svg',
+        icon: side.icon ?? 'ic_user.svg'.toAssetsSvg(),
         title: side.name ?? '',
         onTap: () {
           Scaffold.of(context).closeDrawer();

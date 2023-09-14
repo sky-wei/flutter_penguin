@@ -16,14 +16,10 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
-import 'package:flutter_sky_library/theme/theme.dart';
-import 'package:flutter_sky_library/util/platform_util.dart';
-import 'package:flutter_sky_library/util/size_box_util.dart';
-import 'package:flutter_sky_library/widget/color_box_widget.dart';
-import 'package:flutter_sky_library/widget/sub_scaffold.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:flutter_svg/svg.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -67,7 +63,7 @@ class _UpdatePageState extends State<UpdatePage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(
-          'assets/svg/ic_head_logo.svg',
+          'ic_head_logo.svg'.toAssetsSvg(),
           width: 50.r,
           color: Theme.of(context).themeColor,
         ),

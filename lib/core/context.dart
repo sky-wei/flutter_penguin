@@ -114,7 +114,7 @@ class AppContext extends EasyNotifier implements ComponentManager, XContext {
     if (!_init) {
       _init = true;
       await Future.delayed(
-          const Duration(milliseconds: 800)
+          const Duration(milliseconds: 300)
       );
       componentManager.initialize();
       final objectBox = await ObjectBox.create(
@@ -125,6 +125,7 @@ class AppContext extends EasyNotifier implements ComponentManager, XContext {
           component: DataManager(this, objectBox)
       );
       onInitialize();
+      await Future.delayed(const Duration(milliseconds: 200));
     }
   }
 

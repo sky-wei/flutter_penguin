@@ -37,7 +37,7 @@ void main() {
   if (PlatformUtil.isPC()) {
     doWhenWindowReady(() {
       final win = appWindow;
-      win.minSize = const Size(1100, 800);
+      win.minSize = const Size(1260, 860);
       win.size = const Size(XConstant.defaultWidget, XConstant.defaultHeight);
       win.alignment = Alignment.center;
       win.title = 'LinuxDoc';

@@ -39,12 +39,12 @@ class CmdListPage extends StatefulWidget {
   final ListType listType;
 
   const CmdListPage({
-    Key? key,
+    super.key,
     this.inline = false,
     this.listController,
     this.leading,
     this.listType = ListType.all
-  }) : super(key: key);
+  });
 
   @override
   State<CmdListPage> createState() => _CmdListPageState();
@@ -96,6 +96,7 @@ class _CmdListPageState extends State<CmdListPage> {
       title: '命令列表',
       inline: widget.inline,
       actions: [_buildFilterWidget()],
+      padding: REdgeInsets.fromLTRB(15, 0, 15, 15),
       body: _buildFrameWidget(),
     );
   }
@@ -120,11 +121,7 @@ class _CmdListPageState extends State<CmdListPage> {
       direction: Axis.vertical,
       children: [
         _buildSearchWidget(),
-        XBox.vertical15,
-        // _buildFilterWidget(),
-        // XBox.vertical15,
-        const SubItemLine(),
-        // XBox.vertical5,
+        XBox.vertical20,
         Expanded(
           child: Stack(
             children: [
@@ -142,18 +139,15 @@ class _CmdListPageState extends State<CmdListPage> {
 
   /// 创建搜索控件
   Widget _buildSearchWidget() {
-    return Padding(
-      padding: REdgeInsets.symmetric(horizontal: 15),
-      child: TextFieldWidget(
-        iconName: 'ic_search.svg',
-        hintText: '搜索命令',
-        fillColor: !inline ? Theme.of(context).xColor.background : null,
-        focusNode: _focusNode,
-        height: 46.r,
-        maxLength: 50,
-        onChanged: (value) => _onSearch(value),
-        // onSubmitted: (value) => _onSearch(value),
-      ),
+    return TextFieldWidget(
+      iconName: 'ic_search.svg',
+      hintText: '搜索命令',
+      fillColor: !inline ? Theme.of(context).xColor.background : null,
+      focusNode: _focusNode,
+      height: 40.r,
+      maxLength: 50,
+      onChanged: (value) => _onSearch(value),
+      // onSubmitted: (value) => _onSearch(value),
     );
   }
 
@@ -163,8 +157,9 @@ class _CmdListPageState extends State<CmdListPage> {
     return Padding(
       padding: REdgeInsets.fromLTRB(0, 0, 22, 0),
       child: ActionMenuWidget(
-        iconSize: 18.r,
+        iconSize: 20.r,
         iconName: 'ic_filter.svg',
+        iconColor: Theme.of(context).themeColor,
         tooltip: '筛选',
         onPressed: () => _showFilterPage(context),
       ),
@@ -175,8 +170,8 @@ class _CmdListPageState extends State<CmdListPage> {
   Widget _buildBodyWidget() {
     if (_loadingKey.currentState != null && cmdDocItems.isEmpty) {
       return EmptyDocWidget(
-        width: 240.w,
-        message: '还没有命令～',
+        width: 46.r,
+        message: '列表空空的～',
       );
     }
     return _buildListWidget();
@@ -198,7 +193,7 @@ class _CmdListPageState extends State<CmdListPage> {
         );
       },
       separatorBuilder: (context, index) {
-        return WidgetFactory.buildLeft15Line();
+        return SizedBox(height: 10.r);
       },
       itemCount: cmdDocItems.length
     );
@@ -358,7 +353,9 @@ class _ListItemWidgetState extends State<ListItemWidget> {
 
     final frameWidget = ChooseFrameWidget(
       choose: choose,
-      chooseColor: Theme.of(context).highlightColor.withOpacity(0.2),
+      color: Theme.of(context).xColor.surface,
+      chooseColor: Theme.of(context).themeColor.withAlpha(50),
+      borderRadius: XBorder.borderRadius6,
       onTap: () { widget.onPressed(widget.item); },
       child: MouseRegion(
         onEnter: (event) { _setFavorite(true); },
@@ -420,6 +417,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
           XBox.vertical5,
           AppText(
             item.category,
+            fontSize: 15.sp,
             overflow: TextOverflow.ellipsis,
             color: Theme.of(context).hintColor,
           ),

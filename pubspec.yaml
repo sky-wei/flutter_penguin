@@ -37,18 +37,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  go_router: ^14.3.0
-  flutter_svg: ^2.0.10+1
-  objectbox: ^4.0.2
+  go_router: ^14.8.1
+  flutter_svg: ^2.0.17
+  objectbox: ^4.1.0
   objectbox_flutter_libs: any
   bitsdojo_window: ^0.1.6
   intl: ^0.19.0
   shared_preferences: ^2.3.4
   encrypt: ^5.0.3
-  crypto: ^3.0.5
-  path_provider: ^2.1.4
+  crypto: ^3.0.6
+  path_provider: ^2.1.5
   provider: ^6.1.2
-  flutter_slidable: ^3.1.1
+  flutter_slidable: ^4.0.0
   flutter_screenutil: ^5.9.3
   flutter_easyloading: ^3.0.5
   url_launcher: ^6.3.1
@@ -58,7 +58,8 @@ dependencies:
 #    git:
 #      url: git@github.com:sky-wei/flutter_sky_library.git
 #      ref: main
-    path: /media/data/Work/StudioProject/flutter_sky_library
+#    path: /media/data/Work/StudioProject/flutter_sky_library
+    path: D:\Work\StudioProject\flutter_sky_library
 
 dev_dependencies:
   flutter_test:

@@ -16,11 +16,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:flutter_sky_library/util/list_controller.dart';
 import 'package:flutter_sky_library/util/platform_util.dart';
 import 'package:flutter_sky_library/util/size_box_util.dart';
 import 'package:flutter_sky_library/widget/expand_box_widget.dart';
 import 'package:flutter_sky_library/widget/sub_scaffold.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'cmd_list_page.dart';
 import 'doc_details_page.dart';
@@ -32,11 +35,11 @@ class CmdDocPage extends StatefulWidget {
   final ListType listType;
 
   const CmdDocPage({
-    Key? key,
+    super.key,
     this.inline = false,
     this.leading,
     this.listType = ListType.all
-  }) : super(key: key);
+  });
 
   @override
   State<CmdDocPage> createState() => _CmdDocPageState();
@@ -90,7 +93,7 @@ class _CmdDocPageState extends State<CmdDocPage> {
             listType: widget.listType,
           ),
         ),
-        XBox.horizontal8,
+        XBox.horizontal15,
         ExpandBoxWidget(
           flex: 8,
           child: DocDetailsPage(
@@ -110,10 +113,10 @@ class EmptyDocWidget extends StatelessWidget {
   final String? message;
 
   const EmptyDocWidget({
-    Key? key,
+    super.key,
     this.width,
     this.message
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -121,15 +124,16 @@ class EmptyDocWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Image.asset(
-          //   'assets/avatar/Delivery boy.png',
-          //   width: width ?? 300.w,
-          // ),
-          // XBox.vertical20,
+          SvgPicture.asset(
+            'ic_head_logo.svg'.toAssetsSvg(),
+            width: width ?? 46.r,
+            colorFilter: ColorFilter.mode(Theme.of(context).highlightColor, BlendMode.srcIn),
+          ),
+          XBox.vertical20,
           Text(
             message ?? '',
             style: TextStyle(
-              color: Theme.of(context).hintColor,
+              color: Theme.of(context).highlightColor,
             ),
           )
         ],

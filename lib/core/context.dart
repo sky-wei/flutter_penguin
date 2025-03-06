@@ -125,7 +125,9 @@ class AppContext extends EasyNotifier implements ComponentManager, XContext {
           component: DataManager(this, objectBox)
       );
       onInitialize();
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future.delayed(
+          const Duration(milliseconds: 400)
+      );
     }
   }
 

@@ -30,11 +30,11 @@ class CmdDocView extends StatefulWidget {
   final ListType listType;
 
   const CmdDocView({
-    Key? key,
+    super.key,
     this.inline = false,
     this.leading,
     this.listType = ListType.all
-  }) : super(key: key);
+  });
 
   @override
   State<CmdDocView> createState() => _CmdDocViewState();

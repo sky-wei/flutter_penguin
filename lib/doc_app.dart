@@ -39,9 +39,9 @@ class DocApp extends StatefulWidget {
   final BaseContext baseContext;
 
   const DocApp({
-    Key? key,
+    super.key,
     required this.baseContext
-  }) : super(key: key);
+  });
 
   @override
   State<DocApp> createState() => _DocAppState();
@@ -92,6 +92,7 @@ class _DocAppState extends State<DocApp> {
           create: (context) => AppModel(context.read<AppContext>())
         ),
       ],
+
       child: MaterialApp.router(
         title: 'LinuxDoc',
         theme: XTheme.lightTheme(context),

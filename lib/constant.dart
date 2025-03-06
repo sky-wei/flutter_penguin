@@ -23,7 +23,7 @@ class XConstant {
 
   static const String projectName = 'flutter_penguin';
 
-  static const String versionName = '1.0.0';
+  static const String versionName = '2.0.0';
 
   static const String mail = 'jingcai.wei@163.com';
 
@@ -32,9 +32,9 @@ class XConstant {
   /// 默认平板模式(关闭)
   static const bool defaultTabletMode = false;
 
-  static const double defaultWidget = 1400;
+  static const double defaultWidget = 1260;
 
-  static const double defaultHeight = 950;
+  static const double defaultHeight = 860;
 }
 
 class XCmdDoc {

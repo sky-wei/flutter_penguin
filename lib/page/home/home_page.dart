@@ -39,7 +39,7 @@ import 'side_bar_view.dart';
 
 class HomePage extends StatefulWidget {
 
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,7 +48,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
-    SideItem(type: SortType.terminal, icon: 'ic_terminal.svg'.toAssetsSvg(), name: '命令'),
+    SideItem(type: SortType.terminal, icon: 'ic_terminal.svg'.toAssetsSvg(), name: '主页'),
     SideItem(type: SortType.favorite, icon: 'ic_favorites.svg'.toAssetsSvg(), name: '收藏'),
     SideItem(type: SortType.setting, icon: 'ic_settings.svg'.toAssetsSvg(), name: '设置'),
     SideItem(type: SortType.help, icon: 'ic_help.svg'.toAssetsSvg(), name: '帮助'),
@@ -74,9 +74,9 @@ class DesktopHomePage extends StatefulWidget {
   final List<SideItem> sideItems;
 
   const DesktopHomePage({
-    Key? key,
+    super.key,
     required this.sideItems,
-  }) : super(key: key);
+  });
 
   @override
   State<DesktopHomePage> createState() => _DesktopHomePageState();
@@ -145,7 +145,7 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
               HeadLogoWidget(
                 logo: PlatformUtil.isMacOS() ? null : 'ic_head_logo.svg'.toAssetsSvg(),
                 title: S.of(context).appName,
-                logoColor: Theme.of(context).themeColor,
+                logoColor: Theme.of(context).mainTextColor,
                 titleColor: Theme.of(context).mainTextColor,
               ),
             ],
@@ -161,18 +161,18 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
     EdgeInsetsGeometry? padding
   }) {
     return Padding(
-      padding: padding ?? REdgeInsets.all(8),
+      padding: padding ?? REdgeInsets.all(15),
       child: Row(
         children: [
           SizedBox(
-            width: 80.r,
+            width: 90.r,
             child: DesktopSideBarView(
               controller: _pageController,
               sideItems: widget.sideItems,
               intercept: (item) => onIntercept(item),
             ),
           ),
-          XBox.horizontal8,
+          XBox.horizontal15,
           Expanded(
             child: PageView(
               scrollDirection: Axis.vertical,

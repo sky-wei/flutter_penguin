@@ -22,6 +22,7 @@ import 'package:flutter_penguin/util/error_util.dart';
 import 'package:flutter_penguin/util/message_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sky_library/flutter_sky_library.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:provider/provider.dart';
@@ -33,11 +34,11 @@ class DocDetailsPage extends StatefulWidget {
   final CmdDocItem? docItem;
 
   const DocDetailsPage({
-    Key? key,
+    super.key,
     this.inline = false,
     this.listController,
     this.docItem
-  }) : super(key: key);
+  });
 
   @override
   State<DocDetailsPage> createState() => _DocDetailsPageState();
@@ -80,6 +81,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
     return SubScaffold(
       inline: inline,
       title: '命令说明',
+      actions: [_buildShareWidget()],
       body: _buildBodyWidget(),
       padding: REdgeInsets.fromLTRB(15, 0, 15, 15),
     );
@@ -87,14 +89,16 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
 
   /// 创建内容控件
   Widget _buildBodyWidget() {
-    return Stack(
-      children: [
-        _buildBody2Widget(),
-        InnerLoadingWidget(
-          key: _loadingKey,
-          loading: !inline,
-        ),
-      ],
+    return ColorBoxWidget(
+      child: Stack(
+        children: [
+          _buildBody2Widget(),
+          InnerLoadingWidget(
+            key: _loadingKey,
+            loading: !inline,
+          ),
+        ],
+      ),
     );
   }
 
@@ -105,9 +109,67 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
       data: docDetails!.data,
       physics: const BouncingScrollPhysics(),
       config: isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig,
-    ) : !_loading ? const EmptyDocWidget(
-      message: '没有命令说明～',
-    ) : const Center();
+    ) : !_loading ? _buildEmptyWidget() : const Center();
+  }
+
+  /// 创建分享的控件
+  Widget _buildShareWidget() {
+    return Padding(
+      padding: REdgeInsets.fromLTRB(0, 0, 22, 0),
+      child: ActionMenuWidget(
+        iconSize: 20.r,
+        iconName: 'ic_share.svg',
+        iconColor: Theme.of(context).themeColor,
+        tooltip: '分享',
+        onPressed: () {
+          MessageUtil.showMessage(context, "功能暂未开放！");
+        },
+      ),
+    );
+  }
+
+  /// 空内容
+  Widget _buildEmptyWidget() {
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(
+            'ic_head_logo.svg'.toAssetsSvg(),
+            width: 46.r,
+            colorFilter: ColorFilter.mode(Theme.of(context).highlightColor, BlendMode.srcIn),
+          ),
+          XBox.horizontal10,
+          DefaultTextStyle(
+              style: TextStyle(
+                color: Theme.of(context).highlightColor,
+                fontSize: 28.sp,
+                // fontWeight: FontWeight.w400
+              ),
+              child: const Text.rich(
+                  TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'LinuxDoc',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        // TextSpan(text: 'inux'),
+                        // TextSpan(
+                        //     text: 'D',
+                        //     style: TextStyle(
+                        //       fontWeight: FontWeight.bold,
+                        //     )
+                        // ),
+                        // TextSpan(text: 'oc'),
+                      ]
+                  )
+              )
+          )
+        ],
+      ),
+    );
   }
 
   /// 选择修改

@@ -34,7 +34,7 @@ import 'update_page.dart';
 
 class SettingViewPage extends StatefulWidget {
 
-  const SettingViewPage({Key? key}) : super(key: key);
+  const SettingViewPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _SettingViewPageState();
@@ -62,9 +62,9 @@ class _SettingViewPageState extends State<SettingViewPage> {
             controller: _menuController
           ),
         ),
-        XBox.horizontal8,
+        XBox.horizontal15,
         ExpandBoxWidget(
-          flex: 7,
+          flex: 8,
           child: SubPageWidget(
             controller: _menuController,
             pages: const [

@@ -95,11 +95,11 @@ class _AboutPageState extends State<AboutPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          XBox.vertical30,
+          XBox.vertical20,
           SvgPicture.asset(
             'ic_head_logo.svg'.toAssetsSvg(),
-            width: 50.r,
-            color: Theme.of(context).themeColor,
+            width: 46.r,
+            colorFilter: ColorFilter.mode(Theme.of(context).themeColor, BlendMode.srcIn),
           ),
           XBox.vertical20,
           Text(
@@ -114,10 +114,13 @@ class _AboutPageState extends State<AboutPage> {
             S.of(context).versionX(XConstant.versionName),
             style: TextStyle(
               fontSize: 12.sp,
+              color: Theme.of(context).hintColor
             ),
           ),
           XBox.vertical40,
-          SelectableText(S.of(context).mailX(XConstant.mail)),
+          SelectableText(
+            S.of(context).mailX(XConstant.mail)
+          ),
           XBox.vertical10,
           Text.rich(
             TextSpan(

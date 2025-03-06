@@ -32,8 +32,8 @@ class DesktopSideBarView extends StatefulWidget {
     required this.controller,
     required this.sideItems,
     this.intercept,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _DesktopSideBarViewState();
@@ -58,24 +58,21 @@ class _DesktopSideBarViewState extends State<DesktopSideBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: [
-        Expanded(
-          child: ListView(
-            primary: false,
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            children: [
-              for (var index = 0; index < _sideItems.length - 2; index++)
-                _buildSideWidget(index, _sideItems[index]),
-            ],
-          ),
-        ),
-        XBox.vertical20,
-        for (var index = _sideItems.length - 2; index < _sideItems.length; index++)
-          _buildSideWidget(index, _sideItems[index]),
-      ],
+    return ColorBoxWidget(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      padding: REdgeInsets.all(10),
+      child: ListView.separated(
+        primary: false,
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        itemCount: _sideItems.length,
+        itemBuilder: (context, index) {
+          return _buildSideWidget(index, _sideItems[index]);
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(height: 10.r);
+        },
+      ),
     );
   }
 
@@ -124,7 +121,7 @@ class _DesktopSideBarViewState extends State<DesktopSideBarView> {
         Text(
           side.name ?? '',
           style: TextStyle(
-            fontSize: 16.sp,
+            fontSize: 15.sp,
             color: choose ? Theme.of(context).themeColor : Theme.of(context).mainTextColor,
           ),
         ),
@@ -141,15 +138,16 @@ class _DesktopSideBarViewState extends State<DesktopSideBarView> {
     return Material(
       color: XColor.transparent,
       child: Ink(
-        height: 80.h,
+        height: 70.h,
         decoration: BoxDecoration(
-            color: choose ? Theme.of(context).highlightColor : XColor.transparent,
+            color: choose ? Theme.of(context).themeColor.withAlpha(50) : XColor.transparent,
             borderRadius: XBorder.borderRadius6
         ),
         child: Stack(
           children: [
             InkWell(
                 borderRadius: XBorder.borderRadius6,
+                overlayColor: WidgetStatePropertyAll(Theme.of(context).highlightColor.withAlpha(76)),
                 onTap: onTap,
                 child: Center(
                   child: child
@@ -168,7 +166,7 @@ class _DesktopSideBarViewState extends State<DesktopSideBarView> {
       alignment: Alignment.centerLeft,
       child: SizedBox(
         width: 4.r,
-        height: 40.h,
+        height: 36.h,
         child: DecoratedBox(
           decoration: BoxDecoration(
               color: Theme.of(context).themeColor,
@@ -216,8 +214,8 @@ class MobileSideBarView extends StatefulWidget {
     this.controller,
     required this.sideItems,
     this.intercept,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<MobileSideBarView> createState() => _MobileSideBarViewState();

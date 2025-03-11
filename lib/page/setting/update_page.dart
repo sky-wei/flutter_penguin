@@ -27,9 +27,9 @@ class UpdatePage extends StatefulWidget {
   final bool inline;
 
   const UpdatePage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<UpdatePage> createState() => _UpdatePageState();

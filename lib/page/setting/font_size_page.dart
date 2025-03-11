@@ -26,9 +26,9 @@ class FontSizePage extends StatefulWidget {
   final bool inline;
 
   const FontSizePage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<FontSizePage> createState() => _FontSizePageState();

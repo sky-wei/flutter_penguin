@@ -26,9 +26,9 @@ class ThemePage extends StatefulWidget {
   final bool inline;
 
   const ThemePage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<ThemePage> createState() => _ThemePageState();

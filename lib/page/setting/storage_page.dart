@@ -29,9 +29,9 @@ class StoragePage extends StatefulWidget {
   final bool inline;
 
   const StoragePage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _StoragePageState();

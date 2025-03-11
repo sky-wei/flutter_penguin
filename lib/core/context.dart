@@ -59,18 +59,18 @@ class BaseContext extends XContext {
   /// 获取App目录
   Future<Directory> _getAppDirectory() async {
 
-    if (!kDebugMode) {
+    // if (!kDebugMode) {
       return await getApplicationSupportDirectory();
-    }
+    // }
 
-    final rootDirectory = await getTemporaryDirectory();
-    final tempDirectory = Directory('${rootDirectory.path}/${XConstant.projectName}');
-
-    if (!(await tempDirectory.exists())) {
-      // 创建目录
-      await tempDirectory.create(recursive: true);
-    }
-    return tempDirectory;
+    // final rootDirectory = await getTemporaryDirectory();
+    // final tempDirectory = Directory('${rootDirectory.path}/${XConstant.projectName}');
+    //
+    // if (!(await tempDirectory.exists())) {
+    //   // 创建目录
+    //   await tempDirectory.create(recursive: true);
+    // }
+    // return tempDirectory;
   }
 
   @override

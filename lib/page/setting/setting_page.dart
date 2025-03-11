@@ -40,11 +40,11 @@ class SettingPage extends StatefulWidget {
   final ListController? controller;
   
   const SettingPage({
-    Key? key,
+    super.key,
     this.leading,
     this.basic = false,
     this.controller
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _SettingPageState();

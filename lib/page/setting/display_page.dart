@@ -26,9 +26,9 @@ class DisplayPage extends StatefulWidget {
   final bool inline;
 
   const DisplayPage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<DisplayPage> createState() => _DisplayPageState();

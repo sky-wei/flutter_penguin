@@ -24,9 +24,9 @@ class PermissionsPage extends StatefulWidget {
   final bool inline;
 
   const PermissionsPage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<PermissionsPage> createState() => _PermissionsPageState();

@@ -26,9 +26,9 @@ class TabletPage extends StatefulWidget {
   final bool inline;
 
   const TabletPage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<TabletPage> createState() => _TabletPageState();

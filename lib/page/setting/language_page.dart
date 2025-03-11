@@ -26,9 +26,9 @@ class LanguagePage extends StatefulWidget {
   final bool inline;
 
   const LanguagePage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<LanguagePage> createState() => _LanguagePageState();

@@ -34,9 +34,9 @@ class AboutPage extends StatefulWidget {
   final bool inline;
 
   const AboutPage({
-    Key? key,
+    super.key,
     this.inline = false
-  }) : super(key: key);
+  });
 
   @override
   State<AboutPage> createState() => _AboutPageState();
@@ -74,7 +74,7 @@ class _AboutPageState extends State<AboutPage> {
         ? _buildDesktopBody() : _buildMobileBody();
 
     return Padding(
-      padding: REdgeInsets.all(15),
+      padding: REdgeInsets.fromLTRB(15, 0, 15, 15),
       child: child,
     );
   }

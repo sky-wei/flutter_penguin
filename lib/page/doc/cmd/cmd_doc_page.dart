@@ -87,15 +87,17 @@ class _CmdDocPageState extends State<CmdDocPage> {
       children: [
         ExpandBoxWidget(
           flex: 3,
+          borderRadius: BorderRadius.horizontal(left: Radius.circular(6.r)),
           child: CmdListPage(
             inline: widget.inline,
             listController: _listController,
             listType: widget.listType,
           ),
         ),
-        XBox.horizontal15,
+        XBox.horizontal(2),
         ExpandBoxWidget(
           flex: 8,
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(6.r)),
           child: DocDetailsPage(
             inline: widget.inline,
             listController: _listController,

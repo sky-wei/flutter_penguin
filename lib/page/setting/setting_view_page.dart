@@ -17,6 +17,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/page/setting/font_size_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sky_library/util/list_controller.dart';
 import 'package:flutter_sky_library/util/size_box_util.dart';
 import 'package:flutter_sky_library/widget/expand_box_widget.dart';
@@ -58,13 +59,15 @@ class _SettingViewPageState extends State<SettingViewPage> {
       children: [
         ExpandBoxWidget(
           flex: 3,
+          borderRadius: BorderRadius.horizontal(left: Radius.circular(6.r)),
           child: SettingPage(
             controller: _menuController
           ),
         ),
-        XBox.horizontal15,
+        XBox.horizontal(2),
         ExpandBoxWidget(
           flex: 8,
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(6.r)),
           child: SubPageWidget(
             controller: _menuController,
             pages: const [

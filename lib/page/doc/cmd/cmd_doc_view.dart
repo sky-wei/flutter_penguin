@@ -40,12 +40,17 @@ class CmdDocView extends StatefulWidget {
   State<CmdDocView> createState() => _CmdDocViewState();
 }
 
-class _CmdDocViewState extends State<CmdDocView> {
+class _CmdDocViewState extends State<CmdDocView> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return _buildBodyWidget();
   }
+
+
+  @override
+  bool get wantKeepAlive => true;
 
   /// 创建内容控件
   Widget _buildBodyWidget() {

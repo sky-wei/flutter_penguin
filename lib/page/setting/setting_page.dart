@@ -106,18 +106,18 @@ class _SettingPageState extends State<SettingPage> {
           SubMenuItem.more(
             id: 7,
             iconName: 'ic_display.svg',
-            title: '显示大小',
+            title: S.current.displaySize,
           ),
           SubMenuItem.more(
             id: 8,
             iconName: 'ic_font_size.svg',
-            title: '字体大小',
+            title: S.current.fontSize,
           ),
           if (PlatformUtil.isMobile())
             SubMenuItem.more(
               id: 6,
               iconName: 'ic_tablet.svg',
-              title: '平板模式',
+              title: S.current.tabletMode,
             ),
         ],
       ),

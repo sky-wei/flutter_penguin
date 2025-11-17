@@ -17,6 +17,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/page/doc/cmd/cmd_doc_model.dart';
 import 'package:flutter_penguin/page/doc/cmd/filter_page.dart';
 import 'package:flutter_penguin/util/app_navigator.dart';
@@ -93,7 +94,7 @@ class _CmdListPageState extends State<CmdListPage> {
 
   Widget _buildDesktopBody() {
     return SubScaffold(
-      title: '命令列表',
+      title: S.current.cmdList,
       inline: widget.inline,
       actions: [_buildFilterWidget()],
       padding: REdgeInsets.fromLTRB(15, 0, 15, 15),
@@ -105,8 +106,8 @@ class _CmdListPageState extends State<CmdListPage> {
     return Scaffold(
       appBar: AppBar(
         leading: widget.leading,
-        title: const PageTitleWidget(
-          title: '命令列表',
+        title: PageTitleWidget(
+          title: S.current.cmdList,
         ),
         centerTitle: true,
         elevation: 0,
@@ -141,7 +142,7 @@ class _CmdListPageState extends State<CmdListPage> {
   Widget _buildSearchWidget() {
     return TextFieldWidget(
       iconName: 'ic_search.svg',
-      hintText: '搜索命令',
+      hintText: S.current.searchCmd,
       fillColor: !inline ? Theme.of(context).xColor.background : null,
       focusNode: _focusNode,
       height: 40.r,
@@ -160,7 +161,7 @@ class _CmdListPageState extends State<CmdListPage> {
         iconSize: 20.r,
         iconName: 'ic_filter.svg',
         iconColor: Theme.of(context).themeColor,
-        tooltip: '筛选',
+        tooltip: S.current.filter,
         onPressed: () => _showFilterPage(context),
       ),
     );
@@ -171,7 +172,7 @@ class _CmdListPageState extends State<CmdListPage> {
     if (_loadingKey.currentState != null && cmdDocItems.isEmpty) {
       return EmptyDocWidget(
         width: 46.r,
-        message: '列表空空的～',
+        message: S.current.listEmptyTips,
       );
     }
     return _buildListWidget();
@@ -464,7 +465,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
       backgroundColor: Theme.of(context).favoriteColor,
       foregroundColor: Colors.white,
       icon: !favorite ? Icons.star_border_outlined : Icons.star,
-      label: !favorite ? '收藏' : '取消',
+      label: !favorite ? S.current.favorites : S.current.cancel,
       // borderRadius: const BorderRadius.all(Radius.circular(6)),
     );
   }

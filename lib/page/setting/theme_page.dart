@@ -100,7 +100,7 @@ class _ThemePageState extends State<ThemePage> {
     showMessageDialog(
       context: context,
       title: S.of(context).hint,
-      message: '更换主题需要重启才能生效！',
+      message: S.current.themeRestartAppTips,
       positive: S.of(context).reboot,
       negative: S.of(context).later
     ).then((value) {

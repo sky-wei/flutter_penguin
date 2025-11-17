@@ -37,11 +37,11 @@ class FontSizePage extends StatefulWidget {
 class _FontSizePageState extends State<FontSizePage> {
 
   final List<OptionItem<double>> _fontSizeItems = [
-    OptionItem<double>('小号', 0.9),
-    OptionItem<double>('默认', 1),
-    OptionItem<double>('中号', 1.1),
-    OptionItem<double>('大号', 1.2),
-    OptionItem<double>('超大', 1.3),
+    OptionItem<double>(S.current.sizeExtraSmall, 0.9),
+    OptionItem<double>(S.current.sizeDefault, 1),
+    OptionItem<double>(S.current.sizeSmall, 1.1),
+    OptionItem<double>(S.current.sizeMedium, 1.2),
+    OptionItem<double>(S.current.sizeLarge, 1.3),
   ];
 
   late AppModel _appModel;
@@ -58,7 +58,7 @@ class _FontSizePageState extends State<FontSizePage> {
   Widget build(BuildContext context) {
     return SubScaffold(
       inline: widget.inline,
-      title: '字体大小',
+      title: S.current.fontSize,
       body: _buildBodyWidget(),
     );
   }
@@ -102,7 +102,7 @@ class _FontSizePageState extends State<FontSizePage> {
     showMessageDialog(
         context: context,
         title: S.of(context).hint,
-        message: '更换字体大小需要重启才能生效！',
+        message: S.current.fontRestartAppTips,
         positive: S.of(context).reboot,
         negative: S.of(context).later
     ).then((value) {

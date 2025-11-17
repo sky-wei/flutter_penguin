@@ -25,9 +25,9 @@ class EmptyPage extends StatefulWidget {
   final String? value;
 
   const EmptyPage({
-    Key? key,
+    super.key,
     this.value
-  }) : super(key: key);
+  });
 
   @override
   State<EmptyPage> createState() => _EmptyPageState();

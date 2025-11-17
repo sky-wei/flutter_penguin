@@ -48,10 +48,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final List<SideItem> _sideItems = [
-    SideItem(type: SortType.terminal, icon: 'ic_terminal.svg'.toAssetsSvg(), name: '主页'),
-    SideItem(type: SortType.favorite, icon: 'ic_favorites.svg'.toAssetsSvg(), name: '收藏'),
-    SideItem(type: SortType.setting, icon: 'ic_settings.svg'.toAssetsSvg(), name: '设置'),
-    SideItem(type: SortType.help, icon: 'ic_help.svg'.toAssetsSvg(), name: '帮助'),
+    SideItem(type: SortType.terminal, icon: 'ic_terminal.svg'.toAssetsSvg(), name: S.current.home),
+    SideItem(type: SortType.favorite, icon: 'ic_favorites.svg'.toAssetsSvg(), name: S.current.favorites),
+    SideItem(type: SortType.setting, icon: 'ic_settings.svg'.toAssetsSvg(), name: S.current.setting),
+    SideItem(type: SortType.help, icon: 'ic_help.svg'.toAssetsSvg(), name: S.current.help),
   ];
 
   @override
@@ -212,8 +212,8 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   void _exitApp() {
     showMessageDialog(
       context: context,
-      title: '提示',
-      message: '您确定要关闭当前应用？',
+      title: S.current.hint,
+      message: S.current.exitAppTips,
       positive: S.of(context).ok,
       negative: S.of(context).cancel,
     ).then((value) {
@@ -228,9 +228,9 @@ class MobileHomePage extends StatefulWidget {
   final List<SideItem> sideItems;
 
   const MobileHomePage({
-    Key? key,
+    super.key,
     required this.sideItems,
-  }) : super(key: key);
+  });
 
   @override
   State<MobileHomePage> createState() => _MobileHomePageState();

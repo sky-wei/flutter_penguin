@@ -100,7 +100,7 @@ class _LanguagePageState extends State<LanguagePage> {
     showMessageDialog(
       context: context,
       title: S.of(context).hint,
-      message: '更换语言需要重启才能生效！',
+      message: S.current.languageRestartAppTips,
       positive: S.of(context).reboot,
       negative: S.of(context).later
     ).then((value) {

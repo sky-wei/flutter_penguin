@@ -48,7 +48,7 @@ class _StoragePageState extends State<StoragePage> {
   Widget build(BuildContext context) {
     return SubScaffold(
       inline: widget.inline,
-      title: '存储',
+      title: S.current.storage,
       body: _buildBodyContent(),
     );
   }
@@ -67,10 +67,10 @@ class _StoragePageState extends State<StoragePage> {
         // ),
         // XBox.vertical20,
         ListMenuWidget(
-          title: '数据',
+          title: S.current.data,
           onItemTap: _onItemEvent,
           menuItems: [
-            SubMenuItem.more(id: 3, title: '清除数据'),
+            SubMenuItem.more(id: 3, title: S.current.clearData),
           ],
         )
       ],
@@ -95,7 +95,7 @@ class _StoragePageState extends State<StoragePage> {
     final result = await showMessageDialog(
       context: context,
       title: S.of(context).hint,
-      message: '您确定清除本地数据库数据！',
+      message: S.current.clearLocalAllDataTips,
       positive: S.of(context).ok,
       negative: S.of(context).cancel,
     );

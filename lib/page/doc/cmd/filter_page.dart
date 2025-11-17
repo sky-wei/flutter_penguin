@@ -15,11 +15,11 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sky_library/util/platform_util.dart';
+import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sky_library/data/item/option_item.dart';
-import 'package:flutter_sky_library/theme/color.dart';
 import 'package:flutter_sky_library/theme/theme.dart';
+import 'package:flutter_sky_library/util/platform_util.dart';
 import 'package:flutter_sky_library/widget/app_text.dart';
 import 'package:flutter_sky_library/widget/big_button_widget.dart';
 import 'package:flutter_sky_library/widget/sub_scaffold.dart';
@@ -30,9 +30,9 @@ class FilterPage extends StatefulWidget {
   final FilterItem filter;
 
   const FilterPage({
-    Key? key,
+    super.key,
     required this.filter
-  }) : super(key: key);
+  });
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -41,18 +41,18 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
 
   final List<OptionItem<int>> categoryItems = [
-    OptionItem('所有', -1),
-    OptionItem('其他', 0),
-    OptionItem('文本处理', 1),
-    OptionItem('系统管理', 2),
-    OptionItem('磁盘维护', 3),
-    OptionItem('系统设置', 4),
-    OptionItem('电子邮件与新闻组', 5),
-    OptionItem('文件管理', 6),
-    OptionItem('文件传输', 7),
-    OptionItem('磁盘管理', 8),
-    OptionItem('网络通讯', 9),
-    OptionItem('备份压缩', 10),
+    OptionItem(S.current.all, -1),
+    OptionItem(S.current.other, 0),
+    OptionItem(S.current.textProcessing, 1),
+    OptionItem(S.current.systemAdministration, 2),
+    OptionItem(S.current.diskMaintenance, 3),
+    OptionItem(S.current.systemConfiguration, 4),
+    OptionItem(S.current.emailNewsgroups, 5),
+    OptionItem(S.current.fileManagement, 6),
+    OptionItem(S.current.fileTransfer, 7),
+    OptionItem(S.current.diskManagement, 8),
+    OptionItem(S.current.networkCommunication, 9),
+    OptionItem(S.current.backupCompression, 10),
   ];
 
   late FilterItem _filterItem;
@@ -66,7 +66,7 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     return SubScaffold(
-      title: '筛选',
+      title: S.current.filter,
       body: _buildBodyWidget(),
     );
   }

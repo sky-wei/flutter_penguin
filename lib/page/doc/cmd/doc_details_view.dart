@@ -30,11 +30,11 @@ class DocDetailsView extends StatefulWidget {
   final CmdDocItem? docItem;
 
   const DocDetailsView({
-    Key? key,
+    super.key,
     this.inline = false,
     this.listController,
     this.docItem
-  }) : super(key: key);
+  });
 
   @override
   State<DocDetailsView> createState() => _DocDetailsViewState();

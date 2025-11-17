@@ -40,10 +40,10 @@ class _DisplayPageState extends State<DisplayPage> {
     // OptionItem<double>('0.5x', 1.5),
     // OptionItem<double>('0.6x', 1.4),
     // OptionItem<double>('0.7x', 1.3),
-    OptionItem<double>('超小', 1.2),
-    OptionItem<double>('小', 1.1),
-    OptionItem<double>('默认', 1),
-    OptionItem<double>('大', 0.9),
+    OptionItem<double>(S.current.sizeExtraSmall, 1.2),
+    OptionItem<double>(S.current.sizeSmall, 1.1),
+    OptionItem<double>(S.current.sizeDefault, 1),
+    OptionItem<double>(S.current.sizeMedium, 0.9),
     // OptionItem<double>('1.2x', 0.8),
     // OptionItem<double>('1.3x', 0.7),
     // OptionItem<double>('1.4x', 0.6),
@@ -64,7 +64,7 @@ class _DisplayPageState extends State<DisplayPage> {
   Widget build(BuildContext context) {
     return SubScaffold(
       inline: widget.inline,
-      title: '显示大小',
+      title: S.current.displaySize,
       body: _buildBodyWidget(),
     );
   }
@@ -108,7 +108,7 @@ class _DisplayPageState extends State<DisplayPage> {
     showMessageDialog(
         context: context,
         title: S.of(context).hint,
-        message: '更换显示大小需要重启才能生效！',
+        message: S.current.displayRestartAppTips,
         positive: S.of(context).reboot,
         negative: S.of(context).later
     ).then((value) {

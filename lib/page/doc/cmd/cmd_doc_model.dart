@@ -22,6 +22,7 @@ import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
 import 'package:flutter_penguin/data/item/favorite_item.dart';
 import 'package:flutter_penguin/data/source/linux_doc_source.dart';
 import 'package:flutter_penguin/generated/json/base/json_convert_content.dart';
+import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/model/abstract_model.dart';
 import 'package:flutter_sky_library/flutter_sky_library.dart';
 
@@ -35,17 +36,17 @@ class CmdDocModel extends AbstractModel {
   final Map<String, FavoriteItem> _favoriteMap = { };
 
   final Map<int, String> categoryIndex = {
-    0: "其他",
-    1: "文本处理",
-    2: "系统管理",
-    3: "磁盘维护",
-    4: "系统设置",
-    5: "电子邮件与新闻组",
-    6: "文件管理",
-    7: "文件传输",
-    8: "磁盘管理",
-    9: "网络通讯",
-    10: "备份压缩"
+    0: S.current.other,
+    1: S.current.textProcessing,
+    2: S.current.systemAdministration,
+    3: S.current.diskMaintenance,
+    4: S.current.systemConfiguration,
+    5: S.current.emailNewsgroups,
+    6: S.current.fileManagement,
+    7: S.current.fileTransfer,
+    8: S.current.diskManagement,
+    9: S.current.networkCommunication,
+    10: S.current.backupCompression,
   };
 
   CmdDocItem? _cmdDocItem;

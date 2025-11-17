@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.6 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -42,7 +42,7 @@ dependencies:
   objectbox: ^4.1.0
   objectbox_flutter_libs: any
   bitsdojo_window: ^0.1.6
-  intl: ^0.19.0
+  intl: ^0.20.2
   shared_preferences: ^2.3.4
   encrypt: ^5.0.3
   crypto: ^3.0.6
@@ -55,11 +55,11 @@ dependencies:
   markdown_widget: ^2.3.2+6
   watcher: ^1.1.0
   flutter_sky_library:
-#    git:
-#      url: git@github.com:sky-wei/flutter_sky_library.git
-#      ref: main
+    git:
+      url: git@github.com:sky-wei/flutter_sky_library.git
+      ref: main
 #    path: /media/data/Work/StudioProject/flutter_sky_library
-    path: D:\Work\StudioProject\flutter_sky_library
+#    path: D:\Work\StudioProject\flutter_sky_library
 
 dev_dependencies:
   flutter_test:

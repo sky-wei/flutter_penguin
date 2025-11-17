@@ -16,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/data/item/cmd_doc_item.dart';
+import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/page/doc/cmd/cmd_doc_model.dart';
 import 'package:flutter_penguin/page/doc/cmd/cmd_doc_page.dart';
 import 'package:flutter_penguin/util/error_util.dart';
@@ -80,7 +81,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
   Widget build(BuildContext context) {
     return SubScaffold(
       inline: inline,
-      title: '命令说明',
+      title: S.current.cmdDescription,
       actions: [_buildShareWidget()],
       body: _buildBodyWidget(),
       padding: REdgeInsets.fromLTRB(15, 0, 15, 15),
@@ -120,9 +121,9 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
         iconSize: 20.r,
         iconName: 'ic_share.svg',
         iconColor: Theme.of(context).themeColor,
-        tooltip: '分享',
+        tooltip: S.current.share,
         onPressed: () {
-          MessageUtil.showMessage(context, "功能暂未开放！");
+          MessageUtil.showMessage(context, S.current.featureNotYetAvailable);
         },
       ),
     );

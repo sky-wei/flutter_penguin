@@ -54,6 +54,8 @@ dependencies:
   url_launcher: ^6.3.1
   markdown_widget: ^2.3.2+6
   watcher: ^1.1.0
+  msix: ^3.16.12
+  icons_launcher: ^3.0.3
   flutter_sky_library:
     git:
       url: git@github.com:sky-wei/flutter_sky_library.git
@@ -138,3 +140,35 @@ flutter_intl:
 
 objectbox:
   output_dir: data
+
+icons_launcher:
+  image_path: "assets/ic_logo_radius.png"
+  platforms:
+    android:
+      enable: false
+    #      image_path: "assets/ic_logo_radius.png"
+    #      notification_image: "assets/ic_foreground.png"
+    #      # adaptive_background_color: '#ffffff'
+    #      adaptive_background_image: "assets/ic_background.png"
+    #      adaptive_foreground_image: "assets/ic_foreground.png"
+    #      adaptive_round_image: "assets/ic_logo_round.png"
+    #      adaptive_monochrome_image: "assets/ic_black_white.png"
+    ios:
+      enable: false
+    #      image_path: "assets/ic_logo_rectangle_light.png"
+    #      # For iOS 18+ (support dark and tinted)
+    #      dark_path: "assets/ic_logo_rectangle_dark.png"
+    #      tinted_path: "assets/ic_logo_rectangle_tinted.png"
+    web:
+      enable: false
+    #      image_path: "assets/ic_logo_radius.png"
+    #      favicon_path: "assets/ic_logo_round.png"
+    macos:
+      enable: true
+      image_path: "assets/ic_logo_radius.png"
+    windows:
+      enable: true
+      image_path: "assets/ic_logo_radius.png"
+    linux:
+      enable: true
+      image_path: "assets/ic_logo_radius.png"

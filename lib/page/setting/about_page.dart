@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2023 The sky Authors.
  *
@@ -21,13 +20,10 @@ import 'package:flutter_penguin/constant.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/util/launch_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_sky_library/theme/theme.dart';
-import 'package:flutter_sky_library/util/app_extension.dart';
-import 'package:flutter_sky_library/util/platform_util.dart';
-import 'package:flutter_sky_library/util/size_box_util.dart';
-import 'package:flutter_sky_library/widget/color_box_widget.dart';
-import 'package:flutter_sky_library/widget/sub_scaffold.dart';
+import 'package:flutter_sky_library/flutter_sky_library.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'document_page.dart';
 
 class AboutPage extends StatefulWidget {
 
@@ -80,10 +76,8 @@ class _AboutPageState extends State<AboutPage> {
   }
 
   Widget _buildDesktopBody() {
-    return ColorBoxWidget(
-      child: Center(
-        child: _buildAboutWidget(),
-      ),
+    return Center(
+      child: _buildAboutWidget(),
     );
   }
 
@@ -136,11 +130,34 @@ class _AboutPageState extends State<AboutPage> {
               ]
             )
           ),
-          XBox.vertical60,
+          XBox.vertical30,
+          ListMenuWidget(
+            onItemTap: (value) {
+              if(value == 0) {
+                showDocument(
+                  context: context,
+                  title: S.current.serviceAgreement,
+                  assetPath: 'assets/html/service_agreement.html',
+                );
+              } else if (value == 1) {
+                showDocument(
+                  context: context,
+                  title: S.current.privacyPolicy,
+                  assetPath: 'assets/html/privacy_policy.html',
+                );
+              }
+            },
+            menuItems: [
+              SubMenuItem.more(id: 0, title: S.current.serviceAgreement),
+              SubMenuItem.more(id: 1, title: S.current.privacyPolicy),
+            ],
+          ),
+          XBox.vertical30,
+          // XBox.vertical60,
           Material(
             color: PlatformUtil.isTabletMode()
-                ? Theme.of(context).xColor.background
-                : Theme.of(context).xColor.surface,
+                ? Theme.of(context).xColor.surface
+                : Theme.of(context).xColor.background,
             borderRadius: BorderRadius.circular(6),
             child: Padding(
               padding: const EdgeInsets.all(20),

@@ -55,6 +55,7 @@ dependencies:
   markdown_widget: ^2.3.2+8
   watcher: ^1.2.0
   file_selector: ^1.0.4
+  flutter_html: ^3.0.0
   msix: ^3.16.12
   icons_launcher: ^3.0.3
   flutter_sky_library:
@@ -134,6 +135,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/image/
+    - assets/html/
     - assets/doc/linux/
 
 flutter_intl:

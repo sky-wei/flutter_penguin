@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 2.0.0+1
 
 environment:
   sdk: '>=2.19.6 <4.0.0'
@@ -36,24 +36,25 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
-  go_router: ^14.8.1
-  flutter_svg: ^2.0.17
+  cupertino_icons: ^1.0.8
+  go_router: ^17.0.1
+  flutter_svg: ^2.2.3
   objectbox: ^4.1.0
   objectbox_flutter_libs: any
   bitsdojo_window: ^0.1.6
   intl: ^0.20.2
-  shared_preferences: ^2.3.4
+  shared_preferences: ^2.5.4
   encrypt: ^5.0.3
-  crypto: ^3.0.6
+  crypto: ^3.0.7
   path_provider: ^2.1.5
-  provider: ^6.1.2
-  flutter_slidable: ^4.0.0
+  provider: ^6.1.5+1
+  flutter_slidable: ^4.0.3
   flutter_screenutil: ^5.9.3
   flutter_easyloading: ^3.0.5
-  url_launcher: ^6.3.1
-  markdown_widget: ^2.3.2+6
-  watcher: ^1.1.0
+  url_launcher: ^6.3.2
+  markdown_widget: ^2.3.2+8
+  watcher: ^1.2.0
+  file_selector: ^1.0.4
   msix: ^3.16.12
   icons_launcher: ^3.0.3
   flutter_sky_library:
@@ -140,6 +141,16 @@ flutter_intl:
 
 objectbox:
   output_dir: data
+
+msix_config:
+  display_name: LinuxDoc
+  publisher_display_name: 周威
+  identity_name: ZhouWei.LinuxDoc
+  publisher: CN=2C06D91E-5460-4FD8-BE4B-01CE68ED02C9
+  msix_version: 2.0.0.0
+  languages: zh-cn, en
+  logo_path: D:\Work\StudioProject\flutter_penguin\assets\ic_logo_radius.png
+  store: true
 
 icons_launcher:
   image_path: "assets/ic_logo_radius.png"

@@ -104,7 +104,7 @@ class _StoragePageState extends State<StoragePage> {
     //   cleanLocalData().then((value) {
     //     MessageUtil.showMessage2('清除数据完成！');
     //   }).onError((error, stackTrace) {
-    //     MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+    //     MessageUtil.showMessage(ErrorUtil.getMessage(error));
     //   });
     // }
   }

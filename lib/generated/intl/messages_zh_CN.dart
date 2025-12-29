@@ -22,13 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(value) => "邮箱: ${value}";
 
-  static String m1(value) => "源代码: ${value}";
+  static String m1(path) => "已保存至: ${path}";
 
-  static String m2(value) => "版本: ${value}";
+  static String m2(value) => "源代码: ${value}";
 
-  static String m3(value) => "${value}不能为空！";
+  static String m3(value) => "版本: ${value}";
 
-  static String m4(value) => "${value}秒";
+  static String m4(value) => "${value}不能为空！";
+
+  static String m5(value) => "${value}秒";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -58,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "exitTips": MessageLookupByLibrary.simpleMessage("再按一次返回桌面！"),
     "favorites": MessageLookupByLibrary.simpleMessage("收藏"),
     "featureNotYetAvailable": MessageLookupByLibrary.simpleMessage("功能暂未开放！"),
+    "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
     "fileManagement": MessageLookupByLibrary.simpleMessage("文件管理"),
     "fileTransfer": MessageLookupByLibrary.simpleMessage("文件传输"),
     "filter": MessageLookupByLibrary.simpleMessage("筛选"),
@@ -81,14 +84,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "listEmptyTips": MessageLookupByLibrary.simpleMessage("列表空空的～"),
     "loading": MessageLookupByLibrary.simpleMessage("加载中..."),
     "mailX": m0,
+    "more": MessageLookupByLibrary.simpleMessage("更多"),
     "networkCommunication": MessageLookupByLibrary.simpleMessage("网络通讯"),
     "off": MessageLookupByLibrary.simpleMessage("关闭"),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
     "on": MessageLookupByLibrary.simpleMessage("启用"),
     "other": MessageLookupByLibrary.simpleMessage("其他"),
     "permissions": MessageLookupByLibrary.simpleMessage("权限"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
     "reboot": MessageLookupByLibrary.simpleMessage("重启"),
+    "saveImage": MessageLookupByLibrary.simpleMessage("保存图片"),
+    "saveTo": m1,
+    "saveToLocal": MessageLookupByLibrary.simpleMessage("保存至本地"),
+    "scanQrcodeFeedbackTips": MessageLookupByLibrary.simpleMessage(
+      "扫描二维码进行问题反馈",
+    ),
     "searchCmd": MessageLookupByLibrary.simpleMessage("搜索命令"),
+    "serviceAgreement": MessageLookupByLibrary.simpleMessage("服务协议"),
     "setting": MessageLookupByLibrary.simpleMessage("设置"),
     "share": MessageLookupByLibrary.simpleMessage("分享"),
     "simplifiedChinese": MessageLookupByLibrary.simpleMessage("简体中文"),
@@ -97,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sizeLarge": MessageLookupByLibrary.simpleMessage("超大"),
     "sizeMedium": MessageLookupByLibrary.simpleMessage("大"),
     "sizeSmall": MessageLookupByLibrary.simpleMessage("中"),
-    "sourceX": m1,
+    "sourceX": m2,
     "storage": MessageLookupByLibrary.simpleMessage("存储"),
     "systemAdministration": MessageLookupByLibrary.simpleMessage("系统管理"),
     "systemConfiguration": MessageLookupByLibrary.simpleMessage("系统设置"),
@@ -108,8 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "更换主题需要重启才能生效！",
     ),
     "update": MessageLookupByLibrary.simpleMessage("更新"),
-    "versionX": m2,
-    "xNotEmpty": m3,
-    "xSeconds": m4,
+    "versionX": m3,
+    "xNotEmpty": m4,
+    "xSeconds": m5,
   };
 }

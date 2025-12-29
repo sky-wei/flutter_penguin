@@ -230,7 +230,7 @@ class _CmdListPageState extends State<CmdListPage> {
     _cmdDocModel.favoriteCmdDoc(
       widget.listType, item
     ).catchError((error, stackTrace) {
-      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+      MessageUtil.showMessage(ErrorUtil.getMessage(error));
     });
   }
 
@@ -256,7 +256,7 @@ class _CmdListPageState extends State<CmdListPage> {
       _cancelLoading();
     }).onError((error, stackTrace) {
       _cancelLoading();
-      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+      MessageUtil.showMessage(ErrorUtil.getMessage(error));
     });
   }
 
@@ -274,7 +274,7 @@ class _CmdListPageState extends State<CmdListPage> {
         category: value.category,
         listType: widget.listType,
       ).onError((error, stackTrace) {
-        MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+        MessageUtil.showMessage(ErrorUtil.getMessage(error));
       });
     }
   }

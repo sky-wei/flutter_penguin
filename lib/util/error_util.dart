@@ -23,7 +23,7 @@ class ErrorUtil {
 
   ErrorUtil._();
 
-  static String getMessage(BuildContext context, Object? error) {
+  static String getMessage(Object? error) {
 
     XLog.d('>>>>>>>>>>>>>>>> $error');
 

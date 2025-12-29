@@ -110,7 +110,7 @@ class _SplashPageState extends State<SplashPage> {
     if (error is ObjectBoxException) {
       _showResetPublicDatabaseDialog();
     } else {
-      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+      MessageUtil.showMessage(ErrorUtil.getMessage(error));
     }
   }
 
@@ -131,7 +131,7 @@ class _SplashPageState extends State<SplashPage> {
     _appModel.deletePublicDatabase().then((value) {
       if (value) appWindow.close();
     }).onError((error, stackTrace) {
-      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+      MessageUtil.showMessage(ErrorUtil.getMessage(error));
     });
   }
 }

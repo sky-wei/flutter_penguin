@@ -66,5 +66,13 @@
   "sizeMedium": "Medium",
   "sizeLarge": "Large",
   "clearLocalAllDataTips": "Are you sure you want to clear all local database data?",
+  "feedback": "Feedback",
+  "saveToLocal": "Save to Local",
+  "serviceAgreement": "Service Agreement",
+  "privacyPolicy": "Privacy Policy",
+  "scanQrcodeFeedbackTips": "Scan Qrcode for feedback",
+  "saveImage": "Save Image",
+  "saveTo": "Saved to: {path}",
+  "more": "More",
   "exitTips": "Press again to exit to desktop!"
 }

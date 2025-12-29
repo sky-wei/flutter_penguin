@@ -18,6 +18,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_penguin/generated/l10n.dart';
 import 'package:flutter_penguin/page/setting/about_page.dart';
+import 'package:flutter_penguin/page/setting/feedback_page.dart';
 import 'package:flutter_penguin/page/setting/language_page.dart';
 import 'package:flutter_penguin/page/setting/permissions_page.dart';
 import 'package:flutter_penguin/page/setting/storage_page.dart';
@@ -64,7 +65,8 @@ class _SettingPageState extends State<SettingPage> {
     AboutPage(),
     TabletPage(),
     DisplayPage(),
-    FontSizePage()
+    FontSizePage(),
+    FeedbackPage()
   ];
 
   @override
@@ -146,6 +148,16 @@ class _SettingPageState extends State<SettingPage> {
       //       ),
       //     ],
       //   ),
+      SubGroupItem(
+        title: S.current.more,
+        menuItems: [
+          SubMenuItem.more(
+            id: 9,
+            iconName: 'ic_feedback.svg',
+            title: S.current.feedback,
+          ),
+        ],
+      ),
       if (!basic)
         SubGroupItem(
           menuItems: [

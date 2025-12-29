@@ -529,6 +529,71 @@ class S {
     );
   }
 
+  /// `Feedback`
+  String get feedback {
+    return Intl.message('Feedback', name: 'feedback', desc: '', args: []);
+  }
+
+  /// `Save to Local`
+  String get saveToLocal {
+    return Intl.message(
+      'Save to Local',
+      name: 'saveToLocal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Agreement`
+  String get serviceAgreement {
+    return Intl.message(
+      'Service Agreement',
+      name: 'serviceAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan Qrcode for feedback`
+  String get scanQrcodeFeedbackTips {
+    return Intl.message(
+      'Scan Qrcode for feedback',
+      name: 'scanQrcodeFeedbackTips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Image`
+  String get saveImage {
+    return Intl.message('Save Image', name: 'saveImage', desc: '', args: []);
+  }
+
+  /// `Saved to: {path}`
+  String saveTo(Object path) {
+    return Intl.message(
+      'Saved to: $path',
+      name: 'saveTo',
+      desc: '',
+      args: [path],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message('More', name: 'more', desc: '', args: []);
+  }
+
   /// `Press again to exit to desktop!`
   String get exitTips {
     return Intl.message(

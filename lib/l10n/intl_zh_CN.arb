@@ -66,5 +66,13 @@
   "sizeMedium": "大",
   "sizeLarge": "超大",
   "clearLocalAllDataTips": "您确定清除本地数据库数据！",
+  "feedback": "反馈",
+  "saveToLocal": "保存至本地",
+  "serviceAgreement": "服务协议",
+  "privacyPolicy": "隐私政策",
+  "scanQrcodeFeedbackTips": "扫描二维码进行问题反馈",
+  "saveImage": "保存图片",
+  "saveTo": "已保存至: {path}",
+  "more": "更多",
   "exitTips": "再按一次返回桌面！"
 }

@@ -21,7 +21,7 @@ class MessageUtil {
 
   MessageUtil._();
 
-  static void showMessage(BuildContext context, String msg) {
+  static void showMessage(String msg) {
     // final margin = PlatformUtil.isMobile() ? null : REdgeInsets.fromLTRB(300, 10, 300, 10);
     // final padding = PlatformUtil.isMobile() ? REdgeInsets.only(left: 15, top: 5, bottom: 5) : EdgeInsets.all(20.r);
     // ScaffoldMessenger.of(context).showSnackBar(

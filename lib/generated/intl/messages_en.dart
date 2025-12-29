@@ -22,13 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(value) => "Email: ${value}";
 
-  static String m1(value) => "Source Code: ${value}";
+  static String m1(path) => "Saved to: ${path}";
 
-  static String m2(value) => "Version: ${value}";
+  static String m2(value) => "Source Code: ${value}";
 
-  static String m3(value) => "${value} cannot be empty!";
+  static String m3(value) => "Version: ${value}";
 
-  static String m4(value) => "${value} seconds";
+  static String m4(value) => "${value} cannot be empty!";
+
+  static String m5(value) => "${value} seconds";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -70,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "featureNotYetAvailable": MessageLookupByLibrary.simpleMessage(
       "Feature not yet available!",
     ),
+    "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
     "fileManagement": MessageLookupByLibrary.simpleMessage("File Management"),
     "fileTransfer": MessageLookupByLibrary.simpleMessage("File Transfer"),
     "filter": MessageLookupByLibrary.simpleMessage("Filter"),
@@ -93,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "listEmptyTips": MessageLookupByLibrary.simpleMessage("The list is empty~"),
     "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
     "mailX": m0,
+    "more": MessageLookupByLibrary.simpleMessage("More"),
     "networkCommunication": MessageLookupByLibrary.simpleMessage(
       "Network Communication",
     ),
@@ -101,8 +105,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "on": MessageLookupByLibrary.simpleMessage("On"),
     "other": MessageLookupByLibrary.simpleMessage("Other"),
     "permissions": MessageLookupByLibrary.simpleMessage("Permissions"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "reboot": MessageLookupByLibrary.simpleMessage("Restart"),
+    "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
+    "saveTo": m1,
+    "saveToLocal": MessageLookupByLibrary.simpleMessage("Save to Local"),
+    "scanQrcodeFeedbackTips": MessageLookupByLibrary.simpleMessage(
+      "Scan Qrcode for feedback",
+    ),
     "searchCmd": MessageLookupByLibrary.simpleMessage("Search Commands"),
+    "serviceAgreement": MessageLookupByLibrary.simpleMessage(
+      "Service Agreement",
+    ),
     "setting": MessageLookupByLibrary.simpleMessage("Settings"),
     "share": MessageLookupByLibrary.simpleMessage("Share"),
     "simplifiedChinese": MessageLookupByLibrary.simpleMessage("简体中文"),
@@ -111,7 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sizeLarge": MessageLookupByLibrary.simpleMessage("Large"),
     "sizeMedium": MessageLookupByLibrary.simpleMessage("Medium"),
     "sizeSmall": MessageLookupByLibrary.simpleMessage("Small"),
-    "sourceX": m1,
+    "sourceX": m2,
     "storage": MessageLookupByLibrary.simpleMessage("Storage"),
     "systemAdministration": MessageLookupByLibrary.simpleMessage(
       "System Administration",
@@ -126,8 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Theme change requires restart to take effect!",
     ),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
-    "versionX": m2,
-    "xNotEmpty": m3,
-    "xSeconds": m4,
+    "versionX": m3,
+    "xNotEmpty": m4,
+    "xSeconds": m5,
   };
 }

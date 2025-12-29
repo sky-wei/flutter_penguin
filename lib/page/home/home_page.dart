@@ -320,7 +320,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
         DateTime.now().difference(_lastPressTime!) > const Duration(seconds: 3)
     ) {
       _lastPressTime = DateTime.now();
-      MessageUtil.showMessage(context, S.of(context).exitTips);
+      MessageUtil.showMessage(S.of(context).exitTips);
       return Future.value(false);
     }
     return Future.value(true);

@@ -25,6 +25,7 @@ import 'package:flutter_sky_library/widget/sub_page_widget.dart';
 
 import 'about_page.dart';
 import 'display_page.dart';
+import 'feedback_page.dart';
 import 'language_page.dart';
 import 'permissions_page.dart';
 import 'setting_page.dart';
@@ -80,6 +81,7 @@ class _SettingViewPageState extends State<SettingViewPage> {
               TabletPage(inline: true),
               DisplayPage(inline: true),
               FontSizePage(inline: true),
+              FeedbackPage(inline: true),
             ],
           ),
         ),

@@ -123,7 +123,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
         iconColor: Theme.of(context).themeColor,
         tooltip: S.current.share,
         onPressed: () {
-          MessageUtil.showMessage(context, S.current.featureNotYetAvailable);
+          MessageUtil.showMessage(S.current.featureNotYetAvailable);
         },
       ),
     );
@@ -193,7 +193,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
       _cancelLoading();
     }).onError((error, stackTrace) {
       _cancelLoading();
-      MessageUtil.showMessage(context, ErrorUtil.getMessage(context, error));
+      MessageUtil.showMessage(ErrorUtil.getMessage(error));
     });
   }
 

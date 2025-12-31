@@ -1,6 +1,6 @@
 {
   "@@locale": "zh_CN",
-  "appName": "LinuxDoc",
+  "appName": "CmdDoc",
   "ok": "确定",
   "cancel": "取消",
   "loading": "加载中...",

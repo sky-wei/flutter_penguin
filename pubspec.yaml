@@ -145,7 +145,7 @@ objectbox:
   output_dir: data
 
 msix_config:
-  display_name: LinuxDoc
+  display_name: CmdDoc
   publisher_display_name: 周威
   identity_name: ZhouWei.LinuxDoc
   publisher: CN=2C06D91E-5460-4FD8-BE4B-01CE68ED02C9

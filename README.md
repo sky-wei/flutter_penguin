@@ -1,4 +1,4 @@
-# LinuxDoc
+# CmdDoc
 
 项目是基于 Flutter 编写的一个 ``Linux文档`` 软件，目前支持Android，iOS, Window，Mac，Linux平台。
 

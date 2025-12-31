@@ -151,7 +151,7 @@ class _DocDetailsPageState extends State<DocDetailsPage> {
                   TextSpan(
                       children: [
                         TextSpan(
-                            text: 'LinuxDoc',
+                            text: 'CmdDoc',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )

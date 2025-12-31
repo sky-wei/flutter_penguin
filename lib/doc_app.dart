@@ -94,7 +94,7 @@ class _DocAppState extends State<DocApp> {
       ],
 
       child: MaterialApp.router(
-        title: 'LinuxDoc',
+        title: 'CmdDoc',
         theme: XTheme.lightTheme(context),
         darkTheme: XTheme.darkTheme(context),
         themeMode: _getThemeMode(),

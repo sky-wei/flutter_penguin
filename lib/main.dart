@@ -40,7 +40,7 @@ void main() {
       win.minSize = const Size(800, 600);
       win.size = const Size(XConstant.defaultWidget, XConstant.defaultHeight);
       win.alignment = Alignment.center;
-      win.title = 'LinuxDoc';
+      win.title = 'CmdDoc';
       win.show();
     });
   }

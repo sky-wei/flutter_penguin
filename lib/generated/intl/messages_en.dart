@@ -34,102 +34,114 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("About"),
-        "all": MessageLookupByLibrary.simpleMessage("All"),
-        "appName": MessageLookupByLibrary.simpleMessage("CmdDoc"),
-        "backupCompression":
-            MessageLookupByLibrary.simpleMessage("Backup & Compression"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "clearData": MessageLookupByLibrary.simpleMessage("Clear Data"),
-        "clearLocalAllDataTips": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to clear all local database data?"),
-        "cmdDescription":
-            MessageLookupByLibrary.simpleMessage("Command Description"),
-        "cmdList": MessageLookupByLibrary.simpleMessage("Command List"),
-        "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
-        "data": MessageLookupByLibrary.simpleMessage("Data"),
-        "diskMaintenance":
-            MessageLookupByLibrary.simpleMessage("Disk Maintenance"),
-        "diskManagement":
-            MessageLookupByLibrary.simpleMessage("Disk Management"),
-        "display": MessageLookupByLibrary.simpleMessage("Display"),
-        "displayRestartAppTips": MessageLookupByLibrary.simpleMessage(
-            "Display zoom change requires restart to take effect!"),
-        "displaySize": MessageLookupByLibrary.simpleMessage("Display Zoom"),
-        "emailNewsgroups":
-            MessageLookupByLibrary.simpleMessage("Email & Newsgroups"),
-        "english": MessageLookupByLibrary.simpleMessage("English"),
-        "exitAppTips": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to close the application?"),
-        "exitTips": MessageLookupByLibrary.simpleMessage(
-            "Press again to exit to desktop!"),
-        "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
-        "featureNotYetAvailable":
-            MessageLookupByLibrary.simpleMessage("Feature not yet available!"),
-        "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
-        "fileManagement":
-            MessageLookupByLibrary.simpleMessage("File Management"),
-        "fileTransfer": MessageLookupByLibrary.simpleMessage("File Transfer"),
-        "filter": MessageLookupByLibrary.simpleMessage("Filter"),
-        "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
-        "fontRestartAppTips": MessageLookupByLibrary.simpleMessage(
-            "Font size change requires restart to take effect!"),
-        "fontSize": MessageLookupByLibrary.simpleMessage("Font Size"),
-        "help": MessageLookupByLibrary.simpleMessage("Help"),
-        "hint": MessageLookupByLibrary.simpleMessage("Hint"),
-        "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "languageRestartAppTips": MessageLookupByLibrary.simpleMessage(
-            "Language change requires restart to take effect!"),
-        "later": MessageLookupByLibrary.simpleMessage("Later"),
-        "license": MessageLookupByLibrary.simpleMessage(
-            "Copyright 2025 The sky Authors\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License."),
-        "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
-        "listEmptyTips":
-            MessageLookupByLibrary.simpleMessage("The list is empty~"),
-        "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
-        "mailX": m0,
-        "more": MessageLookupByLibrary.simpleMessage("More"),
-        "networkCommunication":
-            MessageLookupByLibrary.simpleMessage("Network Communication"),
-        "off": MessageLookupByLibrary.simpleMessage("Off"),
-        "ok": MessageLookupByLibrary.simpleMessage("OK"),
-        "on": MessageLookupByLibrary.simpleMessage("On"),
-        "other": MessageLookupByLibrary.simpleMessage("Other"),
-        "permissions": MessageLookupByLibrary.simpleMessage("Permissions"),
-        "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-        "reboot": MessageLookupByLibrary.simpleMessage("Restart"),
-        "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
-        "saveTo": m1,
-        "saveToLocal": MessageLookupByLibrary.simpleMessage("Save to Local"),
-        "scanQrcodeFeedbackTips":
-            MessageLookupByLibrary.simpleMessage("Scan Qrcode for feedback"),
-        "searchCmd": MessageLookupByLibrary.simpleMessage("Search Commands"),
-        "serviceAgreement":
-            MessageLookupByLibrary.simpleMessage("Service Agreement"),
-        "setting": MessageLookupByLibrary.simpleMessage("Settings"),
-        "share": MessageLookupByLibrary.simpleMessage("Share"),
-        "simplifiedChinese": MessageLookupByLibrary.simpleMessage("简体中文"),
-        "sizeDefault": MessageLookupByLibrary.simpleMessage("Default"),
-        "sizeExtraSmall": MessageLookupByLibrary.simpleMessage("Extra Small"),
-        "sizeLarge": MessageLookupByLibrary.simpleMessage("Large"),
-        "sizeMedium": MessageLookupByLibrary.simpleMessage("Medium"),
-        "sizeSmall": MessageLookupByLibrary.simpleMessage("Small"),
-        "sourceX": m2,
-        "storage": MessageLookupByLibrary.simpleMessage("Storage"),
-        "systemAdministration":
-            MessageLookupByLibrary.simpleMessage("System Administration"),
-        "systemConfiguration":
-            MessageLookupByLibrary.simpleMessage("System Configuration"),
-        "tabletMode": MessageLookupByLibrary.simpleMessage("Tablet Mode"),
-        "textProcessing":
-            MessageLookupByLibrary.simpleMessage("Text Processing"),
-        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "themeRestartAppTips": MessageLookupByLibrary.simpleMessage(
-            "Theme change requires restart to take effect!"),
-        "update": MessageLookupByLibrary.simpleMessage("Update"),
-        "versionX": m3,
-        "xNotEmpty": m4,
-        "xSeconds": m5
-      };
+    "about": MessageLookupByLibrary.simpleMessage("About"),
+    "all": MessageLookupByLibrary.simpleMessage("All"),
+    "appName": MessageLookupByLibrary.simpleMessage("CmdDoc"),
+    "backupCompression": MessageLookupByLibrary.simpleMessage(
+      "Backup & Compression",
+    ),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "clearData": MessageLookupByLibrary.simpleMessage("Clear Data"),
+    "clearLocalAllDataTips": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to clear all local database data?",
+    ),
+    "cmdDescription": MessageLookupByLibrary.simpleMessage(
+      "Command Description",
+    ),
+    "cmdList": MessageLookupByLibrary.simpleMessage("Command List"),
+    "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "data": MessageLookupByLibrary.simpleMessage("Data"),
+    "diskMaintenance": MessageLookupByLibrary.simpleMessage("Disk Maintenance"),
+    "diskManagement": MessageLookupByLibrary.simpleMessage("Disk Management"),
+    "display": MessageLookupByLibrary.simpleMessage("Display"),
+    "displayRestartAppTips": MessageLookupByLibrary.simpleMessage(
+      "Display zoom change requires restart to take effect!",
+    ),
+    "displaySize": MessageLookupByLibrary.simpleMessage("Display Zoom"),
+    "emailNewsgroups": MessageLookupByLibrary.simpleMessage(
+      "Email & Newsgroups",
+    ),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
+    "exitAppTips": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to close the application?",
+    ),
+    "exitTips": MessageLookupByLibrary.simpleMessage(
+      "Press again to exit to desktop!",
+    ),
+    "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
+    "featureNotYetAvailable": MessageLookupByLibrary.simpleMessage(
+      "Feature not yet available!",
+    ),
+    "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
+    "fileManagement": MessageLookupByLibrary.simpleMessage("File Management"),
+    "fileTransfer": MessageLookupByLibrary.simpleMessage("File Transfer"),
+    "filter": MessageLookupByLibrary.simpleMessage("Filter"),
+    "followSystem": MessageLookupByLibrary.simpleMessage("Follow System"),
+    "fontRestartAppTips": MessageLookupByLibrary.simpleMessage(
+      "Font size change requires restart to take effect!",
+    ),
+    "fontSize": MessageLookupByLibrary.simpleMessage("Font Size"),
+    "help": MessageLookupByLibrary.simpleMessage("Help"),
+    "hint": MessageLookupByLibrary.simpleMessage("Hint"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "languageRestartAppTips": MessageLookupByLibrary.simpleMessage(
+      "Language change requires restart to take effect!",
+    ),
+    "later": MessageLookupByLibrary.simpleMessage("Later"),
+    "license": MessageLookupByLibrary.simpleMessage(
+      "Copyright 2025 The sky Authors\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n   http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
+    ),
+    "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
+    "listEmptyTips": MessageLookupByLibrary.simpleMessage("The list is empty~"),
+    "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+    "mailX": m0,
+    "more": MessageLookupByLibrary.simpleMessage("More"),
+    "networkCommunication": MessageLookupByLibrary.simpleMessage(
+      "Network Communication",
+    ),
+    "off": MessageLookupByLibrary.simpleMessage("Off"),
+    "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "on": MessageLookupByLibrary.simpleMessage("On"),
+    "other": MessageLookupByLibrary.simpleMessage("Other"),
+    "permissions": MessageLookupByLibrary.simpleMessage("Permissions"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "reboot": MessageLookupByLibrary.simpleMessage("Restart"),
+    "saveImage": MessageLookupByLibrary.simpleMessage("Save Image"),
+    "saveTo": m1,
+    "saveToLocal": MessageLookupByLibrary.simpleMessage("Save to Local"),
+    "scanQrcodeFeedbackTips": MessageLookupByLibrary.simpleMessage(
+      "Scan Qrcode for feedback",
+    ),
+    "searchCmd": MessageLookupByLibrary.simpleMessage("Search Commands"),
+    "serviceAgreement": MessageLookupByLibrary.simpleMessage(
+      "Service Agreement",
+    ),
+    "setting": MessageLookupByLibrary.simpleMessage("Settings"),
+    "share": MessageLookupByLibrary.simpleMessage("Share"),
+    "simplifiedChinese": MessageLookupByLibrary.simpleMessage("简体中文"),
+    "sizeDefault": MessageLookupByLibrary.simpleMessage("Default"),
+    "sizeExtraSmall": MessageLookupByLibrary.simpleMessage("Extra Small"),
+    "sizeLarge": MessageLookupByLibrary.simpleMessage("Large"),
+    "sizeMedium": MessageLookupByLibrary.simpleMessage("Medium"),
+    "sizeSmall": MessageLookupByLibrary.simpleMessage("Small"),
+    "sourceX": m2,
+    "storage": MessageLookupByLibrary.simpleMessage("Storage"),
+    "systemAdministration": MessageLookupByLibrary.simpleMessage(
+      "System Administration",
+    ),
+    "systemConfiguration": MessageLookupByLibrary.simpleMessage(
+      "System Configuration",
+    ),
+    "tabletMode": MessageLookupByLibrary.simpleMessage("Tablet Mode"),
+    "textProcessing": MessageLookupByLibrary.simpleMessage("Text Processing"),
+    "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+    "themeRestartAppTips": MessageLookupByLibrary.simpleMessage(
+      "Theme change requires restart to take effect!",
+    ),
+    "update": MessageLookupByLibrary.simpleMessage("Update"),
+    "versionX": m3,
+    "xNotEmpty": m4,
+    "xSeconds": m5,
+  };
 }

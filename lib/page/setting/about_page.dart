@@ -130,30 +130,40 @@ class _AboutPageState extends State<AboutPage> {
               ]
             )
           ),
-          XBox.vertical30,
-          ListMenuWidget(
-            onItemTap: (value) {
-              if(value == 0) {
-                showDocument(
-                  context: context,
-                  title: S.current.serviceAgreement,
-                  assetPath: 'assets/html/service_agreement.html',
-                );
-              } else if (value == 1) {
-                showDocument(
-                  context: context,
-                  title: S.current.privacyPolicy,
-                  assetPath: 'assets/html/privacy_policy.html',
-                );
-              }
-            },
-            menuItems: [
-              SubMenuItem.more(id: 0, title: S.current.serviceAgreement),
-              SubMenuItem.more(id: 1, title: S.current.privacyPolicy),
+          XBox.vertical10,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    showDocument(
+                      context: context,
+                      title: S.current.privacyPolicy,
+                      assetPath: 'assets/html/privacy_policy.html',
+                    );
+                  },
+                  child: Text(S.current.privacyPolicy)
+              ),
+              XBox.horizontal10,
+              SizedBox(
+                width: 1,
+                height: 18,
+                child: VerticalDivider(thickness: 1),
+              ),
+              XBox.horizontal10,
+              TextButton(
+                  onPressed: () {
+                    showDocument(
+                      context: context,
+                      title: S.current.serviceAgreement,
+                      assetPath: 'assets/html/service_agreement.html',
+                    );
+                  },
+                  child: Text(S.current.serviceAgreement)
+              ),
             ],
           ),
           XBox.vertical30,
-          // XBox.vertical60,
           Material(
             color: PlatformUtil.isTabletMode()
                 ? Theme.of(context).xColor.surface

@@ -23,7 +23,7 @@ class XConstant {
 
   static const String projectName = 'flutter_penguin';
 
-  static const String versionName = '2.0.0';
+  static const String versionName = '2.0.1';
 
   static const String mail = 'jingcai.wei@163.com';
 
